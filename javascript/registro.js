@@ -4,6 +4,9 @@ var $apellidos = $("#apellidos");
 var $nacimiento = $("#nacimiento");
 var $email = $("#email");
 
+var $direccion = $("#direccion");
+var $contra = $("#contra");
+
 
 //Se agregan los eventos on focus
 $nif.on("focus",limpiarEA);
@@ -12,6 +15,11 @@ $apellidos.on("focus",limpiarEA);
 $nacimiento.on("focus",limpiarEA);
 $email.on("focus",limpiarEA);
 $("#emailRepetido").on("focus",limpiarEA);
+
+$direccion.on("focus",limpiarEA);
+$contra.on("focus",limpiarEA);
+$("#contraRepetida").on("focus",limpiarEA);
+
 
 //Comprobación del DNI
 $nif.on("focusout",function () {
@@ -28,9 +36,10 @@ $nif.on("focusout",function () {
 //Comprobación del nombre
 $nombre.on("focusout",function(){
 
-    let nombre = $nombre.val().trim();
+    let nombre = $nombre.val();
+    let re = /^[a-zA-ZáéíóúÁÉÍÓÚ ]{2,30}$/gmi;
 
-    if(nombre.length == 0 || nombre.length > 30){
+    if(!re.test(nombre)){
         $nombre.addClass("error");
         $("<div class='error'>El nombre no puede estar vacío o es demasiado largo</div>").insertAfter($nombre);
     }
@@ -41,11 +50,12 @@ $nombre.on("focusout",function(){
 //Comprobación de apellidos
 $apellidos.on("focusout",function(){
 
-    let apellidos = $apellidos.val().trim();
+    let apellidos = $apellidos.val();
+    let re = /^[a-zA-ZáéíóúÁÉÍÓÚ ]{2,50}$/gmi;
 
-    if(apellidos.length == 0 || apellidos.length > 30){
+    if(!re.test(apellidos)){
         $apellidos.addClass("error");
-        $("<div class='error'>El apellido no puede estar vacío o es demasiado largo</div>").insertAfter($apellidos);
+        $("<div class='error'>El apellido no puede estar vacío o contener caracteres especiales.</div>").insertAfter($apellidos);
     }
     else
         $apellidos.addClass("acierto");
@@ -93,6 +103,48 @@ $("#emailRepetido").on("focusout",function(){
         $(this).addClass("acierto");
 });
 
+//Comprobación del campo direccion
+$direccion.on("focusout",function(){
+
+    let direccion = $direccion.val();
+    let re = /^[a-zA-ZáéíóúÁÉÍÓÚ0-9 ]{2,30}$/gmi;
+
+    if(!re.test(direccion)){
+        $direccion.addClass("error");
+        $("<div class='error'>La dirección no puede ser mayor a 50 caracteres.</div>").insertAfter($direccion);
+    }
+    else
+        $direccion.addClass("acierto");
+
+});
+
+//Comprobación de contraseña
+$contra.on("focusout",function(){
+
+    let contra = $contra.val();
+    let re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,10}$/;
+
+    if(!re.test(contra)){
+        $contra.addClass("error");
+        $("<div class='error'>La contraseña debe contener al menos una minúscula, mayúscula, un dígito <br> y tener entre 6 y 10 caracteres</div>").insertAfter($contra);
+    }
+    else
+        $contra.addClass("acierto");
+
+});
+
+//Re-comprobación de la contraseña
+$("#contraRepetida").on("focusout",function(){
+    let contra1 = $contra.val();
+    let contra2 = $(this).val();
+
+    if (!contra1.localeCompare(contra2)==0){
+        $(this).addClass("error");
+        $("<div class='error'>Las contraseñas no coinciden.</div>").insertAfter($(this));
+    }
+    else
+        $(this).addClass("acierto");
+});
 
 //Para limpiar errores/aciertos del formulario
 function limpiarEA () {
