@@ -156,4 +156,3 @@ function limpiarEA () {
     else if ($(this).hasClass("acierto"))
         $(this).removeClass("acierto");
 }
-

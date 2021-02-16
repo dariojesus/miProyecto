@@ -10,25 +10,21 @@ abstract class CACLBase {
 
     abstract protected function getPermisosRole($codRole);
 
-    abstract protected function anadirUsuario($nombre,$nick,$contrasena,$codRole);
+    abstract protected function anadirUsuario($nif,$contrasena,$codRole);
 
-    abstract protected function getCodUsuario($nick);
+    abstract protected function getCodUsuario($nif);
 
-    abstract protected function existeUsuario($nick);
+    abstract protected function existeUsuario($nif);
 
-    abstract protected function esValido($nick, $contrasena);
+    abstract protected function esValido($nif, $contrasena);
 
     abstract protected function getPermiso($codUsuario,$numero);
 
     abstract protected function getPermisos($codUsuario);
 
-    abstract protected function getNombre($codUsuario);
-
     abstract protected function getBorrado($codUsuario);
 
     abstract protected function getUsuarioRole($codUsuario);
-
-    abstract protected function setNombre($codUsuario, $nombre);
 
     abstract protected function setContrasenia($codUsuario, $contra);
 

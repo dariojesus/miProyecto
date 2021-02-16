@@ -130,7 +130,7 @@
         </fieldset>
 
 
-        <button type="submit" class="btn btn-outline-success">Registrarse</button>
+        <button type="submit" class="btn btn-outline-success w-50" disabled>Registrarse</button>
 
     </main>
     <?php

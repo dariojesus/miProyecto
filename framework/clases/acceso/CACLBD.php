@@ -19,8 +19,8 @@ class CACLBD extends CACLBase
             } while (sizeof($permisos) < 10);
         }
 
-        $consulta = "INSERT INTO `acl_roles` (`cod_acl_role`, `nombre_rol`, `permiso1`, `permiso2`, `permiso3`, `permiso4`, `permiso5`, `permiso6`, `permiso7`, `permiso8`, `permiso9`, `permiso10`) ";
-        $consulta .= "VALUES (NULL, '$nombre', '$permisos[0]', '$permisos[1]', '$permisos[2]', '$permisos[3]', '$permisos[4]', '$permisos[5]', '$permisos[6]', '$permisos[7]', '$permisos[8]', '$permisos[9]')";
+        $consulta = "INSERT INTO `roles` (`nombre_rol`, `permiso1`, `permiso2`, `permiso3`, `permiso4`, `permiso5`, `permiso6`, `permiso7`, `permiso8`, `permiso9`, `permiso10`) ";
+        $consulta .= "VALUES ('$nombre', '$permisos[0]', '$permisos[1]', '$permisos[2]', '$permisos[3]', '$permisos[4]', '$permisos[5]', '$permisos[6]', '$permisos[7]', '$permisos[8]', '$permisos[9]')";
 
         return $this->_sqli->crearConsulta($consulta);
     }
@@ -28,16 +28,16 @@ class CACLBD extends CACLBase
     public function getCodRole($nombre)
     {
 
-        $consulta = "SELECT cod_acl_role from acl_roles where nombre_rol = '$nombre'";
+        $consulta = "SELECT cod_rol from roles where nombre_rol = '$nombre'";
 
         $resul = $this->_sqli->crearConsulta($consulta)->fila();
 
-        return (is_null($resul) ? false : $resul["cod_acl_role"]);
+        return (is_null($resul) ? false : $resul["cod_rol"]);
     }
 
     public function existeRole($codRole)
     {
-        $consulta = "SELECT * from `acl_roles` where cod_acl_role = '$codRole'";
+        $consulta = "SELECT * from `roles` where cod_rol = '$codRole'";
 
         $resul = $this->_sqli->crearConsulta($consulta)->fila();
 
@@ -49,7 +49,7 @@ class CACLBD extends CACLBase
 
     public function getPermisosRole($codRole)
     {
-        $consulta = "SELECT `permiso1`, `permiso2`, `permiso3`, `permiso4`, `permiso5`, `permiso6`, `permiso7`, `permiso8`, `permiso9`, `permiso10` FROM `acl_roles` WHERE cod__acl_role = $codRole";
+        $consulta = "SELECT `permiso1`, `permiso2`, `permiso3`, `permiso4`, `permiso5`, `permiso6`, `permiso7`, `permiso8`, `permiso9`, `permiso10` FROM `roles` WHERE cod_rol = $codRole";
 
         $resul = $this->_sqli->crearConsulta($consulta)->fila();
 
@@ -58,32 +58,32 @@ class CACLBD extends CACLBase
 
 
     //Funciones de usuario
-    public function anadirUsuario($nick, $nombre, $contrasena, $codRole)
+    public function anadirUsuario($nif, $contrasena, $codRole)
     {
-        $consulta = "INSERT INTO  `acl_usuarios` (`nick`,`nombre`,`contrasenna`,`cod_acl_rol`) VALUES ('$nick', '$nombre', MD5('$contrasena'), $codRole)";
+        $consulta = "INSERT INTO  `usuarios` (`nif`,`contrasenna`,`cod_rol`) VALUES ('$nif',MD5('$contrasena'), $codRole)";
         return $this->_sqli->crearConsulta($consulta);
     }
 
-    public function getCodUsuario($nick)
+    public function getCodUsuario($nif)
     {
-        $consulta = "SELECT `cod_acl_usuario` FROM `acl_usuarios` WHERE `nick` = '$nick'";
+        $consulta = "SELECT `cod_usuario` FROM `usuarios` WHERE `nif` = '$nif'";
 
         $resul = $this->_sqli->crearConsulta($consulta)->fila();
 
-        return (is_null($resul) ? false : $resul["cod_acl_usuario"]);
+        return (is_null($resul) ? false : $resul["cod_usuario"]);
     }
 
-    public function existeUsuario($nick)
+    public function existeUsuario($nif)
     {
-        if ($this->getCodUsuario($nick) !== false)
+        if ($this->getCodUsuario($nif) !== false)
             return true;
 
         return false;
     }
 
-    public function esValido($nick, $contrasena)
+    public function esValido($nif, $contrasena)
     {
-        $consulta = "SELECT * FROM `acl_usuarios` WHERE nick = '$nick' and contrasenna = MD5('$contrasena') and borrado = 0 ";
+        $consulta = "SELECT * FROM `usuarios` WHERE nif = '$nif' and contrasenna = MD5('$contrasena') and borrado = 0 ";
 
         $resul = $this->_sqli->crearConsulta($consulta)->fila();
 
@@ -108,7 +108,7 @@ class CACLBD extends CACLBase
 
     public function getPermisos($codUsuario)
     {
-        $consulta = "SELECT `permiso1`, `permiso2`, `permiso3`, `permiso4`, `permiso5`, `permiso6`, `permiso7`, `permiso8`, `permiso9`, `permiso10` FROM `dfs_usuarios_roles` WHERE cod_acl_usuario = $codUsuario";
+        $consulta = "SELECT `permiso1`, `permiso2`, `permiso3`, `permiso4`, `permiso5`, `permiso6`, `permiso7`, `permiso8`, `permiso9`, `permiso10` FROM `usuarios_roles` WHERE cod_usuario = $codUsuario";
 
         $resul = $this->_sqli->crearConsulta($consulta)->fila();
 
@@ -118,21 +118,10 @@ class CACLBD extends CACLBase
         return $resul;
     }
 
-    public function getNombre($codUsuario)
-    {
-        $consulta = "SELECT nombre FROM `acl_usuarios` WHERE cod_acl_usuario = $codUsuario";
-
-        $resul = $this->_sqli->crearConsulta($consulta)->fila();
-
-        if (is_null($resul))
-            return false;
-
-        return $resul["nombre"];
-    }
-
+    
     public function getBorrado($codUsuario)
     {
-        $consulta = "SELECT borrado FROM `acl_usuarios` WHERE cod_acl_usuario = $codUsuario";
+        $consulta = "SELECT borrado FROM `usuarios` WHERE cod_usuario = $codUsuario";
 
         $resul = $this->_sqli->crearConsulta($consulta)->fila();
 
@@ -144,38 +133,32 @@ class CACLBD extends CACLBase
 
     public function getUsuarioRole($codUsuario)
     {
-        $consulta = "SELECT `rol` FROM `dfs_usuarios_roles`  WHERE cod_acl_usuario = $codUsuario";
+        $consulta = "SELECT `nombre_rol` FROM `usuarios_roles`  WHERE cod_usuario = $codUsuario";
 
         $resul = $this->_sqli->crearConsulta($consulta)->fila();
 
         if (is_null($resul))
             return false;
 
-        return $resul["rol"];
+        return $resul["nombre_rol"];
     }
 
     //Setters
-    public function setNombre($codUsuario, $nombre)
-    {
-        $consulta = "UPDATE `acl_usuarios` SET `nombre` = '$nombre' WHERE `cod_acl_usuario` = '$codUsuario'";
-        $this->_sqli->crearConsulta($consulta);
-    }
-
     public function setContrasenia($codUsuario, $contra)
     {
-        $consulta = "UPDATE `acl_usuarios` SET `contrasenna` = MD5('$contra') WHERE `cod_acl_usuario` = '$codUsuario'";
+        $consulta = "UPDATE `usuarios` SET `contrasenna` = MD5('$contra') WHERE `cod_usuario` = '$codUsuario'";
         $this->_sqli->crearConsulta($consulta);
     }
 
     public function setBorrado($codUsuario, $borrado)
     {
-        $consulta = "UPDATE `acl_usuarios` SET `borrado` = '$borrado' WHERE `cod_acl_usuario` = '$codUsuario'";
+        $consulta = "UPDATE `usuarios` SET `borrado` = '$borrado' WHERE `cod_usuario` = '$codUsuario'";
         $this->_sqli->crearConsulta($consulta);
     }
 
     public function setUsuarioRole($codUsuario, $rol)
     {
-        $consulta = "UPDATE `dfs_usuarios_roles` SET `cod_acl_rol` = '$rol' WHERE `cod_acl_usuario` = '$codUsuario'";
+        $consulta = "UPDATE `usuarios_roles` SET `cod_rol` = '$rol' WHERE `cod_usuario` = '$codUsuario'";
         $this->_sqli->crearConsulta($consulta);
     }
 
@@ -183,26 +166,26 @@ class CACLBD extends CACLBase
     //Arrays
     public function dameUsuarios()
     {
-        $consulta = "SELECT `cod_acl_usuario`, `nick` from `acl_usuarios` ORDER BY `cod_acl_usuario`";
+        $consulta = "SELECT `cod_usuario`, `nif` from `usuarios` ORDER BY `cod_usuario`";
 
         $datos = $this->_sqli->crearConsulta($consulta);
         $res = [];
 
         while ($fila = $datos->filas())
-            $res[$fila["cod_acl_usuario"]] = $fila["nick"];
+            $res[$fila["cod_usuario"]] = $fila["nif"];
 
         return $res;
     }
 
     public function dameRoles()
     {
-        $consulta = "SELECT `cod_acl_role`, `nombre_rol` from `acl_roles` ORDER BY `cod_acl_role`";
+        $consulta = "SELECT `cod_rol`, `nombre_rol` from `roles` ORDER BY `cod_rol`";
 
         $datos = $this->_sqli->crearConsulta($consulta);
         $res = [];
 
         while ($fila = $datos->filas())
-            $res[$fila["cod_acl_role"]] = $fila["nombre_rol"];
+            $res[$fila["cod_rol"]] = $fila["nombre_rol"];
 
         return $res;
     }
