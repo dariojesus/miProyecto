@@ -70,12 +70,11 @@
 				$this->_acceso = new CAcceso();
 
 			else{
-				$nick = $_SESSION["nick"];
-				$nombre = $_SESSION["nombre"];
+				$nif = $_SESSION["nif"];
 				$permisos = $_SESSION["permisos"];
 
 				$this->_acceso = new CAcceso();
-				$this->_acceso->registrarUsuario($nick,$nombre,$permisos);
+				$this->_acceso->registrarUsuario($nif,$permisos);
 			}
 
 

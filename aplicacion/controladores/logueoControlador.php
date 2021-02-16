@@ -7,7 +7,20 @@
         }
 
 		public function accionFormulario(){
-            echo $this->dibujaVistaParcial("index",array(),true).PHP_EOL;
+            $login = new Login();
+            $datos = $login->getNombre();
+
+            if (isset($_POST[$datos])){
+
+                $login->setValores($_POST[$datos]);
+
+                if ($login->validar()){
+                    Sistema::app()->irAPagina(array("inicial","Principal"));
+                    return;
+                }
+            }
+
+            echo $this->dibujaVistaParcial("index",array("modelo"=>$login),true).PHP_EOL;
 		}
 
         public function accionRegistro(){

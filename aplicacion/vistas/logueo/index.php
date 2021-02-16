@@ -33,38 +33,38 @@
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "form-floating"], null, false) . PHP_EOL;
-    echo CHTML::campoText("identificacion", "", array(
-        "class" => "form-control",
-        "placeholder" => "identifiacion",
-        "autocomplete" => "username"
-    )) . PHP_EOL;
-    echo CHTML::campoLabel("Identificación (DNI/NIF)", "identificacion") . PHP_EOL;
+    echo CHTML::modeloText($modelo, "nif", array(
+                                                    "class" => "form-control",
+                                                    "placeholder" => "identificacion",
+                                                    "autocomplete" => "username"
+                                                )) . PHP_EOL;
+    echo CHTML::modeloLabel($modelo,"nif") . PHP_EOL;
+    echo CHTML::modeloError($modelo,"nif",["class"=>"error"]);
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
 
-
     echo CHTML::dibujaEtiqueta("div", ["class" => "form-floating"], null, false) . PHP_EOL;
-    echo CHTML::campoPassword("contra", "", array(
-        "class" => "form-control",
-        "placeholder" => "contra",
-        "autocomplete" => "current-password"
-    )) . PHP_EOL;
-    echo CHTML::campoLabel("Contraseña", "contra") . PHP_EOL;
+    echo CHTML::modeloPassword($modelo, "contrasenna", array(
+                                                    "class" => "form-control",
+                                                    "placeholder" => "contra",
+                                                    "autocomplete" => "current-password"
+                                                )) . PHP_EOL;
+    echo CHTML::modeloLabel($modelo, "contrasenna") . PHP_EOL;
+    echo CHTML::modeloError($modelo,"contrasenna",["class"=>"error"]);
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
 
     echo CHTML::dibujaEtiqueta("div", [], null, false) . PHP_EOL;
-    echo CHTML::boton("Acceder", ["class" => "btn btn-dark"]) . PHP_EOL;
+    echo CHTML::campoBotonSubmit("Acceder", ["class" => "btn btn-dark"]) . PHP_EOL;
     echo CHTML::link("Registrarse", ["logueo", "Registro"], ["class" => "btn btn-dark"]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
+    echo CHTML::finalizarForm() . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("hr") . PHP_EOL;
 
     echo CHTML::botonHtml("Login mediante Google", ["class" => "btn btn-outline-warning"]) . PHP_EOL;
     echo CHTML::botonHtml("Login mediante Facebook", ["class" => "btn btn-outline-primary"]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("main") . PHP_EOL;
-
-    echo CHTML::finalizarForm() . PHP_EOL;
     ?>
 </body>
 
