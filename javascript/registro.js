@@ -3,7 +3,7 @@ var $nombre = $("#nombre");
 var $apellidos = $("#apellidos");
 var $nacimiento = $("#nacimiento");
 var $email = $("#email");
-
+var $poblacion = $("#poblacion");
 var $direccion = $("#direccion");
 var $contra = $("#contra");
 
@@ -15,7 +15,7 @@ $apellidos.on("focus",limpiarEA);
 $nacimiento.on("focus",limpiarEA);
 $email.on("focus",limpiarEA);
 $("#emailRepetido").on("focus",limpiarEA);
-
+$poblacion.on("focus",limpiarEA);
 $direccion.on("focus",limpiarEA);
 $contra.on("focus",limpiarEA);
 $("#contraRepetida").on("focus",limpiarEA);
@@ -89,6 +89,20 @@ $email.on("focusout",function(){
 
 });
 
+//Comprobación de población
+$poblacion.on("focusout",function(){  
+
+    let poblacion = $poblacion.val();
+    let re = /^[a-zA-ZáéíóúÁÉÍÓÚ0-9 ]{2,30}$/gmi;
+
+    if(!re.test(poblacion)){
+        $poblacion.addClass("error");
+        $("<div class='error'>La poblacion no puede estar vacía o ser mayor a 30 caracteres.</div>").insertAfter($poblacion);
+    }
+    else
+        $poblacion.addClass("acierto");
+})
+
 //Re-comprobación del email
 $("#emailRepetido").on("focusout",function(){
 
@@ -98,6 +112,10 @@ $("#emailRepetido").on("focusout",function(){
     if (!mail1.localeCompare(mail2)==0){
         $(this).addClass("error");
         $("<div class='error'>Los emails no coinciden.</div>").insertAfter($(this));
+    }
+    else if (mail1===""){
+        $(this).addClass("error");
+        $("<div class='error'>El campo no puede estar vacío.</div>").insertAfter($(this));
     }
     else
         $(this).addClass("acierto");
@@ -111,7 +129,7 @@ $direccion.on("focusout",function(){
 
     if(!re.test(direccion)){
         $direccion.addClass("error");
-        $("<div class='error'>La dirección no puede ser mayor a 50 caracteres.</div>").insertAfter($direccion);
+        $("<div class='error'>La dirección no puede estar vacía o ser mayor a 30 caracteres.</div>").insertAfter($direccion);
     }
     else
         $direccion.addClass("acierto");
@@ -142,6 +160,11 @@ $("#contraRepetida").on("focusout",function(){
         $(this).addClass("error");
         $("<div class='error'>Las contraseñas no coinciden.</div>").insertAfter($(this));
     }
+
+    else if (contra1===""){
+        $(this).addClass("error");
+        $("<div class='error'>El campo no puede estar vacío.</div>").insertAfter($(this));
+    }
     else
         $(this).addClass("acierto");
 });
@@ -149,8 +172,16 @@ $("#contraRepetida").on("focusout",function(){
 //Para limpiar errores/aciertos del formulario
 function limpiarEA () {
 
-    if($(this).next().hasClass("error")){
-        $(this).next().remove();
+    let hermanos = $(this).siblings();
+
+    if(hermanos.length > 0){
+        
+        for (let cont=0; cont < hermanos.length; cont++){
+
+            if ($(hermanos[cont]).hasClass("error"))
+                $(hermanos[cont]).remove();
+        }
+
         $(this).removeClass("error");
     }
     else if ($(this).hasClass("acierto"))

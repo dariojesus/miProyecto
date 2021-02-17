@@ -32,7 +32,6 @@
 <div id="menu">
 	<ul class="list-group list-group-flush">
 		<?php
-		echo CHTML::link("Menu de opciones", "#", ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 		echo CHTML::link("Iniciar sesion", ["logueo", "formulario"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 		echo CHTML::link("Opción 1", "#", ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 		echo CHTML::link("Opción 2", "#", ["class" => "list-group-item list-group-item-action list-group-item-dark"]);

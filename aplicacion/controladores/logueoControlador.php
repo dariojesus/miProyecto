@@ -24,7 +24,20 @@
 		}
 
         public function accionRegistro(){
-            echo $this->dibujaVistaParcial("registro",array(),true).PHP_EOL;
+            $registro = new Registro();
+            $datos = $registro->getNombre();
+
+            if (isset($_POST[$datos])){
+
+                $registro->setValores($_POST[$datos]);
+
+                if ($registro->validar()){
+                    echo "Validado correcto";
+                    return;
+                }
+            }
+
+            echo $this->dibujaVistaParcial("registro",array("modelo"=>$registro),true).PHP_EOL;
         }
 		
 	}

@@ -68,20 +68,49 @@
         <fieldset>
             <legend>Datos personales</legend>
             <div class="form-floating m-2">
-                <input type="text" class="form-control" id="nif" placeholder="nif">
-                <label for="nif">NIF</label>
+
+                <?php
+                echo CHTML::modeloText($modelo,"nif",["class"=>"form-control",
+                                                           "id"=>"nif",
+                                                           "placeholder"=>"nif"]).PHP_EOL;
+                echo CHTML::modeloLabel($modelo,"nif").PHP_EOL;
+                echo CHTML::modeloError($modelo, "nif").PHP_EOL;
+                ?>
+
             </div>
             <div class="form-floating m-2">
-                <input type="text" class="form-control" id="nombre" placeholder="nombre" autocomplete="username">
-                <label for="nombre">Nombre</label>
+
+                <?php
+                echo CHTML::modeloText($modelo,"nombre",["class"=>"form-control",
+                                                           "id"=>"nombre",
+                                                           "placeholder"=>"nombre",
+                                                           "autocomplete"=>"username"]).PHP_EOL;
+                echo CHTML::modeloLabel($modelo,"nombre").PHP_EOL;
+                echo CHTML::modeloError($modelo, "nombre").PHP_EOL;
+                ?>
+
             </div>
             <div class="form-floating m-2">
-                <input type="text" class="form-control" id="apellidos" placeholder="apellidos">
-                <label for="apellidos">Apellidos</label>
+
+                <?php
+                echo CHTML::modeloText($modelo,"apellidos",["class"=>"form-control",
+                                                           "id"=>"apellidos",
+                                                           "placeholder"=>"apellidos"]).PHP_EOL;
+                echo CHTML::modeloLabel($modelo,"apellidos").PHP_EOL;
+                echo CHTML::modeloError($modelo, "apellidos").PHP_EOL;
+                ?>
+
             </div>
             <div class="form-floating m-2">
-                <input type="date" class="form-control" id="nacimiento" placeholder="nacimiento">
-                <label for="nacimiento">Fecha de nacimiento</label>
+
+                <?php
+                echo CHTML::modeloDate($modelo,"fecha_nacimiento",["class"=>"form-control",
+                                                           "id"=>"nacimiento",
+                                                           "placeholder"=>"nacimiento"]).PHP_EOL;
+                echo CHTML::modeloLabel($modelo,"fecha_nacimiento").PHP_EOL;
+                echo CHTML::modeloError($modelo,"fecha_nacimiento").PHP_EOL;
+                ?>
+
             </div>
         </fieldset>
 
@@ -89,8 +118,15 @@
         <fieldset>
             <legend>Datos de contacto</legend>
             <div class="form-floating m-2">
-                <input type="email" class="form-control" id="email" placeholder="email">
-                <label for="email">Email</label>
+
+                <?php
+                echo CHTML::modeloEmail($modelo,"email",["class"=>"form-control",
+                                                           "id"=>"email",
+                                                           "placeholder"=>"email"]).PHP_EOL;
+                echo CHTML::modeloLabel($modelo,"email").PHP_EOL;
+                echo CHTML::modeloError($modelo, "email").PHP_EOL;
+                ?>
+
             </div>
 
             <div class="form-floating m-2">
@@ -99,20 +135,28 @@
             </div>
 
             <div class="form-floating m-2">
-                <input class="form-control" list="Opciones" id="poblacion" placeholder="poblacion">
-                <datalist id="Opciones">
-                    <option value="San Francisco">
-                    <option value="New York">
-                    <option value="Seattle">
-                    <option value="Los Angeles">
-                    <option value="Chicago">
-                </datalist>
-                <label for="poblacion">Poblacion</label>
+
+                <?php
+                echo CHTML::modeloText($modelo,"poblacion",["class"=>"form-control",
+                                                           "id"=>"poblacion",
+                                                           "placeholder"=>"poblacion",
+                                                           "list"=>"opciones"]).PHP_EOL;
+                echo CHTML::modeloLabel($modelo,"poblacion").PHP_EOL;
+                echo CHTML::modeloError($modelo, "poblacion").PHP_EOL;
+                ?>
+
             </div>
 
             <div class="form-floating m-2">
-                <input type="text" class="form-control" id="direccion" placeholder="direccion">
-                <label for="direccion">Direccion</label>
+
+                <?php
+                echo CHTML::modeloText($modelo,"direccion",["class"=>"form-control",
+                                                           "id"=>"direccion",
+                                                           "placeholder"=>"direccion"]).PHP_EOL;
+                echo CHTML::modeloLabel($modelo,"direccion").PHP_EOL;
+                echo CHTML::modeloError($modelo, "direccion").PHP_EOL;
+                ?>
+
             </div>
         </fieldset>
 
@@ -120,8 +164,16 @@
         <fieldset>
             <legend>Seguridad</legend>
             <div class="form-floating m-2">
-                <input type="password" class="form-control" id="contra" placeholder="contraseña" autocomplete="new-password">
-                <label for="contra">Contraseña</label>
+
+                <?php
+                echo CHTML::modeloPassword($modelo,"contrasenna",["class"=>"form-control",
+                                                           "id"=>"contra",
+                                                           "placeholder"=>"contraseña",
+                                                           "autocomplete"=>"new-password"]).PHP_EOL;
+                echo CHTML::modeloLabel($modelo,"contrasenna").PHP_EOL;
+                echo CHTML::modeloError($modelo, "contrasenna").PHP_EOL;
+                ?>
+
             </div>
             <div class="form-floating m-2">
                 <input type="password" class="form-control" id="contraRepetida" placeholder="contraseña" autocomplete="new-password">
@@ -129,8 +181,7 @@
             </div>
         </fieldset>
 
-
-        <button type="submit" class="btn btn-outline-success w-50" disabled>Registrarse</button>
+        <?php echo CHTML::campoBotonSubmit("Registrarse",["class"=>"btn btn-outline-success w-50"])?>
 
     </main>
     <?php
