@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title><?php echo $titulo; ?></title>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+	<link rel="icon" type="image/png" href="/imagenes/logo/16.png"/>
 
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -32,18 +33,25 @@
 <div id="menu">
 	<ul class="list-group list-group-flush">
 		<?php
-		echo CHTML::link("Iniciar sesion", ["logueo", "formulario"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
-		echo CHTML::link("Opción 1", "#", ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+		$acceso = Sistema::app()->acceso();
+
+		if (!$acceso->hayUsuario())
+			echo CHTML::link("Iniciar sesion", ["logueo", "formulario"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+		else
+			echo CHTML::link("Mi cuenta", ["logueo", "MiCuenta"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+			
+		echo CHTML::link("Inicio", ["inicial", "Principal"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 		echo CHTML::link("Opción 2", "#", ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 		echo CHTML::link("Opción 3", "#", ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+
+		if ($acceso->hayUsuario())
+			echo CHTML::link("Logout",["logueo","QuitarRegistro"],["class"=>"list-group-item list-group-item-action list-group-item-danger"]);
 		?>
 	</ul>
 </div>
 
 <nav>
-	<div class="nav-item">
-		<a class="nav-link" aria-current="page" id="btnMenu"><img src="/imagenes/logo/menu.png"></a>
-	</div>
+	<a class="nav-link" aria-current="page" id="btnMenu"><img src="/imagenes/logo/menu.png"></a>
 </nav>
 
 <?php echo $contenido; ?>

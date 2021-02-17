@@ -1,5 +1,6 @@
 <?php
 	 
+     //Controlador con acciones respectivas a la página principal
 	class inicialControlador extends CControlador{
 
         public function __construct(){

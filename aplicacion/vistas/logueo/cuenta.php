@@ -1,7 +1,7 @@
 <main id="cuenta">
     <div>
         <h1>Tu cuenta</h1>
-        <h4>Hola <u>nombre de usuario</u> aquí encontrarás toda la información relevante a tu cuenta.</h4>
+        <h4>Hola <u><?php echo $nombre ?></u> aquí encontrarás toda la información relevante a tu cuenta.</h4>
     </div>
 
     <section id="seccionCuenta">
