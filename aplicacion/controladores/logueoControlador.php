@@ -39,5 +39,10 @@
 
             echo $this->dibujaVistaParcial("registro",array("modelo"=>$registro),true).PHP_EOL;
         }
+
+        public function accionMiCuenta(){
+
+            $this->dibujaVista("cuenta",array(),"Mi cuenta");
+        }
 		
 	}
