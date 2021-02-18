@@ -55,8 +55,13 @@
                 $registro->setValores($_POST[$datos]);
 
                 if ($registro->validar()){
-                    echo "Validado correcto";
-                    return;
+
+                    if ($registro->guardar()){
+                        $acl = Sistema::app()->ACL();
+                        $acl->anadirUsuario($registro->nif, $registro->contrasenna, 1);
+                        Sistema::app()->irAPagina(array("logueo","Formulario"));
+                        return;
+                    }
                 }
             }
 

@@ -5,27 +5,42 @@ class Registro extends CActiveRecord{
         return "registro";
     }
 
+    protected function fijarTabla(){
+        return "perfiles";
+    }
+
+    protected function fijarId(){
+        return "codigo";
+    }
+
     protected function fijarAtributos(){
         
-        return array("nif", "nombre", "apellidos", "fecha_nacimiento",
-                     "email", "poblacion", "direccion", "contrasenna");
+        return array("codigo","nif", "nombre", "apellidos", "fecha_nacimiento",
+                     "email", "poblacion", "direccion", "contrasenna", "borrado");
     }
 
     protected function fijarDescripciones(){
 
-        return array("nif"=>"NIF",
+        return array("codigo"=>"Codigo",
+                     "nif"=>"NIF",
                      "nombre"=>"Nombre",
                      "apellidos"=>"Apellidos",
                      "fecha_nacimiento"=>"Fecha de nacimiento",
                      "email"=>"Email",
                      "poblacion"=>"Población",
                      "direccion"=>"Dirección",
-                     "contrasenna"=>"Contraseña");
+                     "contrasenna"=>"Contraseña",
+                     "borrado"=>"Borrado");
     }
 
     protected function fijarRestricciones(){
         
         return array(
+                    array(
+                        "ATRI"=>"codigo",
+                        "TIPO"=>"ENTERO"
+                    ),
+
                     array("ATRI"=>"nif,nombre,apellidos,fecha_nacimiento,email,poblacion,direccion,contrasenna","TIPO"=>"REQUERIDO"),
                 
                     array(
@@ -86,6 +101,13 @@ class Registro extends CActiveRecord{
                         "TIPO"=>"CADENA",
                         "TAMANIO"=>"50",
                         "MENSAJE"=>"La contraseña no puede tener mas de 50 caracteres."
+                    ),
+
+                    array(
+                        "ATRI"=>"borrado",
+                        "TIPO" => "ENTERO",
+                        "MIN" => "0",
+                        "MAX" => "1"
                     )
                 );
     }
@@ -99,6 +121,7 @@ class Registro extends CActiveRecord{
         $this->poblacion="";
         $this->direccion="";
         $this->contrasenna="";
+        $this->borrado=0;
     }
 
     public function validaEmail(){
@@ -142,6 +165,55 @@ class Registro extends CActiveRecord{
 
         else if ($fecha_dada >= $fecha_actual)
             $this->setError("fecha_nacimiento","La fecha de nacimiento no puede ser superior a la actual.");
+    }
+
+    protected function afterBuscar(){
+        $this->fecha_nacimiento = CGeneral::fechaMysqlANormal($this->fecha_nacimiento);
+        $this->borrado = $this->borrado=="1"? "SI" : "NO";
+    }
+
+    public function fijarSentenciaInsert(){
+
+        $email = CGeneral::addSlashes($this->email);
+        $nom = CGeneral::addSlashes($this->nombre);
+        $ape = CGeneral::addSlashes($this->apellidos);
+        $nif = CGeneral::addSlashes($this->nif);
+        $fec = CGeneral::addSlashes($this->fecha_nacimiento);
+        $dir = CGeneral::addSlashes($this->direccion);
+        $pob = CGeneral::addSlashes($this->poblacion);
+
+
+        $sentencia = "INSERT INTO  perfiles (`email`, `nombre`, `apellidos`, `nif`, `fecha_nacimiento`, `direccion`, `poblacion`)".
+                                    "values ('$email', '$nom', '$ape', '$nif', '$fec', '$dir', '$pob')";
+
+        return $sentencia;
+    }
+
+    public function fijarSentenciaUpdate(){
+
+        $cod = $this->codigo;
+
+        $email = CGeneral::addSlashes($this->email);
+        $nom = CGeneral::addSlashes($this->nombre);
+        $ape = CGeneral::addSlashes($this->apellidos);
+        $nif = CGeneral::addSlashes($this->nif);
+        $fec = CGeneral::addSlashes($this->fecha_nacimiento);
+        $dir = CGeneral::addSlashes($this->direccion);
+        $pob = CGeneral::addSlashes($this->poblacion);
+        $bor = CGeneral::addSlashes($this->borrado);
+
+
+        $sentencia = "UPDATE dfs_productos SET `email` = '$email'".
+                                            ", `nombre` ='".$nom."'".
+                                            ", `apellidos` ='".$ape."'".
+                                            ", `nif` ='".$nif."'".
+                                            ", `fecha_nacimiento` ='".$fec."'".
+                                            ", `direccion` ='".$dir."'".
+                                            ", `poblacion` ='".$pob."'".
+                                            ", `borrado` =".$bor.
+                                            "  where `cod_perfil` ='".$cod."'";
+
+        return $sentencia;
     }
 
 }

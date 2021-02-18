@@ -8,6 +8,7 @@
         }
 
 
+        //Acción para mostrar la página de index
 		public function accionPrincipal(){
             $this->dibujaVista("index",array(),"Indice de la aplicación");
 		}
