@@ -1,0 +1,90 @@
+/*--------------------CSS DE BUSQUEDA DE DESTINOS----------------------------*/
+
+#filtro{
+    width: 100%;
+    min-height: 50px;
+    background-color: brown;
+}
+
+#destinos{
+    width: 95%;
+    margin: 2%;
+    height: 700px;
+}
+
+.destino{
+    width: 100%;
+    height: 15vh;
+    background-color: black;
+    color: white;
+    border-radius: 25px;
+    margin-bottom: 2%;
+
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.info{
+    overflow-y: auto;
+}
+
+.info > div{
+    height: min-content;
+    background-color: cadetblue;
+    padding: 2%;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.info > article{
+    height: 10%;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+    border-radius: 25px;
+    background-color: cadetblue;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.foto{
+    border-top-left-radius: 25px;
+    border-bottom-left-radius:25px ;
+    max-width: 150px;
+}
+
+.datos{
+    margin-left: 3%;
+    padding-top: 0.5%;
+}
+
+@media (min-width:700px){
+
+    #destinos{
+        display: grid;
+        grid-template-columns: 35% auto;
+        column-gap: 2%;
+    }
+}
+
+/* width */
+.info::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  /* Track */
+  .info::-webkit-scrollbar-track {
+    background: white;
+  }
+   
+  /* Handle */
+  .info::-webkit-scrollbar-thumb {
+    background: cadetblue; 
+  }
+  
+  /* Handle on hover */
+  .info::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+  }

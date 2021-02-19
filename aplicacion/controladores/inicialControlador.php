@@ -7,11 +7,19 @@
             $this->accionDefecto="principal";
         }
 
-
         //Acción para mostrar la página de index
 		public function accionPrincipal(){
             $this->dibujaVista("index",array(),"Indice de la aplicación");
 		}
+
+        //Acción para mostrar los planetas (destinos)
+        public function accionDestinos(){
+
+            $var = Sistema::app()->BD()->crearConsulta("SELECT * FROM destinos ORDER BY `nombre`");
+            $var = $var->filas();
+           
+            $this->dibujaVista("destinos",array("planetas"=>$var),"Destinos disponibles");
+        }
 
 		
 	}

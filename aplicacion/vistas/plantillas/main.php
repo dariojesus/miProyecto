@@ -41,7 +41,7 @@
 			echo CHTML::link("Mi cuenta", ["logueo", "MiCuenta"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 			
 		echo CHTML::link("Inicio", ["inicial", "Principal"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
-		echo CHTML::link("Opción 2", "#", ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+		echo CHTML::link("Viajes", ["inicial", "Destinos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 		echo CHTML::link("Opción 3", "#", ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 
 		if ($acceso->hayUsuario())
