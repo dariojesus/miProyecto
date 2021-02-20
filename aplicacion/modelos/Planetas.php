@@ -80,13 +80,38 @@ class Planetas extends CActiveRecord{
         $this->foto="";
     }
 
-    public function compruebaPlaneta(){
+    private function compruebaPlaneta(){
 
         $existe = Sistema::app()->BD()->crearConsulta("SELECT `cod_destino` FROM destinos WHERE `nombre` = '".$this->nombre."'");
         $existe = $existe->filas();
 
         if ($existe)
             $this->setError("nif","El planeta ya se encuentra registrado en los destinos.");
+    }
+
+    public static function devuelvePlanetas($codigo=null){
+
+        //Si no llega un codigo se devuelven todos los pares (codigo:planeta)
+        if (is_null($codigo)){
+            $existe = Sistema::app()->BD()->crearConsulta("SELECT `cod_destino`,`nombre` FROM destinos");
+            $existe = $existe->filas();
+            return $existe;
+        }
+            
+        //Si llega un codigo que no es numerico se devuelve false
+        else if (!is_numeric($codigo))
+            return false;
+
+        //En otro caso se devuelve el planeta correspondiente al codigo si lo hubiese
+        else{
+            $codigo = CGeneral::addSlashes($codigo);
+            $existe = Sistema::app()->BD()->crearConsulta("SELECT `cod_destino`,`nombre` FROM destinos WHERE `cod_destino` = '".$codigo."'");
+            
+            if ($existe)
+                 return $existe->filas();
+            else
+                return false;
+        }
     }
 
     public function fijarSentenciaInsert(){
@@ -105,7 +130,7 @@ class Planetas extends CActiveRecord{
 
     public function fijarSentenciaUpdate(){
 
-        $codigo = CGeneral::addcslashes($this->cod_destino);
+        $codigo = CGeneral::addSlashes($this->cod_destino);
         $nom = CGeneral::addSlashes($this->nombre);
         $des = CGeneral::addSlashes($this->descipcion);
         $dur = CGeneral::addSlashes($this->duracion_viaje);
@@ -117,7 +142,7 @@ class Planetas extends CActiveRecord{
                                             ", `duracion_viaje` ='".$dur."'".
                                             ", `clima` ='".$cli."'".
                                             ", `foto` ='".$pic."'".
-                                            "  where `cod_destino` ='".$cod."'";
+                                            "  where `cod_destino` ='".$codigo."'";
 
         return $sentencia;
     }
