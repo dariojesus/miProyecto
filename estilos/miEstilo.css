@@ -99,7 +99,7 @@ footer{
     margin-bottom: 5%;
 }
 
-nav{
+nav.barra{
     background-color:none;
     position: sticky;
     top: 0;
