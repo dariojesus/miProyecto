@@ -169,7 +169,7 @@ class Registro extends CActiveRecord{
 
     protected function afterBuscar(){
         $this->fecha_nacimiento = CGeneral::fechaMysqlANormal($this->fecha_nacimiento);
-        $this->borrado = $this->borrado=="1"? "SI" : "NO";
+        $this->borrado = $this->borrado=="1"? "Si" : "No";
     }
 
     public function fijarSentenciaInsert(){

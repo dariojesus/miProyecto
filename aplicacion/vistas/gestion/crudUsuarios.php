@@ -87,9 +87,9 @@
                         echo CHTML::dibujaEtiqueta("td", [], $usuario["borrado"]) . PHP_EOL;
 
                         echo CHTML::dibujaEtiqueta("td", [], 
-                                CHTML::link("Más", 
+                                CHTML::link("+", 
                                     Sistema::app()->generaURL(
-                                        array("gestion", "mostrar"),
+                                        array("gestion", "control"),
                                         array("codigo"=>$usuario["cod_perfil"])
                                     ),
                                     array("class"=>"btn btn-info","target"=>"miFrame")
