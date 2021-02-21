@@ -51,122 +51,141 @@
     ?>
     <main>
 
-    <fieldset>
-        <legend>Datos personales</legend>
+        <fieldset>
+            <legend>Datos personales</legend>
+
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloText($modelo, "nif", [
+                    "class" => "form-control",
+                    "id" => "nif",
+                    "placeholder" => "nif"
+                ]) . PHP_EOL;
+                echo CHTML::modeloLabel($modelo, "nif") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "nif") . PHP_EOL;
+                ?>
+
+            </div>
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloText($modelo, "nombre", [
+                    "class" => "form-control",
+                    "id" => "nombre",
+                    "placeholder" => "nombre",
+                    "autocomplete" => "username"
+                ]) . PHP_EOL;
+                echo CHTML::modeloLabel($modelo, "nombre") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "nombre") . PHP_EOL;
+                ?>
+
+            </div>
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloText($modelo, "apellidos", [
+                    "class" => "form-control",
+                    "id" => "apellidos",
+                    "placeholder" => "apellidos"
+                ]) . PHP_EOL;
+                echo CHTML::modeloLabel($modelo, "apellidos") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "apellidos") . PHP_EOL;
+                ?>
+
+            </div>
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloDate($modelo, "fecha_nacimiento", [
+                    "class" => "form-control",
+                    "id" => "nacimiento",
+                    "placeholder" => "nacimiento"
+                ]) . PHP_EOL;
+                echo CHTML::modeloLabel($modelo, "fecha_nacimiento") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "fecha_nacimiento") . PHP_EOL;
+                ?>
+
+            </div>
+
+        </fieldset>
+
+
+        <fieldset>
+            <legend>Datos de contacto</legend>
+
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloEmail($modelo, "email", [
+                    "class" => "form-control",
+                    "id" => "email",
+                    "placeholder" => "email"
+                ]) . PHP_EOL;
+                echo CHTML::modeloLabel($modelo, "email") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "email") . PHP_EOL;
+                ?>
+
+            </div>
+
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloText($modelo, "poblacion", [
+                    "class" => "form-control",
+                    "id" => "poblacion",
+                    "placeholder" => "poblacion",
+                    "list" => "opciones"
+                ]) . PHP_EOL;
+                echo CHTML::modeloLabel($modelo, "poblacion") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "poblacion") . PHP_EOL;
+                ?>
+
+            </div>
+
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloText($modelo, "direccion", [
+                    "class" => "form-control",
+                    "id" => "direccion",
+                    "placeholder" => "direccion"
+                ]) . PHP_EOL;
+                echo CHTML::modeloLabel($modelo, "direccion") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "direccion") . PHP_EOL;
+                ?>
+
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Datos de cuenta</legend>
+
+                <div class="form-floating m-2">
+
+                <?php
+
+                $datos = array(0=>"No", 1=>"Si");
+
+                echo CHTML::modeloListaDropDown($modelo,"borrado",$datos,
+                                                ["class" => "form-control w-50",
+                                                "placeholder" => "borrado"]) . PHP_EOL;
+
+                echo CHTML::modeloLabel($modelo, "borrado") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "borrado") . PHP_EOL;
+                ?>
+
+            </div>
+        
+        </fieldset>
 
         <div class="form-floating m-2">
 
             <?php
-            echo CHTML::modeloText($modelo, "nif", [
-                "class" => "form-control",
-                "id" => "nif",
-                "placeholder" => "nif"
-            ]) . PHP_EOL;
-            echo CHTML::modeloLabel($modelo, "nif") . PHP_EOL;
-            echo CHTML::modeloError($modelo, "nif") . PHP_EOL;
+            echo CHTML::modeloNumber($modelo,"cod_perfil",array("hidden"=>"hidden"));
+            echo CHTML::campoBotonSubmit("Modificar", ["class" => "btn btn-outline-warning w-50", "name" => "modifica"]) . PHP_EOL;
             ?>
-
-        </div>
-        <div class="form-floating m-2">
-
-            <?php
-            echo CHTML::modeloText($modelo, "nombre", [
-                "class" => "form-control",
-                "id" => "nombre",
-                "placeholder" => "nombre",
-                "autocomplete" => "username"
-            ]) . PHP_EOL;
-            echo CHTML::modeloLabel($modelo, "nombre") . PHP_EOL;
-            echo CHTML::modeloError($modelo, "nombre") . PHP_EOL;
-            ?>
-
-        </div>
-        <div class="form-floating m-2">
-
-            <?php
-            echo CHTML::modeloText($modelo, "apellidos", [
-                "class" => "form-control",
-                "id" => "apellidos",
-                "placeholder" => "apellidos"
-            ]) . PHP_EOL;
-            echo CHTML::modeloLabel($modelo, "apellidos") . PHP_EOL;
-            echo CHTML::modeloError($modelo, "apellidos") . PHP_EOL;
-            ?>
-
-        </div>
-        <div class="form-floating m-2">
-
-            <?php
-            echo CHTML::modeloDate($modelo, "fecha_nacimiento", [
-                "class" => "form-control",
-                "id" => "nacimiento",
-                "placeholder" => "nacimiento"
-            ]) . PHP_EOL;
-            echo CHTML::modeloLabel($modelo, "fecha_nacimiento") . PHP_EOL;
-            echo CHTML::modeloError($modelo, "fecha_nacimiento") . PHP_EOL;
-            ?>
-
-        </div>
-
-    </fieldset>
-
-
-    <fieldset>
-        <legend>Datos de contacto</legend>
-
-        <div class="form-floating m-2">
-
-            <?php
-            echo CHTML::modeloEmail($modelo, "email", [
-                "class" => "form-control",
-                "id" => "email",
-                "placeholder" => "email"
-            ]) . PHP_EOL;
-            echo CHTML::modeloLabel($modelo, "email") . PHP_EOL;
-            echo CHTML::modeloError($modelo, "email") . PHP_EOL;
-            ?>
-
-        </div>
-
-        <div class="form-floating m-2">
-
-            <?php
-            echo CHTML::modeloText($modelo, "poblacion", [
-                "class" => "form-control",
-                "id" => "poblacion",
-                "placeholder" => "poblacion",
-                "list" => "opciones"
-            ]) . PHP_EOL;
-            echo CHTML::modeloLabel($modelo, "poblacion") . PHP_EOL;
-            echo CHTML::modeloError($modelo, "poblacion") . PHP_EOL;
-            ?>
-
-        </div>
-
-        <div class="form-floating m-2">
-
-            <?php
-            echo CHTML::modeloText($modelo, "direccion", [
-                "class" => "form-control",
-                "id" => "direccion",
-                "placeholder" => "direccion"
-            ]) . PHP_EOL;
-            echo CHTML::modeloLabel($modelo, "direccion") . PHP_EOL;
-            echo CHTML::modeloError($modelo, "direccion") . PHP_EOL;
-            ?>
-
-        </div>
-
-    </fieldset>
-
-        <div class="form-floating m-2">
-
-        <?php 
-        echo CHTML::dibujaEtiqueta("div",[],null,false) . PHP_EOL;
-        echo CHTML::campoBotonSubmit("Modificar", ["class" => "btn btn-outline-warning w-50","name"=>"modifica"]) . PHP_EOL; 
-        echo CHTML::campoBotonSubmit("Borrar", ["class" => "btn btn-outline-danger w-25","name"=>"borra"]) . PHP_EOL; 
-        echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
-        ?>
 
     </main>
     <?php

@@ -15,39 +15,15 @@ main {
 
     display: grid;
     grid-template-columns: 3.5em auto;
-    column-gap: 3%;
+    column-gap: 1.5%;
 }
 
 table{
-    margin-top: 3%;
+    margin-top: 2%;
 }
 
 .barra{
     background-color: #04394e;
-    height: 100%;
-}
-
-@media (max-width:940px) {
-    tr > :nth-child(6), :nth-child(7), :nth-child(5){
-        display: none;
-    }
-}
-
-@media (max-width:654px) {
-    th:nth-child(4), td:nth-child(4){
-        display: none;
-    }
-
-    main{
-        grid-template-columns: auto;
-        grid-template-rows: 2.7em auto;
-    }
-}
-
-@media (max-width:436px) {
-    th:nth-child(2), td:nth-child(2) {
-        display: none;
-    }
 }
 
 /*--------------------------------PARTE DE ESTILO DEL OTRO CSS-----------------------------------------*/
@@ -84,20 +60,22 @@ table{
 
 #fondoFrame{
     visibility: collapse;
+    margin-top: 4%;
     background-color: whitesmoke;
-    width: 100vw;
-    height: 100%;
+    width: 100%;
+    height: 96%;
+    border: 1px solid gray;
 
     z-index: 10;
     position: absolute;
 
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 8vh 90%;
+    grid-template-rows: 3% auto;
 }
 
 #barraFrame{
-    background-color: black;
+    background-color: gray;
     padding-right: 2vw;
 
     display: flex;
@@ -108,4 +86,52 @@ table{
 #miFrame{
     height: 100%;
     width: 100%;
+}
+
+@media (min-width: 990px){
+    main{
+        grid-template-columns: 3% 30% auto ;
+        grid-template-rows: 40% auto;
+    }
+
+    .barra{
+        grid-row-start: 1;
+        grid-row-end: 3;
+    }
+
+    table{
+        grid-column-start: 3;
+        grid-column-end: 4;
+    }
+
+    #fondoFrame{
+        position: unset;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
+}
+
+@media (max-width:990px) {
+    tr > :nth-child(6), :nth-child(7), :nth-child(5){
+        display: none;
+    }
+}
+
+@media (max-width:700px) {
+    th:nth-child(4), td:nth-child(4){
+        display: none;
+    }
+
+    main{
+        grid-template-columns: auto;
+        grid-template-rows: 2.7em auto;
+    }
+}
+
+@media (max-width:436px) {
+    th:nth-child(2), td:nth-child(2) {
+        display: none;
+    }
 }

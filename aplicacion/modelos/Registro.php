@@ -125,11 +125,14 @@ class Registro extends CActiveRecord{
     }
 
     public function validaEmail(){
-        $existe = Sistema::app()->BD()->crearConsulta("SELECT `cod_perfil` FROM perfiles WHERE `email` = '".$this->email."'");
-        $existe = $existe->filas();
 
-        if ($existe)
-            $this->setError("email","El email ya se encuentra registrado en nuestra web.");
+        if (!$this->cod_perfil > 0){
+            $existe = Sistema::app()->BD()->crearConsulta("SELECT `cod_perfil` FROM perfiles WHERE `email` = '".$this->email."'");
+            $existe = $existe->filas();
+    
+            if ($existe)
+                $this->setError("email","El email ya se encuentra registrado en nuestra web.");
+        }
     }
 
     public function compruebaContra(){
@@ -142,6 +145,8 @@ class Registro extends CActiveRecord{
 
     public function compruebaDNI(){
 
+        if (!$this->cod_perfil > 0){
+
         $existe = Sistema::app()->BD()->crearConsulta("SELECT `cod_usuario` FROM usuarios WHERE `nif` = '".$this->nif."'");
         $existe = $existe->filas();
 
@@ -150,6 +155,7 @@ class Registro extends CActiveRecord{
 
         if ($existe)
             $this->setError("nif","El DNI ya se encuentra registrado en nuestra web.");
+        }
     }
 
     public function validaFecha(){

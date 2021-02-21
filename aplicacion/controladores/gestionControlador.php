@@ -36,6 +36,7 @@
             }
         }
 
+        //Acción para mostrar la información de un usuario
         public function accionMostrar(){
 
             //Se busca y recupera el usuario en el caso de que exista
@@ -54,18 +55,39 @@
             }
         }
 
+        //Acción para modificar la información de un usuario
         public function accionModificar(){
 
+            $usuario = new Registro();
+            $datos = $usuario->getNombre();
+            $exito = $usuario->buscarPorId($_GET["codigo"]);
+
+            //En el caso de que lleguen los datos por POST se intenta validar
+            if (isset($_POST[$datos])){
+                $datos = $_POST[$datos];
+                $usuario->setValores($datos);
+
+                if($usuario->validar()){
+                    echo "bien";
+                }
+            }
+
+            //El usuario no se ha encontrado en la base de datos
+            if (!$exito){
+                Sistema::app()->paginaError(505,"Ups, no se ha podido recuperar la información de dicho usuario.");
+                return;
+            }
+
+            else{
+                $usuario->fecha_nacimiento = CGeneral::fechaNormalAMysql($usuario->fecha_nacimiento);
+                echo $this->dibujaVistaParcial("modificarUsuarios",array("modelo"=>$usuario),true).PHP_EOL;
+                return;
+            }
 
         }
 
         public function accionBorrar(){
 
 
-        }
-
-        //$datos = $usuario->getNombre();
-        //$datos = $_POST[$datos];
-        //Sistema::app()->irAPagina(array("gestion","Modificar"));
-	
+        }	
 	}
