@@ -83,7 +83,7 @@
             }
                 
             else
-                Sistema::app()->paginaError(500,"Ups, no tiene permiso para acceder a esta página");
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
         }
 
         //Accion para logout

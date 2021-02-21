@@ -10,18 +10,18 @@ class Registro extends CActiveRecord{
     }
 
     protected function fijarId(){
-        return "codigo";
+        return "cod_perfil";
     }
 
     protected function fijarAtributos(){
         
-        return array("codigo","nif", "nombre", "apellidos", "fecha_nacimiento",
+        return array("cod_perfil","nif", "nombre", "apellidos", "fecha_nacimiento",
                      "email", "poblacion", "direccion", "contrasenna", "borrado");
     }
 
     protected function fijarDescripciones(){
 
-        return array("codigo"=>"Codigo",
+        return array("cod_perfil"=>"Codigo",
                      "nif"=>"NIF",
                      "nombre"=>"Nombre",
                      "apellidos"=>"Apellidos",
@@ -37,7 +37,7 @@ class Registro extends CActiveRecord{
         
         return array(
                     array(
-                        "ATRI"=>"codigo",
+                        "ATRI"=>"cod_perfil",
                         "TIPO"=>"ENTERO"
                     ),
 
@@ -191,7 +191,7 @@ class Registro extends CActiveRecord{
 
     public function fijarSentenciaUpdate(){
 
-        $cod = $this->codigo;
+        $cod = $this->cod_perfil;
 
         $email = CGeneral::addSlashes($this->email);
         $nom = CGeneral::addSlashes($this->nombre);

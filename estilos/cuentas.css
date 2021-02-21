@@ -15,10 +15,15 @@ main {
 
     display: grid;
     grid-template-columns: 3.5em auto;
+    column-gap: 3%;
+}
+
+table{
+    margin-top: 3%;
 }
 
 .barra{
-    background-color: black;
+    background-color: #04394e;
     height: 100%;
 }
 
@@ -73,4 +78,38 @@ main {
 
     transition-property: width;
     transition-duration: 0.5s;
+}
+
+/*---------------------------------------------------------------*/
+
+#fondoFrame{
+    visibility: collapse;
+    background-color: whitesmoke;
+    width: 100vw;
+    height: 100%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    z-index: 10;
+    position: absolute;
+
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 8vh 90%;
+}
+
+#barraFrame{
+    background-color: black;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    padding-right: 2vw;
+
+    display: flex;
+    align-items:center;
+    justify-content:flex-end;
+}
+
+#miFrame{
+    height: 100%;
+    width: 100%;
 }

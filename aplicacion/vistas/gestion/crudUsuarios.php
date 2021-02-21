@@ -43,56 +43,64 @@
             ?>
         </ul>
     </div>
+
+
+    <div id="fondoFrame">
+        <div id="barraFrame">
+            <button id="btnFrame" class="btn btn-outline-light btn-sm">X</button>
+        </div>
+        <iframe id="miFrame" name="miFrame"></iframe>
+    </div>
+
+
     <main>
         <nav class="barra">
             <a class="nav-link" aria-current="page" id="btnMenu"><img src="/imagenes/logo/menu.png"></a>
         </nav>
-        <table class="table table-light table-striped table-hover scroll">
-            <thead>
-                <tr>
-                    <th>NIF</th>
-                    <th>Email</th>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Fecha nacimiento</th>
-                    <th>Direccion</th>
-                    <th>Poblacion</th>
-                    <th>Borrado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>12345678A</td>
-                    <td>dariojesusflores@gmail.com</td>
-                    <td>Dario Jesus</td>
-                    <td>Flores Sevilla</td>
-                    <td>18/07/1997</td>
-                    <td>Antequera</td>
-                    <td>Merecillas n4</td>
-                    <td>NO</td>
-                </tr>
-                <tr>
-                    <td>12345678A</td>
-                    <td>dariojesusflores@gmail.com</td>
-                    <td>Dario Jesus</td>
-                    <td>Flores Sevilla</td>
-                    <td>18/07/1997</td>
-                    <td>Antequera</td>
-                    <td>Merecillas n4</td>
-                    <td>NO</td>
-                </tr>
-                <tr>
-                    <td>12345678A</td>
-                    <td>dariojesusflores@gmail.com</td>
-                    <td>Dario Jesus</td>
-                    <td>Flores Sevilla</td>
-                    <td>18/07/1997</td>
-                    <td>Antequera</td>
-                    <td>Merecillas n4</td>
-                    <td>NO</td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table table-light table-striped table-hover scroll">
+                <thead>
+                    <tr>
+                        <th>NIF</th>
+                        <th>Email</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Fecha nacimiento</th>
+                        <th>Direccion</th>
+                        <th>Poblacion</th>
+                        <th>Borrado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($usr as $clave => $usuario) {
+
+                        echo CHTML::dibujaEtiqueta("tr", ["class" => "persona"], null, false) . PHP_EOL;
+
+                        echo CHTML::dibujaEtiqueta("td", [], $usuario["nif"]) . PHP_EOL;
+                        echo CHTML::dibujaEtiqueta("td", [], $usuario["email"]) . PHP_EOL;
+                        echo CHTML::dibujaEtiqueta("td", [], $usuario["nombre"]) . PHP_EOL;
+                        echo CHTML::dibujaEtiqueta("td", [], $usuario["apellidos"]) . PHP_EOL;
+                        echo CHTML::dibujaEtiqueta("td", [], $usuario["fecha_nacimiento"]) . PHP_EOL;
+                        echo CHTML::dibujaEtiqueta("td", [], $usuario["poblacion"]) . PHP_EOL;
+                        echo CHTML::dibujaEtiqueta("td", [], $usuario["direccion"]) . PHP_EOL;
+                        echo CHTML::dibujaEtiqueta("td", [], $usuario["borrado"]) . PHP_EOL;
+
+                        echo CHTML::dibujaEtiqueta("td", [], 
+                                CHTML::link("Más", 
+                                    Sistema::app()->generaURL(
+                                        array("gestion", "mostrar"),
+                                        array("codigo"=>$usuario["cod_perfil"])
+                                    ),
+                                    array("class"=>"btn btn-info","target"=>"miFrame")
+                                    )
+                                ) . PHP_EOL;
+
+                        echo CHTML::dibujaEtiquetaCierre("tr") . PHP_EOL;
+                    }
+                    ?>
+                </tbody>
+            </table>
     </main>
 </body>
 

@@ -44,3 +44,13 @@ function muestraInfo() {
 
     $(nombre).removeAttr("style");
 }
+
+/*----------------------------------------------Control del frame y visibilidad--------------------------------------------------------------- */
+
+$("#btnFrame").click(function(){
+    $("#fondoFrame").css("visibility","collapse");
+});
+
+$("a.btn").click(function(){
+    $("#fondoFrame").css("visibility","visible");
+});
