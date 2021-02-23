@@ -19,13 +19,14 @@
 </head>
 <style>
     body {
-        margin-top: 2%;
         height: 100%;
         width: 100%;
+        padding-top: 5%;
 
         display: grid;
-        grid-template-columns: 100%;
+        grid-template-columns: 50%;
         grid-template-rows: repeat(3, 33%);
+        justify-content: center;
         row-gap: 2%;
     }
 </style>

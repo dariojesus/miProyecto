@@ -46,26 +46,31 @@
                 return;
             }
 
-            //Sino accedes al formulario de registro
+            //Si no, accedes al formulario de registro
             $registro = new Registro();
             $datos = $registro->getNombre();
+            $exito = "";
 
-            if (isset($_POST[$datos])){
+            if (isset($_POST[$datos]) && isset($_POST["contrasenna"])){
 
                 $registro->setValores($_POST[$datos]);
+                $exito = CGeneral::passwordSegura($_POST["contrasenna"],50);
 
-                if ($registro->validar()){
+                //Si los datos son validos y la contraseña cumple los requisitos, se guarda en usuarios y en perfiles
+                if ($registro->validar() &&  $exito === true){
 
                     if ($registro->guardar()){
                         $acl = Sistema::app()->ACL();
-                        $acl->anadirUsuario($registro->nif, $registro->contrasenna, 1);
+                        $contra = $_POST["contrasenna"];
+
+                        $acl->anadirUsuario($registro->nif, $contra, 1);
                         Sistema::app()->irAPagina(array("logueo","Formulario"));
                         return;
                     }
                 }
             }
 
-            echo $this->dibujaVistaParcial("registro",array("modelo"=>$registro),true).PHP_EOL;
+            echo $this->dibujaVistaParcial("registro",array("modelo"=>$registro,"error"=>$exito),true).PHP_EOL;
         }
 
         //Accion para acceder a mi cuenta

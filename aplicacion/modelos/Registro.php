@@ -16,7 +16,7 @@ class Registro extends CActiveRecord{
     protected function fijarAtributos(){
         
         return array("cod_perfil","nif", "nombre", "apellidos", "fecha_nacimiento",
-                     "email", "poblacion", "direccion", "contrasenna", "borrado");
+                     "email", "poblacion", "direccion", "borrado");
     }
 
     protected function fijarDescripciones(){
@@ -29,7 +29,6 @@ class Registro extends CActiveRecord{
                      "email"=>"Email",
                      "poblacion"=>"Población",
                      "direccion"=>"Dirección",
-                     "contrasenna"=>"Contraseña",
                      "borrado"=>"Borrado");
     }
 
@@ -94,15 +93,6 @@ class Registro extends CActiveRecord{
                         "MENSAJE"=>"La direccion no puede tener mas de 50 caracteres."
                     ),
 
-                    array("ATRI"=>"contrasenna","TIPO"=>"FUNCION","FUNCION"=>"compruebaContra"),
-
-                    array(
-                        "ATRI"=>"contrasenna",
-                        "TIPO"=>"CADENA",
-                        "TAMANIO"=>"50",
-                        "MENSAJE"=>"La contraseña no puede tener mas de 50 caracteres."
-                    ),
-
                     array(
                         "ATRI"=>"borrado",
                         "TIPO" => "ENTERO",
@@ -120,7 +110,6 @@ class Registro extends CActiveRecord{
         $this->email="";
         $this->poblacion="";
         $this->direccion="";
-        $this->contrasenna="";
         $this->borrado=0;
     }
 
@@ -133,14 +122,6 @@ class Registro extends CActiveRecord{
             if ($existe)
                 $this->setError("email","El email ya se encuentra registrado en nuestra web.");
         }
-    }
-
-    public function compruebaContra(){
-
-        $patron = "/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,10}$/";
-
-        if (preg_match($patron,$this->contrasenna)!==1)
-            $this->setError("contrasenna","La contraseña debe contener al menos una minúscula, mayúscula, un dígito y tener entre 6 y 10 caracteres.");
     }
 
     public function compruebaDNI(){
@@ -209,7 +190,7 @@ class Registro extends CActiveRecord{
         $bor = CGeneral::addSlashes($this->borrado);
 
 
-        $sentencia = "UPDATE dfs_productos SET `email` = '$email'".
+        $sentencia = "UPDATE perfiles SET `email` = '$email'".
                                             ", `nombre` ='".$nom."'".
                                             ", `apellidos` ='".$ape."'".
                                             ", `nif` ='".$nif."'".

@@ -167,12 +167,14 @@
             <div class="form-floating m-2">
 
                 <?php
-                echo CHTML::modeloPassword($modelo,"contrasenna",["class"=>"form-control",
-                                                           "id"=>"contra",
-                                                           "placeholder"=>"contraseña",
-                                                           "autocomplete"=>"new-password"]).PHP_EOL;
-                echo CHTML::modeloLabel($modelo,"contrasenna").PHP_EOL;
-                echo CHTML::modeloError($modelo, "contrasenna").PHP_EOL;
+                echo CHTML::campoPassword("contrasenna","",["class"=>"form-control",
+                                                            "id"=>"contra",
+                                                            "placeholder"=>"contraseña",
+                                                            "autocomplete"=>"new-password"]).PHP_EOL;
+                echo CHTML::campoLabel("Contraseña","contrasenna").PHP_EOL;
+
+                if (!empty($error))
+                    echo CHTML::dibujaEtiqueta("div",["class"=>"error"],$error);
                 ?>
 
             </div>

@@ -7,6 +7,7 @@ html, body {
     height: 100%;
     padding: 0%;
     margin: 0%;
+    background-color: rgb(216, 215, 215);
 }
 
 main {
@@ -20,6 +21,12 @@ main {
 
 table{
     margin-top: 2%;
+    border-radius: 5px;
+    border: 1.5px solid gray;
+    height: fit-content;
+    background-color: white;
+
+    box-shadow: -7px 7px 29px -12px rgba(0,0,0,0.63);
 }
 
 .barra{
@@ -60,37 +67,32 @@ table{
 
 #fondoFrame{
     visibility: collapse;
-    margin-top: 4%;
     background-color: whitesmoke;
+    margin-top: 5%;
     width: 100%;
-    height: 96%;
-    border: 1px solid gray;
+    height: 60%;
+    border-radius: 5px;
+    border: 1.5px solid rgb(161, 160, 160);
 
     z-index: 10;
     position: absolute;
 
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 3% auto;
-}
+    grid-template-rows:auto;
 
-#barraFrame{
-    background-color: gray;
-    padding-right: 2vw;
-
-    display: flex;
-    align-items:center;
-    justify-content:flex-end;
+    box-shadow: -7px 7px 29px -12px rgba(0,0,0,0.63);
 }
 
 #miFrame{
+    border-radius: 5px;
     height: 100%;
-    width: 100%;
+    width: 99.5%;
 }
 
-@media (min-width: 990px){
+@media (min-width: 1200px){
     main{
-        grid-template-columns: 3% 30% auto ;
+        grid-template-columns: 3% 20% auto ;
         grid-template-rows: 40% auto;
     }
 
@@ -113,13 +115,20 @@ table{
     }
 }
 
-@media (max-width:990px) {
+@media (max-width:1200px) {
+
     tr > :nth-child(6), :nth-child(7), :nth-child(5){
         display: none;
+    }
+
+    #fondoFrame{
+        margin-top: 0;
+        height: 100%;
     }
 }
 
 @media (max-width:700px) {
+
     th:nth-child(4), td:nth-child(4){
         display: none;
     }
@@ -130,7 +139,7 @@ table{
     }
 }
 
-@media (max-width:436px) {
+@media (max-width:534px) {
     th:nth-child(2), td:nth-child(2) {
         display: none;
     }

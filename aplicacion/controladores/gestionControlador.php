@@ -68,7 +68,10 @@
                 $usuario->setValores($datos);
 
                 if($usuario->validar()){
-                    echo "bien";
+                    $usuario->guardar();
+                    Sistema::app()->ACL()->setNif($datos["cod_perfil"],$datos["nif"]);
+                    Sistema::app()->irAPagina(array("gestion","CrudUsuarios"));
+                    return;
                 }
             }
 

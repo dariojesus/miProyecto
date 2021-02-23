@@ -150,6 +150,12 @@ class CACLBD extends CACLBase
         $this->_sqli->crearConsulta($consulta);
     }
 
+    public function setNif($codUsuario, $nif)
+    {
+        $consulta = "UPDATE `usuarios` SET `nif` = '$nif' WHERE `cod_usuario` = '$codUsuario'";
+        $this->_sqli->crearConsulta($consulta);
+    }
+
     public function setBorrado($codUsuario, $borrado)
     {
         $consulta = "UPDATE `usuarios` SET `borrado` = '$borrado' WHERE `cod_usuario` = '$codUsuario'";

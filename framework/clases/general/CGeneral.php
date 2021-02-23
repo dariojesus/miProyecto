@@ -28,6 +28,19 @@
 			
 		}
 
+		public static function passwordSegura($passwd, $longitud){
+			$patron = "/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,10}$/";
+	
+			if (preg_match($patron,$passwd)!==1)
+				return "La contraseña debe contener al menos una minúscula, mayúscula, un dígito y tener entre 6 y 10 caracteres.";
+		
+			else if (strlen($passwd)>$longitud)
+				return "La contraseña no puede ser superior a $longitud caracteres.";
+
+			else 
+				return true;
+			}
+
 		
 		/**
 		 * Permite escapar una cadena . Los caracteres que se 

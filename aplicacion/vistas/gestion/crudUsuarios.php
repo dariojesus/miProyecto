@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/imagenes/logo/16.png"/>
+    <link rel="icon" type="image/png" href="/imagenes/logo/16.png" />
     <title>Registro</title>
 
     <!-- Bootstrap CSS -->
@@ -48,7 +48,7 @@
         <nav class="barra">
             <a class="nav-link" aria-current="page" id="btnMenu"><img src="/imagenes/logo/menu.png"></a>
         </nav>
-            <table class="table table-light table-striped table-hover scroll">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>NIF</th>
@@ -77,15 +77,18 @@
                         echo CHTML::dibujaEtiqueta("td", [], $usuario["direccion"]) . PHP_EOL;
                         echo CHTML::dibujaEtiqueta("td", [], $usuario["borrado"]) . PHP_EOL;
 
-                        echo CHTML::dibujaEtiqueta("td", [], 
-                                CHTML::link("+", 
-                                    Sistema::app()->generaURL(
-                                        array("gestion", "control"),
-                                        array("codigo"=>$usuario["cod_perfil"])
-                                    ),
-                                    array("class"=>"btn btn-info","target"=>"miFrame")
-                                    )
-                                ) . PHP_EOL;
+                        echo CHTML::dibujaEtiqueta(
+                            "td",
+                            [],
+                            CHTML::link(
+                                "+",
+                                Sistema::app()->generaURL(
+                                    array("gestion", "control"),
+                                    array("codigo" => $usuario["cod_perfil"])
+                                ),
+                                array("class" => "btn btn-info", "target" => "miFrame")
+                            )
+                        ) . PHP_EOL;
 
                         echo CHTML::dibujaEtiquetaCierre("tr") . PHP_EOL;
                     }
@@ -93,12 +96,10 @@
                 </tbody>
             </table>
 
-    <div id="fondoFrame">
-        <div id="barraFrame">
-            <button id="btnFrame" class="btn btn-outline-light btn-sm">X</button>
+        <div id="fondoFrame">
+            <iframe id="miFrame" name="miFrame"></iframe>
         </div>
-        <iframe id="miFrame" name="miFrame"></iframe>
-    </div>
+
     </main>
 </body>
 
