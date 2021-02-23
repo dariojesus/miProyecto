@@ -52,7 +52,7 @@ $("#btnFrame").click(function(){
     $("#fondoFrame").css("opacity","0");
 });
 
-$("a.btn").click(function(){
+$("a.utilidad").click(function(){
     $("#fondoFrame").css("visibility","visible");
     $("#fondoFrame").css("opacity","1");
 });

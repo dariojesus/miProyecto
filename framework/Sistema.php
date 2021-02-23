@@ -18,7 +18,8 @@
 											"CCommand"=>"/bd/CCommand.php",
 											"CWidget"=>"/widget/CWidget.php",
 											"CGrid"=>"/widget/CGrid.php",
-											"CPager"=>"/widget/CPager.php"
+											"CPager"=>"/widget/CPager.php",
+											"CModal"=>"/widget/CModal.php"
 										);
 		static private $_rutasInclude=array();
 		static private $_app;

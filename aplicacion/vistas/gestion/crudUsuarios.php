@@ -48,58 +48,82 @@
         <nav class="barra">
             <a class="nav-link" aria-current="page" id="btnMenu"><img src="/imagenes/logo/menu.png"></a>
         </nav>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>NIF</th>
-                        <th>Email</th>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Fecha nacimiento</th>
-                        <th>Direccion</th>
-                        <th>Poblacion</th>
-                        <th>Borrado</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($usr as $clave => $usuario) {
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>NIF</th>
+                    <th>Email</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Fecha nacimiento</th>
+                    <th>Direccion</th>
+                    <th>Poblacion</th>
+                    <th>Borrado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($usr as $clave => $usuario) {
 
-                        echo CHTML::dibujaEtiqueta("tr", ["class" => "persona"], null, false) . PHP_EOL;
+                    //Se crea una ventana modal correspondiente al boton eliminar de cada persona
+                    $ventana = new CModal("persona".$usuario["cod_perfil"],
+                                          "Borrar usuario",
+                                          "Está a punto de borrar el usuario <b>{$usuario["nombre"]} {$usuario["apellidos"]}</b><br>
+                                          ¿Seguro que quiere proceder con la operación?",
+                                          Sistema::app()->generaURL(array("gestion", "Borrar"),array("codigo" => $usuario["cod_perfil"]))
+                                        );
 
-                        echo CHTML::dibujaEtiqueta("td", [], $usuario["nif"]) . PHP_EOL;
-                        echo CHTML::dibujaEtiqueta("td", [], $usuario["email"]) . PHP_EOL;
-                        echo CHTML::dibujaEtiqueta("td", [], $usuario["nombre"]) . PHP_EOL;
-                        echo CHTML::dibujaEtiqueta("td", [], $usuario["apellidos"]) . PHP_EOL;
-                        echo CHTML::dibujaEtiqueta("td", [], $usuario["fecha_nacimiento"]) . PHP_EOL;
-                        echo CHTML::dibujaEtiqueta("td", [], $usuario["poblacion"]) . PHP_EOL;
-                        echo CHTML::dibujaEtiqueta("td", [], $usuario["direccion"]) . PHP_EOL;
-                        echo CHTML::dibujaEtiqueta("td", [], $usuario["borrado"]) . PHP_EOL;
+                    $ventana->dibujate();
 
-                        $contenido = CHTML::link("D",
-                                       Sistema::app()->generaURL(array("gestion", "Mostrar"),
-                                       array("codigo" => $usuario["cod_perfil"])),
-                                       array("class" => "btn btn-info", "target" => "miFrame"));
+                    //Se crea una linea de tabla por cada persona
+                    echo CHTML::dibujaEtiqueta("tr", ["class" => "persona"], null, false) . PHP_EOL;
 
-                        $contenido .= CHTML::link("M",
-                                       Sistema::app()->generaURL(array("gestion", "Modificar"),
-                                       array("codigo" => $usuario["cod_perfil"])),
-                                       array("class" => "btn btn-warning", "target" => "miFrame"));
+                    echo CHTML::dibujaEtiqueta("td", [], $usuario["nif"]) . PHP_EOL;
+                    echo CHTML::dibujaEtiqueta("td", [], $usuario["email"]) . PHP_EOL;
+                    echo CHTML::dibujaEtiqueta("td", [], $usuario["nombre"]) . PHP_EOL;
+                    echo CHTML::dibujaEtiqueta("td", [], $usuario["apellidos"]) . PHP_EOL;
+                    echo CHTML::dibujaEtiqueta("td", [], $usuario["fecha_nacimiento"]) . PHP_EOL;
+                    echo CHTML::dibujaEtiqueta("td", [], $usuario["poblacion"]) . PHP_EOL;
+                    echo CHTML::dibujaEtiqueta("td", [], $usuario["direccion"]) . PHP_EOL;
+                    echo CHTML::dibujaEtiqueta("td", [], $usuario["borrado"]) . PHP_EOL;
 
-                        $contenido .= CHTML::link("borrar",
-                                       Sistema::app()->generaURL(array("gestion", "Borrar"),
-                                       array("codigo" => $usuario["cod_perfil"])),
-                                       array("target" => "miFrame"));
+                    //En contenido se guardan los 3 tipos de enlaces correspondientes a las acciones por cada persona
+                    $contenido = CHTML::link(
+                        CHTML::imagen("../../../imagenes/iconos/detalles.png"),
+                        Sistema::app()->generaURL(
+                            array("gestion", "Mostrar"),
+                            array("codigo" => $usuario["cod_perfil"])
+                        ),
+                        array("class" => "btn btn-outline-secondary utilidad", "target" => "miFrame")
+                    );
 
-                        echo CHTML::dibujaEtiqueta("td",[],$contenido) . PHP_EOL;
+                    $contenido .= CHTML::link(
+                        CHTML::imagen("../../../imagenes/iconos/modificar.png"),
+                        Sistema::app()->generaURL(
+                            array("gestion", "Modificar"),
+                            array("codigo" => $usuario["cod_perfil"])
+                        ),
+                        array("class" => "btn btn-outline-secondary utilidad", "target" => "miFrame")
+                    );
 
-                        echo CHTML::dibujaEtiquetaCierre("tr") . PHP_EOL;
-                    }
-                    ?>
-                </tbody>
-            </table>
+                    $contenido .= CHTML::botonHtml(
+                        CHTML::imagen("../../../imagenes/iconos/borrar.png"),
+                        array("class"=>"btn btn-outline-secondary", 
+                        "data-bs-toggle"=>"modal", 
+                        "data-bs-target"=>"#persona{$usuario["cod_perfil"]}"));
 
+
+                    //El contenido (enlaces) se dibuja en la ultima celda de la tabla
+                    echo CHTML::dibujaEtiqueta("td", [], $contenido) . PHP_EOL;
+
+                    echo CHTML::dibujaEtiquetaCierre("tr") . PHP_EOL;
+                }
+                ?>
+            </tbody>
+        </table>
+
+        <!--Creo mi ventana POP-UP propia para mostrar las páginas de ver y modificar en esta propia página (sin redirecciones)-->
         <div id="fondoFrame">
             <button id="btnFrame">X</button>
             <iframe id="miFrame" name="miFrame"></iframe>
