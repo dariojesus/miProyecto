@@ -22,20 +22,6 @@
             echo $this->dibujaVistaParcial("crudUsuarios",["usr"=>$usuarios],true).PHP_EOL;
         }
 
-        //Acción encargada de llamar a las operaciones agregar/mostrar/modificar/eliminar
-        public function accionControl(){
-
-            if (isset($_GET["codigo"])){
-                $codigo = $_GET["codigo"];
-                echo $this->dibujaVistaParcial("controlUsuarios",array("codigo"=>$codigo),true).PHP_EOL;
-            }
-
-            else{
-                Sistema::app()->paginaError(505,"No se ha podido recoger el usuario con el que operar.");
-                return;
-            }
-        }
-
         //Acción para mostrar la información de un usuario
         public function accionMostrar(){
 

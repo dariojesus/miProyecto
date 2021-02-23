@@ -9,18 +9,25 @@
 #destinos{
     width: 95%;
     margin: 2%;
-    height: 700px;
+    height: 900px;
 }
 
 .destino{
-    width: 100%;
-    height: 15vh;
-    background-color: black;
+    width: 90%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 20px;
     color: white;
-    margin-bottom: 2%;
+}
 
-    display: flex;
-    flex-wrap: nowrap;
+.datos{
+    margin-left: 3%;
+    padding-top: 3%;
+}
+
+.destino:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
 }
 
 .info{
@@ -46,38 +53,11 @@
     align-items: center;
 }
 
-.foto{max-width: 150px;}
-
-.datos{
-    margin-left: 3%;
-    padding-top: 0.5%;
+#planetas{
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(5,15%) auto;
+    row-gap: 2%;
+    justify-items: center;
 }
-
-@media (min-width:830px){
-
-    #destinos{
-        display: grid;
-        grid-template-columns: 35% auto;
-        column-gap: 2%;
-    }
-}
-
-/* width */
-.info::-webkit-scrollbar {
-    width: 20px;
-  }
-  
-  /* Track */
-  .info::-webkit-scrollbar-track {
-    background: white;
-  }
-   
-  /* Handle */
-  .info::-webkit-scrollbar-thumb {
-    background: cadetblue; 
-  }
-  
-  /* Handle on hover */
-  .info::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
-  }

@@ -1,7 +1,9 @@
 <?php
     /*Se crean las tarjetas de los planetas con su información mínima */
-    echo CHTML::dibujaEtiqueta("div",["class"=>"destino"],null,false).PHP_EOL;
-        echo CHTML::dibujaEtiqueta("img",["src"=>$planeta["foto"], "class"=>"foto"]).PHP_EOL;
+    $foto = $planeta["foto"];
+
+    echo CHTML::dibujaEtiqueta("div",["class"=>"destino", "style"=>"background-image: url($foto)"],null,false).PHP_EOL;
+        //echo CHTML::dibujaEtiqueta("img",["src"=>$planeta["foto"], "class"=>"foto"]).PHP_EOL;
 
         echo CHTML::dibujaEtiqueta("div",["class"=>"datos"],null,false).PHP_EOL;
 

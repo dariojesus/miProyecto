@@ -45,12 +45,14 @@ function muestraInfo() {
     $(nombre).removeAttr("style");
 }
 
-/*----------------------------------------------Control del frame y visibilidad--------------------------------------------------------------- */
+/*----------------------------------------------Control del frame y visibilidad (Cuentas)--------------------------------------------------------------- */
 
 $("#btnFrame").click(function(){
     $("#fondoFrame").css("visibility","collapse");
+    $("#fondoFrame").css("opacity","0");
 });
 
 $("a.btn").click(function(){
     $("#fondoFrame").css("visibility","visible");
+    $("#fondoFrame").css("opacity","1");
 });

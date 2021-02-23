@@ -77,18 +77,22 @@
                         echo CHTML::dibujaEtiqueta("td", [], $usuario["direccion"]) . PHP_EOL;
                         echo CHTML::dibujaEtiqueta("td", [], $usuario["borrado"]) . PHP_EOL;
 
-                        echo CHTML::dibujaEtiqueta(
-                            "td",
-                            [],
-                            CHTML::link(
-                                "+",
-                                Sistema::app()->generaURL(
-                                    array("gestion", "control"),
-                                    array("codigo" => $usuario["cod_perfil"])
-                                ),
-                                array("class" => "btn btn-info", "target" => "miFrame")
-                            )
-                        ) . PHP_EOL;
+                        $contenido = CHTML::link("D",
+                                       Sistema::app()->generaURL(array("gestion", "Mostrar"),
+                                       array("codigo" => $usuario["cod_perfil"])),
+                                       array("class" => "btn btn-info", "target" => "miFrame"));
+
+                        $contenido .= CHTML::link("M",
+                                       Sistema::app()->generaURL(array("gestion", "Modificar"),
+                                       array("codigo" => $usuario["cod_perfil"])),
+                                       array("class" => "btn btn-warning", "target" => "miFrame"));
+
+                        $contenido .= CHTML::link("borrar",
+                                       Sistema::app()->generaURL(array("gestion", "Borrar"),
+                                       array("codigo" => $usuario["cod_perfil"])),
+                                       array("target" => "miFrame"));
+
+                        echo CHTML::dibujaEtiqueta("td",[],$contenido) . PHP_EOL;
 
                         echo CHTML::dibujaEtiquetaCierre("tr") . PHP_EOL;
                     }
@@ -97,9 +101,9 @@
             </table>
 
         <div id="fondoFrame">
+            <button id="btnFrame">X</button>
             <iframe id="miFrame" name="miFrame"></iframe>
         </div>
-
     </main>
 </body>
 
