@@ -91,11 +91,16 @@ class Planetas extends CActiveRecord{
 
     public static function devuelvePlanetas($codigo=null){
 
-        //Si no llega un codigo se devuelven todos los pares (codigo:planeta)
+        //Si no llega un codigo se devuelven todos los pares (planeta:codigo) en un array asociativo
         if (is_null($codigo)){
-            $existe = Sistema::app()->BD()->crearConsulta("SELECT `cod_destino`,`nombre` FROM destinos");
-            $existe = $existe->filas();
-            return $existe;
+            $array = [];
+            $destinos = Sistema::app()->BD()->crearConsulta("SELECT `cod_destino`,`nombre` FROM destinos");
+            $destinos = $destinos->filas();
+
+            foreach ($destinos as $clave => $valor)
+                $array[$valor["nombre"]]=$valor["cod_destino"];
+
+            return $array;
         }
             
         //Si llega un codigo que no es numerico se devuelve false
