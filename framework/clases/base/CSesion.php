@@ -6,9 +6,7 @@ class CSesion{
     }
 
     public function crearSesion(){
-
-        if (!$this->haySesion())
-            session_start();          
+        session_start();          
     }
 
     public function haySesion(){
@@ -16,7 +14,7 @@ class CSesion{
     }
 
     public function destruirSesion(){
-        unset($_SESSION);
+        session_destroy();
     }
 }
 

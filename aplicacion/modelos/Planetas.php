@@ -110,10 +110,10 @@ class Planetas extends CActiveRecord{
         //En otro caso se devuelve el planeta correspondiente al codigo si lo hubiese
         else{
             $codigo = CGeneral::addSlashes($codigo);
-            $existe = Sistema::app()->BD()->crearConsulta("SELECT `cod_destino`,`nombre` FROM destinos WHERE `cod_destino` = '".$codigo."'");
+            $existe = Sistema::app()->BD()->crearConsulta("SELECT `nombre` FROM destinos WHERE `cod_destino` = '".$codigo."'");
             
             if ($existe)
-                 return $existe->filas();
+                 return $existe->filas()[0]["nombre"];
             else
                 return false;
         }

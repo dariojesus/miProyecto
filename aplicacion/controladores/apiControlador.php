@@ -3,11 +3,7 @@
      //Controlador con acciones respectivas a la API
 	class apiControlador extends CControlador{
 
-        private $_bd;
-
-        public function __construct(){
-            $this->_bd = Sistema::app()->BD();
-        }
+        public function __construct(){}
         
         public function accionVuelosDisponibles(){
 
@@ -61,7 +57,7 @@
 
                 $vuelos = $vuelos->buscarTodos($opciones);
 
-                $vuelos = json_encode($vuelos,JSON_PRETTY_PRINT);
+                $vuelos = json_encode($vuelos);
                 echo $vuelos;
             }
     

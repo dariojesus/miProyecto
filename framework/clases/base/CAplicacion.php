@@ -59,23 +59,17 @@
 			}
 
 			//Se carga la configuracion de la sesion
-			$this->_sesion = new CSesion();
-
 			if (isset($config["sesion"]["controlAutomatico"]))
-				if ($config["sesion"]["controlAutomatico"]==true)
+				if ($config["sesion"]["controlAutomatico"]==true){
+					$this->_sesion = new CSesion();
 					$this->_sesion->crearSesion();
-				
+				}
+					
 			//Se carga la configuracion del acceso
-			if (!isset($_SESSION) || $_SESSION["validado"]==false)
-				$this->_acceso = new CAcceso();
-
-			else{
-				$nif = $_SESSION["nif"];
-				$permisos = $_SESSION["permisos"];
-
-				$this->_acceso = new CAcceso();
-				$this->_acceso->registrarUsuario($nif,$permisos);
-			}
+			$this->_acceso = new CAcceso();
+			if ($this->sesion()->haySesion())
+				if(isset($_SESSION["nif"]))
+					$this->_acceso->registrarUsuario($_SESSION["nif"],$_SESSION["permisos"]);
 
 
 			//Se carga la configuracion del ACL

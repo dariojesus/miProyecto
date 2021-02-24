@@ -41,6 +41,50 @@
 				return true;
 			}
 
+		public static function peticionCurl($url, $tipo ="POST", $data=array(), $proxy=false){
+
+			//creo una sesión CUrl
+			$enlaceCurl = curl_init();
+
+			$parametros = "";
+
+			foreach ($data as $clave => $valor) 
+				$parametros .= $clave."=".$valor."&";
+				
+			$parametros = substr($parametros,0,-1);
+
+			
+			//Si la petición es de tipo POST
+			if ($tipo=="POST"){
+				curl_setopt($enlaceCurl,CURLOPT_URL,$url);
+				curl_setopt($enlaceCurl, CURLOPT_POST, 1);
+				curl_setopt($enlaceCurl,CURLOPT_POSTFIELDS,$parametros);
+				curl_setopt($enlaceCurl, CURLOPT_HEADER, 0);
+			}
+
+			//Si la petición es de tipo GET
+			if ($tipo=="GET"){
+				$url .= "?".$parametros;
+				curl_setopt($enlaceCurl,CURLOPT_URL,$url);
+			}
+
+			//Si el proxy está activado activamos esta opción
+			if ($proxy)
+				curl_setopt($enlaceCurl, CURLOPT_PROXY, "192.168.2.254:3128");
+
+
+			//Se habilita el retorno de datos
+			curl_setopt($enlaceCurl, CURLOPT_RETURNTRANSFER, 1);
+
+			//Se ejecuta la petición
+			$datos = curl_exec($enlaceCurl);
+
+			//Se cierra la sesión
+			curl_close($enlaceCurl);
+
+			//Se devuelven los datos
+			return $datos;
+		}
 		
 		/**
 		 * Permite escapar una cadena . Los caracteres que se 
