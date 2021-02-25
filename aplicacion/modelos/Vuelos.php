@@ -110,7 +110,6 @@ protected function afterCreate(){
     $this->cod_destino = 0;
 }
 
-
 public function fijarSentenciaInsert(){
 
     $fec = CGeneral::addSlashes($this->fecha_salida);

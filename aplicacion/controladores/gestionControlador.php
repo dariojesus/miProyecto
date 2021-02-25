@@ -22,6 +22,35 @@
             echo $this->dibujaVistaParcial("crudUsuarios",["usr"=>$usuarios],true).PHP_EOL;
         }
 
+        //Acción para agregar un usuario nuevo
+        public function accionAgregar(){
+            $usuario = new Registro();
+            $datos = $usuario->getNombre();
+            $exito = "";
+            
+            if (isset($_POST[$datos]) && isset($_POST["contrasenna"])){
+
+                $usuario->setValores($_POST[$datos]);
+                $exito = CGeneral::passwordSegura($_POST["contrasenna"],50);
+
+                //Si los datos son validos y la contraseña cumple los requisitos, se guarda en usuarios y en perfiles
+                if ($usuario->validar() &&  $exito === true){
+
+                    if ($usuario->guardar()){
+                    $acl = Sistema::app()->ACL();
+                    $contra = $_POST["contrasenna"];
+
+                    $acl->anadirUsuario($usuario->nif, $contra, 1);
+                    Sistema::app()->irAPagina(array("gestion","CrudUsuarios"));
+                    return;
+                    }
+                }
+            }
+
+            echo $this->dibujaVistaParcial("agregarUsuarios",array("modelo"=>$usuario),true).PHP_EOL;
+            return;
+        }
+
         //Acción para mostrar la información de un usuario
         public function accionMostrar(){
 

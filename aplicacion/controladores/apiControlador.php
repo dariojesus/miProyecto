@@ -5,6 +5,7 @@
 
         public function __construct(){}
         
+        //Acción que devuelde los vuelos deseados (filtros)
         public function accionVuelosDisponibles(){
 
             if ($_SERVER["REQUEST_METHOD"]=="GET"){
@@ -68,6 +69,7 @@
             }
         }
 
+        //Acción que modifica el vuelo con el cod_vuelo pasado
         public function accionVuelosModificar(){
 
             if ($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -103,9 +105,46 @@
 
                 //Si no se encuentra el vuelo con dicho código
                 else{
-                    echo json_encode(array("Error"=>"No se ha encontrado el usuario especificado."));
+                    echo json_encode(array("Error"=>"No se ha encontrado el vuelo especificado."));
                     return;
                 }
+            }
+        }
+
+        //Acción que borra el vuelo con el cod_vuelo pasado
+        public function accionVuelosBorrar(){
+
+            if ($_SERVER["REQUEST_METHOD"]=="POST"){
+                $vuelos = new Vuelos();
+
+                //Si no se ha pasado el código
+                if (!isset($_POST["codigo"])){
+                    echo json_encode(array("Error"=>"No se ha proporcionado un código de vuelo a borrar."));
+                    return;
+                }
+
+                $codigo=CGeneral::addSlashes($_POST["codigo"]);
+
+                //Se busca el vuelo con el código
+                if ($vuelos->buscarPorId($codigo)){
+                    
+                    if ($vuelos->ejecutarSentencia("UPDATE vuelos SET `borrado`='1' WHERE `cod_vuelo`='$codigo'")){
+                        echo json_encode(array("Ok"=>"Vuelo eliminado correctamente."));
+                        return;
+                    }
+                    else{
+                        echo json_encode(array("Error"=>"No se ha podido llevar acabo la operación de eliminación."));
+                        return;
+                    }
+
+                }
+
+                //Si no se encuentra el vuelo con dicho código
+                else{
+                    echo json_encode(array("Error"=>"No se ha encontrado el vuelo especificado."));
+                    return;
+                }
+
             }
         }
 	}

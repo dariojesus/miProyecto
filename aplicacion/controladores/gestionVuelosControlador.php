@@ -2,8 +2,7 @@
 
     class gestionVuelosControlador extends CControlador{
 
-        public function __construct()
-        {
+        public function __construct(){
             $this->accionDefecto ="crudVuelos";
         }
 
@@ -47,6 +46,7 @@
             }
         }
 
+        //Acción para modificar los datos de un vuelo
         public function accionModificar(){
 
             $vuelo = new Vuelos();
@@ -70,20 +70,42 @@
             //Entrará cuando se haya pulsado el botón modificar del formulario anterior
             else if ($_POST){
             
-            $_POST[$vuelo->getNombre()]["hora_salida"] .= ":00";
+                $_POST[$vuelo->getNombre()]["hora_salida"] .= ":00";
 
-            $datos = $_POST[$vuelo->getNombre()];
-            $vuelo->setValores($datos);
+                $datos = $_POST[$vuelo->getNombre()];
+                $vuelo->setValores($datos);
 
-            $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosModificar"]);
-            $datos = CGeneral::peticionCurl($url,"POST",$datos);
+                $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosModificar"]);
+                $datos = CGeneral::peticionCurl($url,"POST",$datos);
 
-            $datos = json_decode($datos);
+                $datos = json_decode($datos);
 
-            echo $this->dibujaVistaParcial("modificarVuelo",array("modelo"=>$vuelo,"formulario"=>$miURL,"errores"=>$datos),true);
+                echo $this->dibujaVistaParcial("modificarVuelo",array("modelo"=>$vuelo,"formulario"=>$miURL,"errores"=>$datos),true);
             }
         }
 
+        //Acción para eliminar los datos de un vuelo
+        public function accionBorrar(){
+
+            if (isset($_GET["codigo"])){
+
+                $codigo = CGeneral::addSlashes($_GET["codigo"]);
+
+                $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosBorrar"]);
+                $datos = CGeneral::peticionCurl($url,"POST",array("codigo"=>$codigo));
+                $datos = get_object_vars(json_decode($datos));
+
+                if (array_key_exists("Ok",$datos)){
+                    Sistema::app()->irAPagina(array("gestionVuelos","crudVuelos"));
+                    return;
+                }
+
+                else{
+                    Sistema::app()->paginaError(400,$datos["Error"]);
+                    return;
+                }
+            }
+        }
     }
 
 ?>

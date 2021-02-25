@@ -91,7 +91,7 @@
 
                     //En contenido se guardan los 3 tipos de enlaces correspondientes a las acciones por cada vuelo
                     $contenido = CHTML::link(
-                        CHTML::imagen("../../../imagenes/iconos/detalles.png"),
+                        CHTML::imagen("../../../imagenes/iconos/detalles_vuelo.png"),
                         Sistema::app()->generaURL(
                             array("gestionVuelos", "Mostrar"),
                             array("codigo" => $vuelo["cod_vuelo"])
@@ -109,7 +109,7 @@
                     );
 
                     $contenido .= CHTML::botonHtml(
-                        CHTML::imagen("../../../imagenes/iconos/borrar.png"),
+                        CHTML::imagen("../../../imagenes/iconos/borrar_vuelo.png"),
                         array("class"=>"btn btn-outline-secondary", 
                         "data-bs-toggle"=>"modal", 
                         "data-bs-target"=>"#vuelo{$vuelo["cod_vuelo"]}"));
