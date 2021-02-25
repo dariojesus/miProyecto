@@ -39,7 +39,7 @@ protected function fijarRestricciones(){
                     "TIPO"=>"ENTERO"
                 ),
 
-                array("ATRI"=>"fecha_salida, hora_salida, compannia, plazas, borrado, cod_destino","TIPO"=>"REQUERIDO"),
+                array("ATRI"=>"fecha_salida, hora_salida, compannia, plazas, cod_destino","TIPO"=>"REQUERIDO"),
 
                 array(
                     "ATRI"=>"fecha_salida",
@@ -49,8 +49,7 @@ protected function fijarRestricciones(){
 
                 array(
                     "ATRI"=>"hora_salida",
-                    "TIPO"=>"FUNCION",
-                    "FUNCION"=>"compruebaHora"
+                    "TIPO"=>"HORA"
                 ),
 
                 array(
@@ -86,25 +85,16 @@ protected function fijarRestricciones(){
     );
 }
 
-private function compruebaFecha(){
-    if (!CValidaciones::validaFecha($this->fecha_salida))
-        $this->setError("fecha_salida","La fecha introducida no es correcta.");
+protected function compruebaFecha(){
 
-    else{
-        $fecha_dada = DateTime::createFromFormat("Y-m-d",$this->fecha_nacimiento);
-        $fecha_actual = DateTime::createFromFormat("Y-m-d",date("Y-m-d"));
+    $fecha_dada = DateTime::createFromFormat("Y-m-d", $this->fecha_salida);
+    $fecha_actual = DateTime::createFromFormat("Y-m-d", date("Y-m-d"));
 
-        if ($fecha_dada < $fecha_actual)
-            $this->setError("fecha_salida","La fecha introducida no puede ser inferior a la actual.");
-    }
+    if ($fecha_dada < $fecha_actual)
+        $this->setError("fecha_salida", "La fecha introducida no puede ser inferior a la actual.");
 }
 
-private function compruebaHora(){
-    if(!CValidaciones::validaHora($this->hora_salida))
-        $this->setError("hora_salida","La hora introducida no es correcta.");
-}
-
-private function compruebaDestino(){
+protected function compruebaDestino(){
 
     if (!Planetas::devuelvePlanetas($this->cod_destino))
         $this->setError("cod_destino","No existe destino con el código dado.");
@@ -120,10 +110,6 @@ protected function afterCreate(){
     $this->cod_destino = 0;
 }
 
-protected function afterBuscar(){
-    $this->fecha_salida = CGeneral::fechaMysqlANormal($this->fecha_salida);
-    $this->borrado = $this->borrado=="1"? "SI" : "NO";
-}
 
 public function fijarSentenciaInsert(){
 
@@ -151,7 +137,7 @@ public function fijarSentenciaUpdate(){
     $bor = CGeneral::addSlashes($this->borrado);
     $des = CGeneral::addSlashes($this->cod_destino);
 
-    $sentencia = "UPDATE dfs_productos SET `fecha_salida` = '$fec'".
+    $sentencia = "UPDATE vuelos SET `fecha_salida` = '$fec'".
                                         ", `hora_salida` ='".$hor."'".
                                         ", `compannia` ='".$com."'".
                                         ", `plazas` ='".$plz."'".

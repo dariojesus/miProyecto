@@ -12,6 +12,12 @@
                 $vuelos = new Vuelos();
                 $opciones["where"] = "true";
 
+                //Filtramos por codigo de vuelo
+                if (isset($_GET["codigo"])){
+                    $dato = CGeneral::addSlashes($_GET["codigo"]);
+                    $opciones["where"].=" and cod_vuelo ='$dato'";
+                }
+
                 //Filtramos por destino
                 if (isset($_GET["destino"])){
 
@@ -60,6 +66,46 @@
                 $vuelos = json_encode($vuelos);
                 echo $vuelos;
             }
-    
-    }
+        }
+
+        public function accionVuelosModificar(){
+
+            if ($_SERVER["REQUEST_METHOD"]=="POST"){
+                $vuelos = new Vuelos();
+
+                //Si no se ha pasado el código
+                if (!isset($_POST["cod_vuelo"])){
+                    echo json_encode(array("Error"=>"No se ha proporcionado un código de vuelo a buscar."));
+                    return;
+                }
+
+                $codigo=CGeneral::addSlashes($_POST["cod_vuelo"]);
+                
+                //Se busca el vuelo con el código
+                if ($vuelos->buscarPorId($codigo)){
+
+                    $vuelos->setValores($_POST);
+
+                    //Si no son los datos válidos se devuelven sus errores
+                    if (!$vuelos->validar()){
+                        echo json_encode($vuelos->getErrores());
+                        return;
+                    }
+                        
+
+                    //Si son válidos se guarda el objeto y se devuelve correcto
+                    else{
+                        $vuelos->guardar();
+                        echo json_encode(array("Ok"=>"Vuelo modificado correctamente."));
+                        return;
+                    }
+                }
+
+                //Si no se encuentra el vuelo con dicho código
+                else{
+                    echo json_encode(array("Error"=>"No se ha encontrado el usuario especificado."));
+                    return;
+                }
+            }
+        }
 	}
