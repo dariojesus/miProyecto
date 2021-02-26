@@ -25,29 +25,32 @@
         //Acción para agregar un usuario nuevo
         public function accionAgregar(){
             $usuario = new Registro();
+
+            $roles = Login::dameRoles();
             $datos = $usuario->getNombre();
+            $acl = Sistema::app()->ACL();
             $exito = "";
             
-            if (isset($_POST[$datos]) && isset($_POST["contrasenna"])){
+            if (isset($_POST[$datos]) && isset($_POST["contrasenna"]) && isset($_POST["rol"])){
 
                 $usuario->setValores($_POST[$datos]);
                 $exito = CGeneral::passwordSegura($_POST["contrasenna"],50);
+                $rol = CGeneral::addSlashes($_POST["rol"]);
 
                 //Si los datos son validos y la contraseña cumple los requisitos, se guarda en usuarios y en perfiles
-                if ($usuario->validar() &&  $exito === true){
+                if ($usuario->validar() &&  $exito === true && $acl->existeRole($rol)){
 
                     if ($usuario->guardar()){
-                    $acl = Sistema::app()->ACL();
                     $contra = $_POST["contrasenna"];
 
-                    $acl->anadirUsuario($usuario->nif, $contra, 1);
-                    Sistema::app()->irAPagina(array("gestion","CrudUsuarios"));
+                    $acl->anadirUsuario($usuario->nif, $contra, $rol);
+                    Sistema::app()->irAPagina(array("gestion","Correcta"));
                     return;
                     }
                 }
             }
 
-            echo $this->dibujaVistaParcial("agregarUsuarios",array("modelo"=>$usuario),true).PHP_EOL;
+            echo $this->dibujaVistaParcial("agregarUsuarios",array("modelo"=>$usuario,"roles"=>$roles),true).PHP_EOL;
             return;
         }
 
@@ -87,7 +90,7 @@
                     $usuario->guardar();
                     $acl->setNif($datos["cod_perfil"],$datos["nif"]);
                     $acl->setBorrado($acl->getCodUsuario($datos["nif"]),$datos["borrado"]);
-                    Sistema::app()->irAPagina(array("gestion","CrudUsuarios"));
+                    Sistema::app()->irAPagina(array("gestion","Correcta"));
                     return;
                 }
             }
@@ -139,5 +142,10 @@
             Sistema::app()->paginaError(505,"Ups, no se ha podido encontrar el usuario a borrar.");
             return;
             
-        }	
+        }
+        
+        public function accionCorrecta(){
+            echo $this->dibujaVistaParcial("correcto",array("mensaje"=>"Acción realizada correctamente, puede cerrar esta pestaña."),true).PHP_EOL;
+            return;
+        }
 	}

@@ -50,6 +50,7 @@ function muestraInfo() {
 $("#btnFrame").click(function(){
     $("#fondoFrame").css("visibility","collapse");
     $("#fondoFrame").css("opacity","0");
+    location.reload();
 });
 
 $("a.utilidad").click(function(){

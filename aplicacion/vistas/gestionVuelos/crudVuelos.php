@@ -49,6 +49,14 @@
         <nav class="barra">
             <a class="nav-link" aria-current="page" id="btnMenu"><img src="/imagenes/logo/menu.png"></a>
         </nav>
+
+        <div id="tabla">
+            <div style="background-color: black;">
+                <?php echo CHTML::link(CHTML::imagen("../../../imagenes/iconos/agregar_vuelo.png"),
+                                       Sistema::app()->generaURL(array("gestionVuelos", "Agregar")),
+                                       array("class"=>"btn btn-warning m-1 utilidad", "target"=>"miFrame")).PHP_EOL;
+                ?>
+            </div>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -123,6 +131,7 @@
                 ?>
             </tbody>
         </table>
+        </div>
 
         <!--Creo mi ventana POP-UP propia para mostrar las páginas de ver y modificar en esta propia página (sin redirecciones)-->
         <div id="fondoFrame">

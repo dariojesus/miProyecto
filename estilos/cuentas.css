@@ -23,6 +23,8 @@ main {
     margin-top: 2%;
     border-radius: 5px;
     height: fit-content;
+    max-height: 100%;
+    overflow-y:auto;
     background-color: white;
 
     box-shadow: -7px 7px 29px -12px rgba(0,0,0,0.63);

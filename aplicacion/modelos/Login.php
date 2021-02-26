@@ -5,8 +5,16 @@ class Login extends CActiveRecord {
         return "login";
     }
 
+    protected function fijarTabla(){
+        return "usuarios";
+    }
+
+    protected function fijarId(){
+        return "cod_usuario";
+    }
+
     protected function fijarAtributos(){
-        return array("nif","contrasenna");
+        return array("cod_usuario","nif","contrasenna");
     }
 
     protected function fijarDescripciones(){
@@ -45,6 +53,12 @@ class Login extends CActiveRecord {
         if (!CValidaciones::validaDNI($this->nif,$partes))
             $this->setError("nif","Formato de DNI incorrecto, compruebelo de nuevo.");
         
+    }
+
+    public static function dameRoles(){
+
+        $acl = Sistema::app()->ACL();
+        return $acl->dameRoles();
     }
 
     public function compruebaLogin(){

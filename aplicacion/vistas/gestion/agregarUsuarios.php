@@ -180,7 +180,19 @@
                 <input type="password" class="form-control" id="contraRepetida" placeholder="contraseña" autocomplete="new-password">
                 <label for="contra">Confirmar contraseña</label>
             </div>
-        
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::campoListaDropDown("rol",0,$roles,["class"=>"form-control",
+                                                            "id"=>"rol",
+                                                            "placeholder"=>"Rol"]).PHP_EOL;
+                echo CHTML::campoLabel("Rol","rol").PHP_EOL;
+
+                if (!empty($error))
+                    echo CHTML::dibujaEtiqueta("div",["class"=>"error"],$error);
+                ?>
+
+            </div>
         </fieldset>
 
             <?php

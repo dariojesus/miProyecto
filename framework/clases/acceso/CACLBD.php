@@ -177,7 +177,7 @@ class CACLBD extends CACLBase
         $datos = $this->_sqli->crearConsulta($consulta);
         $res = [];
 
-        while ($fila = $datos->filas())
+        while ($fila = $datos->fila())
             $res[$fila["cod_usuario"]] = $fila["nif"];
 
         return $res;
@@ -190,7 +190,7 @@ class CACLBD extends CACLBase
         $datos = $this->_sqli->crearConsulta($consulta);
         $res = [];
 
-        while ($fila = $datos->filas())
+        while ($fila = $datos->fila())
             $res[$fila["cod_rol"]] = $fila["nombre_rol"];
 
         return $res;
