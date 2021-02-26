@@ -2,7 +2,7 @@
     /*Se crean las tarjetas de los planetas con su información mínima */
     $foto = $planeta["foto"];
 
-    echo CHTML::dibujaEtiqueta("div",["class"=>"destino", "style"=>"background-image: url($foto)"],null,false).PHP_EOL;
+    echo CHTML::dibujaEtiqueta("div",["class"=>"destino", "style"=>"background-image: url($foto)", "data-location"=>$datos],null,false).PHP_EOL;
 
         echo CHTML::dibujaEtiqueta("div",["class"=>"datos"],null,false).PHP_EOL;
 

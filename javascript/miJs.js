@@ -32,3 +32,9 @@ $("a.utilidad").click(function(){
     $("#fondoFrame").css("visibility","visible");
     $("#fondoFrame").css("opacity","1");
 });
+
+/*--------------------------------------------Script para el control de la parte de viajes y destinos--------------------------------------------------- */
+
+$("div.destino").click(function(){
+    window.location = $(this).data("location");
+});

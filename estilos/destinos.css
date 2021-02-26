@@ -1,11 +1,5 @@
 /*--------------------CSS DE BUSQUEDA DE DESTINOS----------------------------*/
 
-#filtro{
-    width: 100%;
-    min-height: 50px;
-    background-color: brown;
-}
-
 #destinos{
     width: 95%;
     margin: 2%;
@@ -37,4 +31,98 @@
     grid-template-rows: repeat(5,15%) auto;
     row-gap: 2%;
     justify-items: center;
+}
+
+/*---------------------------------------------------------------CSS DE BILLETES DE DESTINO-------------------------------------------*/
+#planeta{
+    margin: 3%;
+    height: 900px;
+    width: 94%;
+
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 30% auto;
+}
+
+#principal {
+    width: 100%;
+    background-size: cover;
+    border-radius: 25px;
+    box-shadow: 9px 11px 48px -14px rgba(0,0,0,0.75);
+}
+
+#dPlaneta{
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.336);
+    width: 50%;
+    padding: 1%;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+#billetes{
+    display: grid;
+    grid-template-columns: repeat(4,25%);
+    grid-template-rows: 13% 23% 23% auto;
+    row-gap: 2%;
+}
+
+.billete{
+    width: 90%;
+    border-radius: 25px;
+    justify-self: center;
+    background: radial-gradient(var(--azulClaro), var(--azulOscuro));
+    box-shadow: 9px 11px 48px -14px rgba(0,0,0,0.75);
+    border: 1px solid grey;
+    color: white;
+}
+
+.billete:hover{
+    transform: scale(1.1);
+    background:var(--azulClaro);
+    transition-duration: 1s;
+}
+
+
+#filtro{
+    grid-column-start: 1;
+    grid-column-end: 5;
+    background-color: rgba(0, 0, 0, 0.74);
+    border-radius: 25px;
+    box-shadow: 9px 11px 48px -14px rgba(0,0,0,0.75);
+}
+
+.mitad1{
+    width: 60%;
+    height: 70%;
+    margin-left: 10%;
+    margin-top: 5%;
+    display: inline-block;
+}
+
+.mitad2{
+    width: 10%;
+    height: 20%;
+    margin-right: 3%;
+    vertical-align: top;
+    float: right;
+    border-top-right-radius: 25px;
+}
+
+@media (max-width:1000px){
+    #dPlaneta{
+        width: 90%;
+        padding: 3%;
+    }
+
+    #billetes{
+        grid-template-columns: repeat(2,50%);
+    }
+
+@media (max-width:600px){
+
+    #billetes{
+        grid-template-columns: 100%;
+    }
+}
 }

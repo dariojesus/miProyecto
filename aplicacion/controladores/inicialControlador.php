@@ -20,5 +20,23 @@
             $this->dibujaVista("destinos",array("planetas"=>$var),"Destinos disponibles");
         }
 
+        public function accioninfoDestino(){
+
+            if(isset($_GET["codigo"])){
+                
+                $codigo = CGeneral::addSlashes($_GET["codigo"]);
+                $planeta = new Planetas();
+                
+                if (!$planeta->buscarPorId($codigo)){
+                    Sistema::app()->paginaError(404,"No se ha encontrado el destino que estaba buscando.");
+                    return;
+                }
+                else{
+                    $this->dibujaVista("informacionDestino",array("planeta"=>$planeta),$planeta->nombre);
+                    return;
+                }
+            }
+        }
+
 		
 	}
