@@ -26,6 +26,38 @@
             echo $this->dibujaVistaParcial("crudVuelos",array("vuelos"=>$array),true);
         }
 
+        //Acción para agregar un nuevo vuelo
+        public function accionAgregar(){
+
+            $vuelo = new Vuelos();
+            $datos = $vuelo->getNombre();
+            $destinos = array_flip(Planetas::devuelvePlanetas());
+
+            if ($_POST){
+
+                $datos = $_POST[$datos];
+                $datos["hora_salida"] .= ":00";
+
+                $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosAgregar"]);
+                $datos = CGeneral::peticionCurl($url,"POST",$datos);
+
+                $datos = json_decode($datos,true);
+
+                if (isset($datos["Ok"])){
+                    Sistema::app()->irAPagina(array("gestionVuelos","Correcta"));
+                    return;
+                }
+
+                else{
+                    echo $this->dibujaVistaParcial("agregarVuelo",array("modelo"=>$vuelo,"destinos"=>$destinos,"errores"=>$datos),true).PHP_EOL;
+                    return;
+                }
+            }
+
+            echo $this->dibujaVistaParcial("agregarVuelo",array("modelo"=>$vuelo,"destinos"=>$destinos),true).PHP_EOL;
+
+        }
+
         //Acción para mostrar los datos de un solo vuelo
         public function accionMostrar(){
 
@@ -78,7 +110,12 @@
                 $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosModificar"]);
                 $datos = CGeneral::peticionCurl($url,"POST",$datos);
 
-                $datos = json_decode($datos);
+                $datos = json_decode($datos, true);
+
+                if (isset($datos["Ok"])){
+                    Sistema::app()->irAPagina(array("gestionVuelos","Correcta"));
+                    return;
+                }
 
                 echo $this->dibujaVistaParcial("modificarVuelo",array("modelo"=>$vuelo,"formulario"=>$miURL,"errores"=>$datos),true);
             }
@@ -105,6 +142,12 @@
                     return;
                 }
             }
+        }
+
+        //Acción para mostrar una animación de que todo ha ido bien
+        public function accionCorrecta(){
+            echo $this->dibujaVistaParcial("correcto",array("mensaje"=>"Acción realizada correctamente, puede cerrar esta pestaña."),true).PHP_EOL;
+            return;
         }
     }
 

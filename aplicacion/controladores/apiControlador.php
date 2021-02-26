@@ -69,6 +69,27 @@
             }
         }
 
+        public function accionVuelosAgregar(){
+            if ($_SERVER["REQUEST_METHOD"]=="POST"){
+                $vuelos = new Vuelos();
+                
+                $vuelos->setValores($_POST);
+
+                //Si no son válidos los datos se devuelven los errores
+                if (!$vuelos->validar()){
+                    echo json_encode($vuelos->getErrores());
+                    return;
+                }
+                
+                //Si son válidos se guarda el objeto y se devuelve correcto
+                else{
+                    $vuelos->guardar();
+                    echo json_encode(array("Ok"=>"Vuelo agregado correctamente."));
+                    return;
+                }
+            }
+        }
+
         //Acción que modifica el vuelo con el cod_vuelo pasado
         public function accionVuelosModificar(){
 

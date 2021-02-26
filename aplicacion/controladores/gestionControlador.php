@@ -144,6 +144,7 @@
             
         }
         
+        //Acción para mostrar una animación de que todo ha ido bien
         public function accionCorrecta(){
             echo $this->dibujaVistaParcial("correcto",array("mensaje"=>"Acción realizada correctamente, puede cerrar esta pestaña."),true).PHP_EOL;
             return;
