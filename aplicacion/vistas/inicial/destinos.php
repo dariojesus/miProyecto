@@ -22,9 +22,4 @@
         </ul>
       </nav>
     </section>
-
-    <?php
-        foreach ($planetas as $clave => $planeta)
-            echo $this->dibujaVistaParcial("informacionOculta",array("planeta"=>$planeta),true).PHP_EOL;  
-    ?>
 </main>

@@ -20,31 +20,6 @@ $fondo.click(
     }
 )
 
-/*------------------------------Parte de script para mostrar información de los destinos a viajar-----------------------------*/
-
-$("#filtro").click(function(){
-    $(this).css("background-color","grey");
-});
-
-
-//Se le agregan los disparadores a las tarjetas de planetas
-var planetas = $("#planetas").children("div.destino");
-
-for (let cont = 0; cont < planetas.length; cont++)
-    $(planetas[cont]).click(muestraInfo);
-
-//Funcion para mostrar la info correspondiente al planeta pulsado y ocultar la de los demas
-function muestraInfo() {
-
-    let nombre = "#" + $(this).children("div.datos").children("h2").text();
-    let visible = $(nombre).siblings(".info").not("[style]");
-
-    if (visible.length != 0)
-        $(visible[0]).attr("style", "display:none;");
-
-    $(nombre).removeAttr("style");
-}
-
 /*----------------------------------------------Control del frame y visibilidad (Cuentas)--------------------------------------------------------------- */
 
 $("#btnFrame").click(function(){
