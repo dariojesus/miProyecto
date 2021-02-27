@@ -6,7 +6,7 @@
     </div>
   </header>
 
-    <section class="card-group s1 w-50">
+    <section class="card-group s1">
       <div class="card planeta">
         <img src="/imagenes/luna.jpg" class="card-img-top">
         <div class="card-body">

@@ -36,12 +36,12 @@
 /*---------------------------------------------------------------CSS DE BILLETES DE DESTINO-------------------------------------------*/
 #planeta{
     margin: 3%;
-    height: 900px;
+    height: 1500px;
     width: 94%;
 
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 30% auto;
+    grid-template-rows: 20% 70% 10%;
 }
 
 #principal {
@@ -63,8 +63,9 @@
 #billetes{
     display: grid;
     grid-template-columns: repeat(4,25%);
-    grid-template-rows: 13% 23% 23% auto;
+    grid-template-rows: 10% 20% 20%;
     row-gap: 2%;
+    grid-auto-flow: row;
 }
 
 .billete{
@@ -109,6 +110,10 @@
     border-top-right-radius: 25px;
 }
 
+#paginado{
+    justify-self: center;
+}
+
 @media (max-width:1000px){
     #dPlaneta{
         width: 90%;
@@ -117,12 +122,14 @@
 
     #billetes{
         grid-template-columns: repeat(2,50%);
+        grid-template-rows: 13% repeat(4,20%);
+        grid-auto-flow: column;
     }
-
+}
 @media (max-width:600px){
 
     #billetes{
         grid-template-columns: 100%;
+        grid-template-rows: 10% repeat(8,15%);
     }
-}
 }

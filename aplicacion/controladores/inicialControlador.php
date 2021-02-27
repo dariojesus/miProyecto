@@ -32,7 +32,11 @@
                     return;
                 }
                 else{
-                    $this->dibujaVista("informacionDestino",array("planeta"=>$planeta),$planeta->nombre);
+                    $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
+                    $datos = CGeneral::peticionCurl($url,"GET",array("destino"=>$planeta->nombre));
+                    $datos = json_decode($datos,true);
+
+                    $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$datos),$planeta->nombre);
                     return;
                 }
             }
