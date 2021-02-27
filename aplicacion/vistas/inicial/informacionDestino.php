@@ -17,11 +17,11 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/destinos.css">';
 
     echo CHTML::dibujaEtiquetaCierre("article") . PHP_EOL;
 
-    echo CHTML::dibujaEtiqueta("article", array("id" => "billetes"), null, false) . PHP_EOL;
-
     echo CHTML::dibujaEtiqueta("div", array("id" => "filtro"), null, false) . PHP_EOL;
 
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
+
+    echo CHTML::dibujaEtiqueta("article", array("id" => "billetes"), null, false) . PHP_EOL;
 
     //Se dibujan los billetes 1 a 1 
     foreach ($vuelos as $ind => $val)

@@ -128,11 +128,13 @@ main {
 
 @media (max-width:1200px) {
 
-    th:nth-child(7), td:nth-child(7){
+    #tablaUsuarios > thead > tr > th:nth-child(7),
+    #tablaUsuarios > tbody > tr > td:nth-child(7){
         display: none;
     }
 
-    th:nth-child(6), td:nth-child(6){
+    #tablaUsuarios > thead > tr > th:nth-child(6),
+    #tablaUsuarios > tbody > tr > td:nth-child(6){
         display: none;
     }
 
@@ -145,11 +147,13 @@ main {
 
 @media (max-width:750px) {
 
-    th:nth-child(5), td:nth-child(5){
+    #tablaUsuarios > thead > tr > th:nth-child(5),
+    #tablaUsuarios > tbody > tr > td:nth-child(5){
         display: none;
     }
 
-    th:nth-child(4), td:nth-child(4){
+    #tablaUsuarios > thead > tr > th:nth-child(4),
+    #tablaUsuarios > tbody > tr > td:nth-child(4){
         display: none;
     }
 
@@ -160,7 +164,23 @@ main {
 }
 
 @media (max-width:534px) {
-    th:nth-child(2), td:nth-child(2) {
+    #tablaUsuarios > thead > tr > th:nth-child(2),
+    #tablaUsuarios > tbody > tr > td:nth-child(2) {
+        display: none;
+    }
+
+    #tablaVuelos > thead > tr > th:nth-child(2),
+    #tablaVuelos > tbody > tr > td:nth-child(2) {
+        display: none;
+    }
+
+    #tablaVuelos > thead > tr > th:nth-child(4),
+    #tablaVuelos > tbody > tr > td:nth-child(4) {
+        display: none;
+    }
+
+    #tablaVuelos > thead > tr > th:nth-child(6),
+    #tablaVuelos > tbody > tr > td:nth-child(6) {
         display: none;
     }
 }

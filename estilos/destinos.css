@@ -36,12 +36,12 @@
 /*---------------------------------------------------------------CSS DE BILLETES DE DESTINO-------------------------------------------*/
 #planeta{
     margin: 3%;
-    height: 1500px;
+    height: 900px;
     width: 94%;
 
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 20% 70% 10%;
+    grid-template-rows: 30% 10% auto 5%;
 }
 
 #principal {
@@ -60,34 +60,30 @@
     border-bottom-right-radius: 25px;
 }
 
-#billetes{
-    display: grid;
-    grid-template-columns: repeat(4,25%);
-    grid-template-rows: 10% 20% 20%;
-    row-gap: 2%;
-    grid-auto-flow: row;
+#billetes{    
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
 }
 
 .billete{
-    width: 90%;
+    width: 21%;
+    margin: 2%;
+    height: 30%;
     border-radius: 25px;
-    justify-self: center;
     background: radial-gradient(var(--azulClaro), var(--azulOscuro));
-    box-shadow: 9px 11px 48px -14px rgba(0,0,0,0.75);
+    box-shadow: 9px 11px 25px -14px rgba(0,0,0,0.75);
     border: 1px solid grey;
     color: white;
 }
 
 .billete:hover{
     transform: scale(1.1);
-    background:var(--azulClaro);
     transition-duration: 1s;
 }
 
 
 #filtro{
-    grid-column-start: 1;
-    grid-column-end: 5;
     background-color: rgba(0, 0, 0, 0.74);
     border-radius: 25px;
     box-shadow: 9px 11px 48px -14px rgba(0,0,0,0.75);
@@ -103,11 +99,12 @@
 
 .mitad2{
     width: 10%;
-    height: 20%;
-    margin-right: 3%;
+    height: 100%;
+    margin-right: 7%;
     vertical-align: top;
     float: right;
-    border-top-right-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.507);
+    text-align: center;
 }
 
 #paginado{
@@ -121,15 +118,17 @@
     }
 
     #billetes{
-        grid-template-columns: repeat(2,50%);
-        grid-template-rows: 13% repeat(4,20%);
-        grid-auto-flow: column;
+        justify-content: center;
+    }
+
+    .billete{
+        width: 40%;
     }
 }
 @media (max-width:600px){
 
-    #billetes{
-        grid-template-columns: 100%;
-        grid-template-rows: 10% repeat(8,15%);
+    .billete{
+        width: 87%;
+        margin: 3%;
     }
 }

@@ -54,6 +54,10 @@
     echo CHTML::modeloError($modelo,"contrasenna",["class"=>"error"]);
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
+    echo CHTML::dibujaEtiqueta("div", ["class"=>"form-check"], null, false) . PHP_EOL;
+    echo CHTML::campoCheckBox("recordar",true,["class"=>"form-check-input","id"=>"miCheck"]).PHP_EOL;
+    echo CHTML::campoLabel("Recordar usuario y contraseña","recordar",["class"=>"form-check-label"]).PHP_EOL;
+    echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", [], null, false) . PHP_EOL;
     echo CHTML::campoBotonSubmit("Acceder", ["class" => "btn btn-dark"]) . PHP_EOL;

@@ -56,7 +56,7 @@
                                        array("class"=>"btn btn-warning m-1 utilidad", "target"=>"miFrame")).PHP_EOL;
                 ?>
             </div>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover" id="tablaUsuarios">
                 <thead>
                     <tr>
                         <th>NIF</th>
