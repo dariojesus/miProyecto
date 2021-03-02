@@ -11,6 +11,19 @@
         //Acción para mostrar el crud de usuarios
         public function accionCrudUsuarios(){
 
+            $acceso = Sistema::app()->acceso();
+
+            //Si no estas logueado te manda al login
+            if (!$acceso->hayUsuario()){
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            //Si no tienes permiso, te da error
+            if (!$acceso->puedePermisos(4)){
+                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+            }
+
             $usuarios = new Registro();
             $usuarios = $usuarios->buscarTodos();
 
@@ -25,6 +38,18 @@
         //Acción para agregar un usuario nuevo
         public function accionAgregar(){
             $usuario = new Registro();
+            $acceso = Sistema::app()->acceso();
+
+            //Si no estas logueado te manda al login
+            if (!$acceso->hayUsuario()){
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            //Si no tienes permiso, te da error
+            if (!$acceso->puedePermisos(4)){
+                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+            }
 
             $roles = Login::dameRoles();
             $datos = $usuario->getNombre();
@@ -57,6 +82,19 @@
         //Acción para mostrar la información de un usuario
         public function accionMostrar(){
 
+            $acceso = Sistema::app()->acceso();
+
+            //Si no estas logueado te manda al login
+            if (!$acceso->hayUsuario()){
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            //Si no tienes permiso, te da error
+            if (!$acceso->puedePermisos(4)){
+                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+            }
+
             //Se busca y recupera el usuario en el caso de que exista
             $usuario = new Registro();
             $exito = $usuario->buscarPorId($_GET["codigo"]);
@@ -75,6 +113,19 @@
 
         //Acción para modificar la información de un usuario
         public function accionModificar(){
+
+            $acceso = Sistema::app()->acceso();
+
+            //Si no estas logueado te manda al login
+            if (!$acceso->hayUsuario()){
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            //Si no tienes permiso, te da error
+            if (!$acceso->puedePermisos(4)){
+                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+            }
 
             $acl = Sistema::app()->ACL();
             $usuario = new Registro();
@@ -111,6 +162,19 @@
 
         //Acción para borrar un usuario
         public function accionBorrar(){
+
+            $acceso = Sistema::app()->acceso();
+
+            //Si no estas logueado te manda al login
+            if (!$acceso->hayUsuario()){
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            //Si no tienes permiso, te da error
+            if (!$acceso->puedePermisos(5)){
+                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+            }
 
             //Si viene un código por el get
             if (isset($_GET["codigo"])){

@@ -48,6 +48,10 @@ class CAcceso {
     }
     
     public function puedePermisos($numero){
+
+        if (!isset($this->_permisos["permiso".$numero]))
+            return false;
+
         return $this->_permisos["permiso".$numero] == "1";
     }
 

@@ -19,10 +19,14 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/destinos.css">';
 
     echo CHTML::dibujaEtiqueta("div", array("id" => "filtro"), null, false) . PHP_EOL;
 
-    echo CHTML::campoText("compannia").PHP_EOL;
+    echo CHTML::iniciarForm();
+
+    echo CHTML::campoText("compannia","",["placeholder"=>"Compañia"]).PHP_EOL;
     echo CHTML::campoDate("fecha").PHP_EOL;
-    echo CHTML::campoTime("hora").PHP_EOL;
+    echo CHTML::campoHidden("codigo",$planeta->cod_destino).PHP_EOL;
     echo CHTML::campoBotonSubmit("Filtrar",array("class"=>"btn btn-dark")).PHP_EOL;
+
+    echo CHTML::finalizarForm();
 
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 

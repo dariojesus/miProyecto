@@ -9,6 +9,19 @@
         //Acción para mostrar los vuelos en forma de tabla (CRUD)
         public function accionCrudVuelos(){
 
+            $acceso = Sistema::app()->acceso();
+
+            //Si no estas logueado te manda al login
+            if (!$acceso->hayUsuario()){
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            //Si no tienes permiso, te da error
+            if (!$acceso->puedePermisos(2)){
+                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+            }
+
             $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
             $datos = CGeneral::peticionCurl($url,"GET",array());
 
@@ -28,6 +41,19 @@
 
         //Acción para agregar un nuevo vuelo
         public function accionAgregar(){
+
+            $acceso = Sistema::app()->acceso();
+
+            //Si no estas logueado te manda al login
+            if (!$acceso->hayUsuario()){
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            //Si no tienes permiso, te da error
+            if (!$acceso->puedePermisos(2)){
+                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+            }
 
             $vuelo = new Vuelos();
             $datos = $vuelo->getNombre();
@@ -61,6 +87,19 @@
         //Acción para mostrar los datos de un solo vuelo
         public function accionMostrar(){
 
+            $acceso = Sistema::app()->acceso();
+
+            //Si no estas logueado te manda al login
+            if (!$acceso->hayUsuario()){
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            //Si no tienes permiso, te da error
+            if (!$acceso->puedePermisos(2)){
+                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+            }
+
             if ($_GET["codigo"]){
 
                 $vuelo = new Vuelos();
@@ -80,6 +119,19 @@
 
         //Acción para modificar los datos de un vuelo
         public function accionModificar(){
+
+            $acceso = Sistema::app()->acceso();
+
+            //Si no estas logueado te manda al login
+            if (!$acceso->hayUsuario()){
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            //Si no tienes permiso, te da error
+            if (!$acceso->puedePermisos(2)){
+                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+            }
 
             $vuelo = new Vuelos();
             $miURL = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["gestionVuelos","Modificar"]);
@@ -123,6 +175,19 @@
 
         //Acción para eliminar los datos de un vuelo
         public function accionBorrar(){
+
+            $acceso = Sistema::app()->acceso();
+
+            //Si no estas logueado te manda al login
+            if (!$acceso->hayUsuario()){
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            //Si no tienes permiso, te da error
+            if (!$acceso->puedePermisos(3)){
+                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+            }
 
             if (isset($_GET["codigo"])){
 
