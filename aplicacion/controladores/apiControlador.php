@@ -62,6 +62,12 @@
                     }
                 }
 
+                //Filtramos por plazas menores a las que lleguen
+                if (isset($_GET["plazas"])){
+                    $plazas = CGeneral::addSlashes($_GET["plazas"]);
+                    $opciones["where"].= " and plazas <= '$plazas'";
+                }
+
                 $vuelos = $vuelos->buscarTodos($opciones);
 
                 $vuelos = json_encode($vuelos);

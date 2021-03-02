@@ -38,3 +38,36 @@ $("a.utilidad").click(function(){
 $("div.destino").click(function(){
     window.location = $(this).data("location");
 });
+
+/*--------------------------------------------Script para el control de cookies---------------------------------------------------*/
+
+//Función para obtener el valor de una clave dada (cookie)
+function obtenerCookie(clave) {
+    var name = clave + "=";
+    var ca = document.cookie.split(';');
+
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ')
+            c = c.substring(1);
+        if (c.indexOf(name) == 0)
+            return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
+//Si la cookie existe...ponemos los datos en los campos correspondientes
+if (obtenerCookie("usuario") != ""){
+    document.getElementById("logNombre").value = obtenerCookie("usuario");
+}
+
+
+$("#acceder").click(function () {
+    //Si el check de recordar esta marcado, creamos la cookie
+    if (document.getElementById("recordar").checked) {
+
+        let tiempo = 3600 * 24;
+        let nombre = document.getElementById("logNombre").value;
+        document.cookie = "usuario=" + nombre + "; max-age=" + tiempo;
+    }
+});

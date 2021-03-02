@@ -41,7 +41,7 @@ main{
 header{
     background: url("../imagenes/imagen-principal.jpg");
     background-size:cover;
-    min-height: 500px;
+    min-height: 400px;
     color: white;
 }
 
@@ -54,15 +54,41 @@ header{
     max-width: 80%;
 }
 
-/*Estilos de secciones*/
+/*Estilos de secciones principales (index)*/
 
-section.s1{
-    height:fit-content;
-    width: 100%;
+#seccion1{
+    height: 300px;
+    width: 95%;
+    margin: 2.5%;
+    overflow-y: auto;
+
+    display: grid;
+    grid-template-columns: repeat(5,18%);
+    grid-template-rows: 15% auto;
+    column-gap: 1%;
+    row-gap: 3%;
+    justify-content: center;
+    justify-items: center;
 }
 
-section.s2{
-    height:100%;
+#seccion1 > h2{
+    grid-column-start: 1;
+    grid-column-end: 6;
+}
+
+
+.vuelo{
+    width: 100%;
+    height: 90%;
+    background-color: var(--azulOscuro);
+    color: white;
+    padding: 5%;
+    border-radius: 25px;
+    box-shadow: 0px 24px 34px -11px rgba(51, 51, 51, 0.75);
+}
+
+#seccion2{
+    height:fit-content;
     width: 100%;
 }
 
@@ -106,7 +132,7 @@ nav.barra{
     z-index: 99;
     background-color: black;
 }
-/*--------------------------------------------------*/
+/*----------------------CSS del menu lateral--------------------------*/
 
 #menu{
     position: fixed;
@@ -192,4 +218,28 @@ main.login{
     background-color:var(--azulClaro);
     color: white;
     transition-duration: 0.2s;
+}
+
+@media (max-width:1000px){
+
+    #seccion1{
+        grid-template-columns: repeat(2,48%);
+    }
+
+    #seccion1 > h2{
+        grid-column-end: 3;
+    }
+
+}
+
+@media (max-width:500px){
+
+    #seccion1{
+        grid-template-columns: 98%;
+    }
+
+    #seccion1 > h2{
+        grid-column-end: 2;
+    }
+
 }
