@@ -3,6 +3,7 @@ var $botonMenu = $("#btnMenu");
 var $menu = $("#menu");
 var $fondo = $("#fondo");
 
+//Abrir menu
 $botonMenu.click(
     function () {
         $fondo.css("height", window.innerHeight + "px");
@@ -12,6 +13,7 @@ $botonMenu.click(
     }
 )
 
+//Cerrar menu
 $fondo.click(
     function () {
         $fondo.css("width", "0px");
@@ -22,21 +24,17 @@ $fondo.click(
 
 /*----------------------------------------------Control del frame y visibilidad (Cuentas)--------------------------------------------------------------- */
 
+//Cerrar frame
 $("#btnFrame").click(function(){
     $("#fondoFrame").css("visibility","collapse");
     $("#fondoFrame").css("opacity","0");
     location.reload();
 });
 
+//Abrir frame
 $("a.utilidad").click(function(){
     $("#fondoFrame").css("visibility","visible");
     $("#fondoFrame").css("opacity","1");
-});
-
-/*--------------------------------------------Script para el control de la parte de viajes y destinos--------------------------------------------------- */
-
-$("div.destino").click(function(){
-    window.location = $(this).data("location");
 });
 
 /*--------------------------------------------Script para el control de cookies---------------------------------------------------*/
@@ -70,4 +68,41 @@ $("#acceder").click(function () {
         let nombre = document.getElementById("logNombre").value;
         document.cookie = "usuario=" + nombre + "; max-age=" + tiempo;
     }
+});
+
+/*------------------------------------------Script para la compra de un billete---------------------------------------------------*/
+
+//Funciones para dirigirse a las paginas correspondientes de dicho elemento
+$("div.destino").click(function(){
+    window.location = $(this).data("location");
+});
+
+$("section.billete").click(function(){
+    window.location = $(this).data("location");
+});
+
+$("#claseSeleccionada").change(function(){
+    let cod = $("#claseSeleccionada option:selected").val();
+
+     //Se crea la promesa con fetch para establecer la conexion
+     fetch("http://www.miproyecto.es/api/ClaseDatos?codigo="+cod, {
+        headers: { "Content-Type": "application/json" },
+        method: "GET"
+    })
+        .then(function (response) {
+            //Esto devuelve una promesa (aunque ponga texto)
+            response.json()
+
+                //Se crea una subpromesa para recibir los datos ahora si
+                .then(function (resp) {
+                   $("#precio").val(resp[0].precio+"€");
+                })
+                .catch(function (e) {
+                    console.log("Data error:" + e);
+                });
+        })
+        .catch(err => {
+            console.log("Error:" + err);
+        });
+
 });

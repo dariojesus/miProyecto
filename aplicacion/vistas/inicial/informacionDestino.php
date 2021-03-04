@@ -33,8 +33,10 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/destinos.css">';
     echo CHTML::dibujaEtiqueta("article", array("id" => "billetes"), null, false) . PHP_EOL;
 
     //Se dibujan los billetes 1 a 1 
-    foreach ($vuelos as $ind => $val)
-        echo $this->dibujaVistaParcial("billetePaginado", array("vuelo" => $val), true) . PHP_EOL;
+    foreach ($vuelos as $ind => $val){
+        $url = Sistema::app()->generaURL(["compra","Compra"])."?codigo=".$val["cod_vuelo"];
+        echo $this->dibujaVistaParcial("billetePaginado", array("vuelo" => $val,"enlace"=>$url), true) . PHP_EOL;
+    } 
 
     echo CHTML::dibujaEtiquetaCierre("article") . PHP_EOL;
     ?>

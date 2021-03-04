@@ -1,5 +1,6 @@
 /*---------------------------------------------Script para peticiones AJAX---------------------------------------------------------*/
 
+//Función para crear billetes con pocas plazas haciendo una llamada a mi propia API
 function cargarUltimos() {
 
     //Se crea la promesa con fetch para establecer la conexion
@@ -35,6 +36,7 @@ function cargarUltimos() {
         });
 }
 
+//Función para obtener la imagen del día a traves de la API de la NASA
 function cargarFotoDelDia(){
         //Se crea la promesa con fetch para establecer la conexion
         fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY", {

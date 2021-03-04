@@ -174,4 +174,26 @@
 
             }
         }
+
+        //Acción que devuelve los datos de una clase dado algun parámetro
+        public function accionClaseDatos(){
+
+            if ($_SERVER["REQUEST_METHOD"]=="GET"){
+
+                $clase = new Clases();
+                $opciones["where"] = "true";
+
+                //Filtramos por codigo de clase
+                if (isset($_GET["codigo"])){
+                    $dato = CGeneral::addSlashes($_GET["codigo"]);
+                    $opciones["where"].=" and `cod_clase` ='$dato'";
+                }
+
+                $clase = $clase->buscarTodos($opciones);
+
+                $clase = json_encode($clase);
+                echo $clase;
+            }
+
+        }
 	}

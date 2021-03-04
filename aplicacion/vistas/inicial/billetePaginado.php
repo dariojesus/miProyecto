@@ -1,6 +1,6 @@
 <?php
 
-echo CHTML::dibujaEtiqueta("section",array("class"=>"billete"),null,false).PHP_EOL;
+echo CHTML::dibujaEtiqueta("section",array("class"=>"billete","data-location"=>$enlace),null,false).PHP_EOL;
             
     echo CHTML::dibujaEtiqueta("div",array("class"=>"mitad1"),null,false).PHP_EOL;
 
