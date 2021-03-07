@@ -54,7 +54,7 @@ class Billetes extends CActiveRecord{
         $this->borrado=0;
     }
 
-    private function compruebaClase(){
+    protected function compruebaClase(){
         $existe = Sistema::app()->BD()->crearConsulta("SELECT `nombre` FROM clases WHERE `cod_clase` = '".$this->cod_clase."'");
         $existe = $existe->filas();
 
@@ -62,7 +62,7 @@ class Billetes extends CActiveRecord{
             $this->setError("cod_clase","La clase de asiento seleccionada no está disponible.");
     }
 
-    private function compruebaVuelo(){
+    protected function compruebaVuelo(){
         $existe = Sistema::app()->BD()->crearConsulta("SELECT `compannia` FROM vuelos WHERE `cod_vuelo` = '".$this->cod_vuelo."'".
                                                                                             " and `plazas` > 1".
                                                                                             " and `borrado` = 0");
@@ -72,7 +72,7 @@ class Billetes extends CActiveRecord{
             $this->setError("cod_vuelo","El vuelo elegido no se encuentra disponible.");
     }
 
-    private function compruebaUsuario(){
+    protected function compruebaUsuario(){
         $existe = Sistema::app()->BD()->crearConsulta("SELECT `nombre` FROM perfiles WHERE `cod_perfil` = '".$this->cod_perfil."' AND `borrado` = '0'");
         $existe = $existe->filas();
 

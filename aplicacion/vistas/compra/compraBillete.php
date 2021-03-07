@@ -26,20 +26,21 @@
 <body>
     <main>
 
+        <?php echo CHTML::iniciarForm().PHP_EOL; ?>
+
         <fieldset>
             <legend>Datos del vuelo</legend>
 
             <div class="form-floating m-2">
 
-                <?php
-                echo CHTML::iniciarForm().PHP_EOL;
-
-                echo CHTML::campoText("compannia", $vuelo->compannia, [
+            <?php
+                echo CHTML::modeloText($vuelo, "compannia", [
                     "class" => "form-control",
                     "placeholder" => "Compañia",
-                    "readonly"=>"readonly"]) . PHP_EOL;
-
-                echo CHTML::campoLabel("Compañia","compannia").PHP_EOL;
+                    "readonly"=>"readonly"
+                ]) . PHP_EOL;
+                echo CHTML::modeloLabel($vuelo, "compannia") . PHP_EOL;
+                echo CHTML::modeloError($vuelo, "compannia") . PHP_EOL;
                 ?>
 
             </div>
@@ -192,7 +193,7 @@
             <div class="form-floating m-2">
 
                 <?php
-                echo CHTML::link("Cancelar","",array("class"=>"btn btn-outline-danger w-100")).PHP_EOL;
+                echo CHTML::link("Cancelar",$url,array("class"=>"btn btn-outline-danger w-100")).PHP_EOL;
                 ?>
 
             </div>

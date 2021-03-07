@@ -91,6 +91,11 @@
                 Sistema::app()->irAPagina(array("logueo","Formulario"));
         }
 
+        //Acción para que el usuario consulte sus proximos viajes
+        public function accionViajes(){
+
+        }
+
         //Accion para logout
         public function accionQuitarRegistro(){
             $acceso = Sistema::app()->acceso();
