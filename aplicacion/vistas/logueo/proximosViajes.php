@@ -28,7 +28,7 @@
       echo CHTML::dibujaEtiqueta("td",[],$datos["hora_salida"]).PHP_EOL;
       echo CHTML::dibujaEtiqueta("td",[],$datos["clase"]).PHP_EOL;
       echo CHTML::dibujaEtiqueta("td",[],$datos["destino"]).PHP_EOL;
-      echo CHTML::dibujaEtiqueta("td",[],CHTML::link(CHTML::imagen("../../../imagenes/iconos/descarga.png"))).PHP_EOL;
+      echo CHTML::dibujaEtiqueta("td",[],CHTML::link(CHTML::imagen("../../../imagenes/iconos/descarga.png"),$url."?codigo={$datos['codigo']}")).PHP_EOL;
 
       echo CHTML::dibujaEtiquetaCierre("tr").PHP_EOL;
     }

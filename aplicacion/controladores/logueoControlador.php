@@ -100,8 +100,9 @@
             if ($acceso->hayUsuario()){
                 $var = CGeneral::addSlashes($acceso->getNif());
                 $var = Sistema::app()->BD()->crearConsulta("SELECT * FROM perfiles_vuelos WHERE `nif`='$var'")->filas();
+                $url = Sistema::app()->generaURL(array("compra","ImprimirBillete"));
 
-                $this->dibujaVista("proximosViajes",array("billetes"=>$var),"Proximos viajes");
+                $this->dibujaVista("proximosViajes",array("billetes"=>$var,"url"=>$url),"Proximos viajes");
 
             }
             else

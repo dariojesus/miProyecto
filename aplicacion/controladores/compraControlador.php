@@ -69,4 +69,54 @@
             
 		}
 
+        //Acción para imprimir un billete comprado de un usuario
+        public function accionImprimirBillete(){
+
+            if ($_GET["codigo"]){
+
+                $acceso = Sistema::app()->acceso();
+
+                if ($acceso->hayUsuario()){
+
+                    $acceso = CGeneral::addSlashes($acceso->getNif());
+                    $codigo = CGeneral::addSlashes($_GET["codigo"]);
+
+                    $acceso = Sistema::app()->BD()->crearConsulta("SELECT * FROM perfiles_vuelos WHERE `nif`='$acceso' AND `codigo`='$codigo'");
+
+                    if ($acceso = $acceso->fila()){
+
+                        $texto = <<<EOL
+                        ┌──────────────────────────────────────────────────────────────
+                        │                     MODELO DE BILLETE                       
+                        ├──────────────────────────────────────────────────────────────
+                        │ NIF: {$acceso["nif"]}.                                      
+                        │ Nombre: {$acceso["nombre_completo"]}.                       
+                        ├──────────────────────────────────────────────────────────────
+                        │ Compañia: {$acceso["compannia"]}.                           
+                        │ Fecha: {$acceso["fecha_salida"]} a las {$acceso["hora_salida"]} horas.
+                        │ Destino: {$acceso["destino"]}.
+                        │ Duración del viaje: {$acceso["duracion_viaje"]}h.
+                        ├──────────────────────────────────────────────────────────────
+                        │ Clase de viaje: {$acceso["clase"]}.
+                        │ Precio: {$acceso["precio"]}€.
+                        └──────────────────────────────────────────────────────────────
+                        
+                        EOL;
+
+                        $salida = "billete".$codigo.".txt";
+                        header("Content-Type: text/plain");
+                        header('Content-Disposition: attatchment;filename="'.$salida.'"');
+                        echo $texto;
+                    }
+
+
+                }
+                else{
+                    Sistema::app()->irAPagina(array("logueo","Formulario"));
+                    return;
+                }
+
+            }
+        }
+
 }

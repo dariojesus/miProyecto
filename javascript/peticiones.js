@@ -3,16 +3,13 @@
 //Función para crear billetes con pocas plazas haciendo una llamada a mi propia API
 function cargarUltimos() {
 
-    //Se crea la promesa con fetch para establecer la conexion
     fetch("http://www.miproyecto.es/api/VuelosDisponibles?plazas=20", {
         headers: { "Content-Type": "application/json" },
         method: "GET"
     })
         .then(function (response) {
-            //Esto devuelve una promesa (aunque ponga texto)
             response.json()
 
-                //Se crea una subpromesa para recibir los datos ahora si
                 .then(function (resp) {
 
                     let longitud = resp.length > 4? 4 : resp.length;
@@ -38,16 +35,13 @@ function cargarUltimos() {
 
 //Función para obtener la imagen del día a traves de la API de la NASA
 function cargarFotoDelDia(){
-        //Se crea la promesa con fetch para establecer la conexion
+
         fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY", {
             headers: { "Content-Type": "application/json" },
             method: "GET"
         })
             .then(function (response) {
-                //Esto devuelve una promesa (aunque ponga texto)
                 response.json()
-    
-                    //Se crea una subpromesa para recibir los datos ahora si
                     .then(function (resp) {
 
                         let imagen = "url('"+resp.hdurl+"')";

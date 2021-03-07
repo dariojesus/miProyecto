@@ -56,7 +56,7 @@ function obtenerCookie(clave) {
 
 //Si la cookie existe...ponemos los datos en los campos correspondientes
 if (obtenerCookie("usuario") != ""){
-    document.getElementById("logNombre").value = obtenerCookie("usuario");
+    $("#logNombre").val(obtenerCookie("usuario"));
 }
 
 
@@ -81,6 +81,7 @@ $("section.billete").click(function(){
     window.location = $(this).data("location");
 });
 
+//Función para obtener el precio de una clase mediante una peticion fetch
 $("#claseSeleccionada").change(function(){
     let cod = $("#claseSeleccionada option:selected").val();
 
