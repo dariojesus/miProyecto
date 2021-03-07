@@ -50,6 +50,12 @@
 
                         if ($billete->validar()){
                             $billete->guardar();
+
+                            //Se le resta la plaza al vuelo
+                            $plazas = Sistema::app()->BD()->crearConsulta("SELECT `plazas` FROM vuelos WHERE `cod_vuelo`='{$vuelo->cod_vuelo}'")->fila()["plazas"]; 
+                            $plazas = intval($plazas)-1;
+                            Sistema::app()->BD()->crearConsulta("UPDATE vuelos SET `plazas`='$plazas' WHERE `cod_vuelo`='{$vuelo->cod_vuelo}'");
+
                             Sistema::app()->irAPagina(array("logueo","MiCuenta"));
                             return;
                         }

@@ -5,21 +5,21 @@
     </div>
 
     <section id="seccionCuenta">
-        <article>
+        <a href="" class="deshabilitado">
             <img src="../../../imagenes/iconos/usuario.png">
             <p>Mis datos</p>
-        </article>
-        <article>
+        </a>
+        <a href="" class="deshabilitado">
             <img src="../../../imagenes/iconos/tarjeta.png">
             <p>Métodos de pago</p>
-        </article>
-        <article>
+        </a>
+        <a href=<?php echo $link3 ?> class="habilitado">
             <img src="../../../imagenes/iconos/nave.png">
             <p>Proximos viajes</p>
-        </article>
-        <article>
+        </a>
+        <a href="" class="deshabilitado">
             <img src="../../../imagenes/iconos/billete.png">
             <p>Historial de viajes</p>
-        </article>
+        </a>
     </section>
 </main>

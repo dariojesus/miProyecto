@@ -23,41 +23,41 @@
 
 <body>
 
-    <div id="fondo"></div>
+    <?php
+    $acceso = Sistema::app()->acceso();
+    $links = array();
 
-    <div id="menu">
-        <ul class="list-group list-group-flush">
-            <?php
-            $acceso = Sistema::app()->acceso();
+    if (!$acceso->hayUsuario())
+        $links[] = CHTML::link("Iniciar sesion", ["logueo", "formulario"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+    else
+        $links[] = CHTML::link("Mi cuenta", ["logueo", "MiCuenta"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 
-            if (!$acceso->hayUsuario())
-                echo CHTML::link("Iniciar sesion", ["logueo", "formulario"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
-            else
-                echo CHTML::link("Mi cuenta", ["logueo", "MiCuenta"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+    $links[] = CHTML::link("Inicio", ["inicial", "Principal"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+    $links[] = CHTML::link("Viajes", ["inicial", "Destinos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 
-            echo CHTML::link("Inicio", ["inicial", "Principal"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
-            echo CHTML::link("Viajes", ["inicial", "Destinos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
-           
-            if ($acceso->puedePermisos(2))
-			    echo CHTML::link("Gestión de vuelos", ["gestionVuelos","CrudVuelos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+    if ($acceso->puedePermisos(2))
+        $links[] = CHTML::link("Gestión de vuelos", ["gestionVuelos", "CrudVuelos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 
-		    if ($acceso->puedePermisos(4))
-			    echo CHTML::link("Gestión de usuarios", ["gestion","CrudUsuarios"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
-		
-            if ($acceso->hayUsuario())
-                echo CHTML::link("Logout", ["logueo", "QuitarRegistro"], ["class" => "list-group-item list-group-item-action list-group-item-danger"]);
-            ?>
-        </ul>
-    </div>
+    if ($acceso->puedePermisos(4))
+        $links[] = CHTML::link("Gestión de usuarios", ["gestion", "CrudUsuarios"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+
+    if ($acceso->hayUsuario())
+        $links[] = CHTML::link("Logout", ["logueo", "QuitarRegistro"], ["class" => "list-group-item list-group-item-action list-group-item-danger"]);
+
+    $menu = new CMenu($links);
+    $menu->dibujate();
+    ?>
     <main>
         <nav class="barra">
             <a class="nav-link" aria-current="page" id="btnMenu"><img src="/imagenes/logo/menu.png"></a>
         </nav>
         <div id="tabla">
             <div style="background-color: black;">
-                <?php echo CHTML::link(CHTML::imagen("../../../imagenes/iconos/agregar.png"),
-                                       Sistema::app()->generaURL(array("gestion", "Agregar")),
-                                       array("class"=>"btn btn-warning m-1 utilidad", "target"=>"miFrame")).PHP_EOL;
+                <?php echo CHTML::link(
+                    CHTML::imagen("../../../imagenes/iconos/agregar.png"),
+                    Sistema::app()->generaURL(array("gestion", "Agregar")),
+                    array("class" => "btn btn-warning m-1 utilidad", "target" => "miFrame")
+                ) . PHP_EOL;
                 ?>
             </div>
             <table class="table table-striped table-hover" id="tablaUsuarios">

@@ -200,20 +200,28 @@ main.login{
     flex-wrap: wrap;
 }
 
-#seccionCuenta > article {
+#seccionCuenta > a {
     min-width: 250px;
     min-height: 25%;
     background-color: rgb(245, 241, 233);
     border-radius: 5px;
+    color: black;
 
     border: 1px solid rgb(248, 247, 247);
     box-shadow:5px 5px 10px grey;
     text-align: center;
+    text-decoration: none;
     padding-top: 2%;
     margin: 2%;
 }
 
-#seccionCuenta > article:hover{
+#seccionCuenta > a.deshabilitado{
+    background-color: rgba(173, 216, 230, 0.616);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+#seccionCuenta > a.habilitado:hover{
     transform: scale(1.1);
     background-color:var(--azulClaro);
     color: white;

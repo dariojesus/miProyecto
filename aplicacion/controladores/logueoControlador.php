@@ -84,7 +84,9 @@
                 $var = Sistema::app()->BD()->crearConsulta("SELECT `nombre`, `apellidos` FROM perfiles WHERE `nif`='$var'")->fila();
                 $var = $var["nombre"]." ".$var["apellidos"];
 
-                $this->dibujaVista("cuenta",array("nombre"=>$var),"Mi cuenta");
+                $prox = Sistema::app()->generaURL(array("logueo","Viajes"));
+
+                $this->dibujaVista("cuenta",array("nombre"=>$var,"link3"=>$prox),"Mi cuenta");
             }
                 
             else
@@ -93,7 +95,17 @@
 
         //Acción para que el usuario consulte sus proximos viajes
         public function accionViajes(){
+            $acceso = Sistema::app()->acceso();
 
+            if ($acceso->hayUsuario()){
+                $var = CGeneral::addSlashes($acceso->getNif());
+                $var = Sistema::app()->BD()->crearConsulta("SELECT * FROM perfiles_vuelos WHERE `nif`='$var'")->filas();
+
+                $this->dibujaVista("proximosViajes",array("billetes"=>$var),"Proximos viajes");
+
+            }
+            else
+                Sistema::app()->irAPagina(array("logueo","Formulario"));   
         }
 
         //Accion para logout
