@@ -18,41 +18,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/estilos/miEstilo.css">
+    <link rel="stylesheet" href="/estilos/formularios.css">
     <script src="/javascript/registro.js" defer></script>
 </head>
-
-<style>
-    main {
-        display: grid;
-        grid-template-columns: 80%;
-        justify-content: center;
-        row-gap: 5%;
-        margin-top: 5vh;
-    }
-
-    .logo>* {
-        display: inline-block;
-    }
-
-    html,
-    body {
-        background-color: white;
-    }
-
-    @media (min-width: 600px) {
-
-        fieldset {
-            display: grid;
-            grid-template-columns: auto auto;
-        }
-
-        legend {
-            grid-column-start: 1;
-            grid-column-end: 3;
-        }
-    }
-</style>
-
 <body>
 
     <?php

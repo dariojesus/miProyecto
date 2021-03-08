@@ -107,3 +107,17 @@ $("#claseSeleccionada").change(function(){
         });
 
 });
+
+/*----------------------------------------Script de registro del service worker---------------------------------------------------*/
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/worker.js').then(function(registration) {
+    
+    console.log('Registro del ServiceWorker con éxito: ', registration.scope);
+    }, function(err) {
+
+    console.log('Registro del ServiceWorker falló: ', err);
+    });
+    });
+   }

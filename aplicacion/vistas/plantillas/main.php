@@ -60,9 +60,9 @@
 <?php echo $contenido; ?>
 
 <footer>
-	<div class="accordion accordion-flush">
+	<div class="accordion accordion-flush" id="accordionFlushExample">
 		<div class="accordion-item">
-			<h2 class="accordion-header">
+			<h2 class="accordion-header" id="flush-headingOne">
 				<button class="accordion-button collapsed blanco" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
 					Sobre nosotros
 				</button>
@@ -74,7 +74,7 @@
 			</div>
 		</div>
 		<div class="accordion-item">
-			<h2 class="accordion-header">
+			<h2 class="accordion-header" id="flush-headingTwo">
 				<button class="accordion-button collapsed blanco" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
 					Protección de datos y cookies
 				</button>
@@ -87,7 +87,7 @@
 			</div>
 		</div>
 		<div class="accordion-item">
-			<h2 class="accordion-header">
+			<h2 class="accordion-header" id="flush-headingThree">
 				<button class="accordion-button collapsed blanco" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
 					Condiciones de uso
 				</button>

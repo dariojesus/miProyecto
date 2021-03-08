@@ -1,28 +1,4 @@
-<style>
-    main {
-        height: 1000px;
-        display: grid;
-        grid-template-columns: 80%;
-        justify-content: center;
-        row-gap: 5%;
-        margin-top: 5vh;
-        margin-bottom: 5vh;
-    }
-
-    @media (min-width: 600px) {
-
-        fieldset {
-            display: grid;
-            grid-template-columns: auto auto;
-        }
-
-        legend {
-            grid-column-start: 1;
-            grid-column-end: 3;
-        }
-    }
-</style>
-
+<?php $this->textoHead = "<link rel='stylesheet' href='/estilos/formularios.css'>"; ?>
 <body>
     <main>
 

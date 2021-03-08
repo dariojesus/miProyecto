@@ -4,6 +4,8 @@
     --azulClaro: #04394e;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 .blanco{
     color: white;
 }
@@ -15,6 +17,7 @@ p{
 /*Estilo básico para el funcionamiento de grid, flex y limpiar estilos predefinidos*/
 *{
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 html, body{

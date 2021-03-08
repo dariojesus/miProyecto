@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 * {
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 html, body {
@@ -34,7 +37,7 @@ main {
     background-color: #04394e;
 }
 
-/*--------------------------------PARTE DE ESTILO DEL OTRO CSS-----------------------------------------*/
+/*--------------------------------PARTE DE ESTILO DEL MENU (COMUN)-----------------------------------------*/
 
 #menu{
     position: fixed;
