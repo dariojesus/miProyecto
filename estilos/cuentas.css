@@ -86,10 +86,6 @@ main {
     grid-template-columns: 100%;
     grid-template-rows: 5% auto;
     row-gap: 3%;
-
-    transition: opacity 0.3s;
-    transition-delay: 0.5s;
-
     box-shadow: -7px 7px 29px -12px rgba(0,0,0,0.63);
 }
 

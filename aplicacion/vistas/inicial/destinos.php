@@ -3,7 +3,7 @@
 ?>
 
 <main id="destinos">
-    <section id="planetas">
+    <section>
     <?php
         foreach ($planetas as $clave => $planeta){
             $url = Sistema::app()->generaURL(["inicial","infoDestino"])."?codigo=".$planeta["cod_destino"];

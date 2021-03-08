@@ -1,4 +1,4 @@
-/*------------------------Parte de script general para cualquier parte con barra de navegación y menu-------------------------*/
+/*--------------------------------------------------Script del menú de navegación---------------------------------------------*/
 var $botonMenu = $("#btnMenu");
 var $menu = $("#menu");
 var $fondo = $("#fondo");
@@ -22,7 +22,34 @@ $fondo.click(
     }
 )
 
-/*----------------------------------------------Control del frame y visibilidad (Cuentas)--------------------------------------------------------------- */
+/*---------------------------------------------------Script con animaciones JQuery----------------------------------------------*/
+
+//Al cargar van apareciendo los billetes uno a uno
+$(window).on("load",function(){
+
+    let billetes = $("#billetes").children(".billete");
+    
+    for (let i=0 ; i < billetes.length ; i++){
+
+        let cont = i+1;
+
+        setTimeout(() => {
+            $(billetes[i]).show("slow");
+        }, 500*cont);
+    }
+});
+
+$(".destinoPaisaje").on("mouseenter", function () {
+    $(this).children(".datos").slideUp(500);
+    $(this).animate({height:"200px"},500);
+});
+
+$(".destinoPaisaje").on("mouseleave", function () {
+    $(this).children(".datos").slideDown(500);
+    $(this).animate({height:"150px"},500);
+});
+    
+/*----------------------------------------------Script del frame y su visibilidad (Cuentas)--------------------------------------------------------------- */
 
 //Cerrar frame
 $("#btnFrame").click(function(){
@@ -73,7 +100,7 @@ $("#acceder").click(function () {
 /*------------------------------------------Script para la compra de un billete---------------------------------------------------*/
 
 //Funciones para dirigirse a las paginas correspondientes de dicho elemento
-$("div.destino").click(function(){
+$("div.destinoPaisaje").click(function(){
     window.location = $(this).data("location");
 });
 
