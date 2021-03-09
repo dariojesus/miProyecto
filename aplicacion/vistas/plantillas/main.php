@@ -105,8 +105,8 @@
 		<div id="copyright">
 			<img src="/imagenes/logo/64.png">
 			<p>
-				<b>The horizons company</b><br>
-				<i>Todos los derechos reservados</i>
+				<b>The <?php echo Sistema::app()->empresa ?> company</b><br>
+				<i>Autor: <?php echo Sistema::app()->autor ?></i>
 			</p>
 		</div>
 		<div>

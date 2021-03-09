@@ -36,7 +36,7 @@
                 }
                 else{
 
-                    $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
+                    $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
 
                     //Control del formulario para filtrar los resultados
                     if ($_POST){

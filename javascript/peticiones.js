@@ -3,7 +3,7 @@
 //Función para crear billetes con pocas plazas haciendo una llamada a mi propia API
 function cargarUltimos() {
 
-    fetch("http://www.miproyecto.es/api/VuelosDisponibles?plazas=20", {
+    fetch("/api/VuelosDisponibles?plazas=20", {
         headers: { "Content-Type": "application/json" },
         method: "GET"
     })
@@ -44,8 +44,10 @@ function cargarFotoDelDia(){
                 response.json()
                     .then(function (resp) {
 
-                        let imagen = "url('"+resp.hdurl+"')";
-                        $("#cabecera").css("background",imagen);
+                        if (resp.hdurl){
+                            let imagen = "url('"+resp.hdurl+"')";
+                            $("#cabecera").css("background",imagen);
+                        }
                     })
                     .catch(function (e) {
                         console.log("Data error:" + e);

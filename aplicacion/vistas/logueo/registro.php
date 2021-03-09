@@ -30,7 +30,7 @@
         <div class="logo">
             <?php
             echo CHTML::link("<img src='../../../imagenes/logo/64.png'>", ["inicial"]);
-            echo CHTML::dibujaEtiqueta("h1", [], "Horizons");
+            echo CHTML::dibujaEtiqueta("h1", [],Sistema::app()->empresa);
             ?>
         </div>
 

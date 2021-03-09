@@ -113,7 +113,7 @@ $("#claseSeleccionada").change(function(){
     let cod = $("#claseSeleccionada option:selected").val();
 
      //Se crea la promesa con fetch para establecer la conexion
-     fetch("http://www.miproyecto.es/api/ClaseDatos?codigo="+cod, {
+     fetch("http://www.sitio2daw17.es:10001/api/ClaseDatos?codigo="+cod, {
         headers: { "Content-Type": "application/json" },
         method: "GET"
     })
@@ -137,14 +137,14 @@ $("#claseSeleccionada").change(function(){
 
 /*----------------------------------------Script de registro del service worker---------------------------------------------------*/
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/worker.js').then(function(registration) {
+// if ('serviceWorker' in navigator) {
+//     window.addEventListener('load', function() {
+//     navigator.serviceWorker.register('/worker.js').then(function(registration) {
     
-    console.log('Registro del ServiceWorker con éxito: ', registration.scope);
-    }, function(err) {
+//     console.log('Registro del ServiceWorker con éxito: ', registration.scope);
+//     }, function(err) {
 
-    console.log('Registro del ServiceWorker falló: ', err);
-    });
-    });
-   }
+//     console.log('Registro del ServiceWorker falló: ', err);
+//     });
+//     });
+//    }

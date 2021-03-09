@@ -30,7 +30,7 @@
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "logo"], null, false) . PHP_EOL;
     echo CHTML::link("<img src='../../../imagenes/logo/64.png'>", ["inicial"]) . PHP_EOL;
-    echo CHTML::dibujaEtiqueta("h1", [], "Horizons") . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("h1", [], Sistema::app()->empresa) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "form-floating"], null, false) . PHP_EOL;

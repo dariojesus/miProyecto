@@ -165,7 +165,7 @@ nav.barra{
     transition-duration: 0.5s;
 }
 
-/*--------------------CSS DEL LOGIN----------------------------*/
+/*------------------------------------------------------CSS DEL LOGIN-------------------------------------------------------------*/
 
 .logo > *{
     display: inline-block;
@@ -188,7 +188,7 @@ main.login{
     border-color: green;
 }
 
-/*--------------------CSS DE OPCIONES DE CUENTA----------------------------*/
+/*--------------------------------------------------CSS DE OPCIONES DE CUENTA----------------------------------------------------*/
 
 #cuenta{
     width: 90%;
@@ -231,6 +231,26 @@ main.login{
     transition-duration: 0.2s;
 }
 
+/*---------------------------------------------------CSS DE PAGINA ERROR---------------------------------------------------------*/
+#fondoError{
+    width: 80%;
+    height: 500px;
+
+    background: url('../imagenes/error.gif');
+    background-size: cover;
+    border-radius: 25px;
+    margin: 5% 10%;
+}
+
+#datoError{
+    height: fit-content;
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.74);
+    color: white;
+    padding: 1vh 2vw;
+}
+
+/*-------------------------------------------------MEDIA QUERIES------------------------------------------------------------------*/
 @media (max-width:1000px){
 
     #seccion1{

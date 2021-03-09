@@ -22,7 +22,7 @@
                 Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
             }
 
-            $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
+            $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
             $datos = CGeneral::peticionCurl($url,"GET",array());
 
             $datos = json_decode($datos);
@@ -64,7 +64,7 @@
                 $datos = $_POST[$datos];
                 $datos["hora_salida"] .= ":00";
 
-                $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosAgregar"]);
+                $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosAgregar"]);
                 $datos = CGeneral::peticionCurl($url,"POST",$datos);
 
                 $datos = json_decode($datos,true);
@@ -105,7 +105,7 @@
                 $vuelo = new Vuelos();
                 $codigo = CGeneral::addSlashes($_GET["codigo"]);
 
-                $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
+                $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
                 $datos = CGeneral::peticionCurl($url,"GET",array("codigo"=>$codigo));
 
                 $datos = json_decode($datos);
@@ -134,14 +134,14 @@
             }
 
             $vuelo = new Vuelos();
-            $miURL = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["gestionVuelos","Modificar"]);
+            $miURL = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["gestionVuelos","Modificar"]);
             
             //Primero se muestran los datos del vuelo
             if (isset($_GET["codigo"])){
 
                 $codigo = CGeneral::addSlashes($_GET["codigo"]);
 
-                $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
+                $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
                 $datos = CGeneral::peticionCurl($url,"GET",array("codigo"=>$codigo));
 
                 $datos = json_decode($datos);
@@ -159,7 +159,7 @@
                 $datos = $_POST[$vuelo->getNombre()];
                 $vuelo->setValores($datos);
 
-                $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosModificar"]);
+                $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosModificar"]);
                 $datos = CGeneral::peticionCurl($url,"POST",$datos);
 
                 $datos = json_decode($datos, true);
@@ -193,7 +193,7 @@
 
                 $codigo = CGeneral::addSlashes($_GET["codigo"]);
 
-                $url = $_SERVER["HTTP_HOST"].Sistema::app()->generaURL(["api","VuelosBorrar"]);
+                $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosBorrar"]);
                 $datos = CGeneral::peticionCurl($url,"POST",array("codigo"=>$codigo));
                 $datos = get_object_vars(json_decode($datos));
 
