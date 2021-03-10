@@ -1,9 +1,10 @@
-/*---------------------------------------------Script para peticiones AJAX---------------------------------------------------------*/
+/*Script para peticiones AJAX
+*/
 
-//Función para crear billetes con pocas plazas haciendo una llamada a mi propia API
+//Función para cargar billetes con pocas plazas haciendo una llamada a mi propia API
 function cargarUltimos() {
 
-    fetch("/api/VuelosDisponibles?plazas=20", {
+    fetch("/api/VuelosDisponibles?limite=4", {
         headers: { "Content-Type": "application/json" },
         method: "GET"
     })
@@ -12,9 +13,7 @@ function cargarUltimos() {
 
                 .then(function (resp) {
 
-                    let longitud = resp.length > 4? 4 : resp.length;
-
-                    for (let index = 0; index < longitud; index++) {
+                    for (let index = 0; index < resp.length; index++) {
                         
                         $("#seccion1").append("<div class='destino'>"
                         +"<h3>"+resp[index].compannia+"</h3>"
@@ -58,5 +57,36 @@ function cargarFotoDelDia(){
             });
 }
 
+/*Script de petición a localstorage
+*/
+function ultimoViaje () {
+
+    //Si se ha consultado un ultimo destino
+    if (localStorage.destino){
+
+        //Se crea el nodo de ese destino
+        let nodo = "<div class='destinoPaisaje' style='"+localStorage.getItem("estilo")+"'"+
+                                              " data-location='"+localStorage.getItem("link")+"'>";
+        
+        nodo += "<div class='datos'>"+
+                    "<h2>"+localStorage.getItem("destino")+"</h2>"+
+                    "<p>"+localStorage.getItem("hora")+"</p>"+
+                "</div></div>";
+        
+        //Se añade el nodo
+        $("#ultimoViaje").append($(nodo));
+        $("#ultimoViaje").css("display","block");
+
+        //Se le añaden los eventos que tenia
+        $(".destinoPaisaje").on("mouseenter", agrandar);
+        $(".destinoPaisaje").on("mouseleave", normalizar);
+        $(".destinoPaisaje").on("click", function() {
+            window.location = $(this).data("location");
+        });
+    }
+
+}
+
+ultimoViaje();
 cargarUltimos();
 cargarFotoDelDia();

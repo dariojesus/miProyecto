@@ -22,9 +22,21 @@ $fondo.click(
     }
 )
 
-/*---------------------------------------------------Script con animaciones JQuery----------------------------------------------*/
+/*---------------------------------------------------Script de los destinos----------------------------------------------*/
 
-//Al cargar van apareciendo los billetes uno a uno
+//Animación para agrandar el destino
+function agrandar() {
+    $(this).children(".datos").slideUp(500);
+    $(this).animate({height:"200px"},500);
+}
+
+//Animación para volver el destino al tamaño normal
+function normalizar(){
+    $(this).children(".datos").slideDown(500);
+    $(this).animate({height:"150px"},500);
+}
+
+//Al cargar la ventana de un destino van apareciendo los billetes uno a uno
 $(window).on("load",function(){
 
     let billetes = $("#billetes").children(".billete");
@@ -39,15 +51,20 @@ $(window).on("load",function(){
     }
 });
 
-$(".destinoPaisaje").on("mouseenter", function () {
-    $(this).children(".datos").slideUp(500);
-    $(this).animate({height:"200px"},500);
+$("div.destinoPaisaje").click(function(){
+
+    //Se guarda en localStorage el destino consultado
+    localStorage.estilo = $(this).attr("style");
+    localStorage.link = $(this).attr("data-location");
+    localStorage.destino = $(this).children(".datos").children("h2").html();
+    localStorage.hora = $(this).children(".datos").children("p").html();
+
+    //Se va a la ubicación
+    window.location = $(this).data("location");
 });
 
-$(".destinoPaisaje").on("mouseleave", function () {
-    $(this).children(".datos").slideDown(500);
-    $(this).animate({height:"150px"},500);
-});
+$(".destinoPaisaje").on("mouseenter", agrandar);
+$(".destinoPaisaje").on("mouseleave", normalizar);
     
 /*----------------------------------------------Script del frame y su visibilidad (Cuentas)--------------------------------------------------------------- */
 
@@ -86,9 +103,9 @@ if (obtenerCookie("usuario") != ""){
     $("#logNombre").val(obtenerCookie("usuario"));
 }
 
-
+//Si el check de recordar esta marcado, creamos la cookie
 $("#acceder").click(function () {
-    //Si el check de recordar esta marcado, creamos la cookie
+    
     if (document.getElementById("recordar").checked) {
 
         let tiempo = 3600 * 24;
@@ -99,11 +116,6 @@ $("#acceder").click(function () {
 
 /*------------------------------------------Script para la compra de un billete---------------------------------------------------*/
 
-//Funciones para dirigirse a las paginas correspondientes de dicho elemento
-$("div.destinoPaisaje").click(function(){
-    window.location = $(this).data("location");
-});
-
 $("section.billete").click(function(){
     window.location = $(this).data("location");
 });
@@ -113,7 +125,7 @@ $("#claseSeleccionada").change(function(){
     let cod = $("#claseSeleccionada option:selected").val();
 
      //Se crea la promesa con fetch para establecer la conexion
-     fetch("http://www.sitio2daw17.es:10001/api/ClaseDatos?codigo="+cod, {
+     fetch("/api/ClaseDatos?codigo="+cod, {
         headers: { "Content-Type": "application/json" },
         method: "GET"
     })

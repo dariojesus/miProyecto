@@ -37,12 +37,18 @@
                 else{
 
                     $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
+                    $opciones["destino"] = $planeta->nombre;
+
+                    $pagina = isset($_GET["pag"])? CGeneral::addSlashes($_GET["pag"]) : 1;
+                    
+                    $linf = ($pagina-1)*8;
+                    $lsup = $pagina*8;
+
+                    $opciones["limite"] = "$linf,$lsup";
 
                     //Control del formulario para filtrar los resultados
                     if ($_POST){
 
-                        $opciones = array("destino"=>$planeta->nombre);
-        
                         if (!empty($_POST["compannia"]))
                             $opciones["compannia"] = CGeneral::addSlashes($_POST["compannia"]);
         
@@ -56,8 +62,7 @@
                         return;
                     }
 
-                    
-                    $datos = CGeneral::peticionCurl($url,"GET",array("destino"=>$planeta->nombre));
+                    $datos = CGeneral::peticionCurl($url,"GET",$opciones);
                     $datos = json_decode($datos,true);
 
                     $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$datos),$planeta->nombre);

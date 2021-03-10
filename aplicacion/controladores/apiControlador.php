@@ -12,6 +12,7 @@
 
                 $vuelos = new Vuelos();
                 $opciones["where"] = "true";
+                $opciones["order"] = "plazas";
 
                 //Filtramos por codigo de vuelo
                 if (isset($_GET["codigo"])){
@@ -62,10 +63,10 @@
                     }
                 }
 
-                //Filtramos por plazas menores a las que lleguen
-                if (isset($_GET["plazas"])){
-                    $plazas = CGeneral::addSlashes($_GET["plazas"]);
-                    $opciones["where"].= " and plazas <= '$plazas'";
+                //Filtramos con un limite de resultados
+                if (isset($_GET["limite"])){
+                    $limite = CGeneral::addSlashes($_GET["limite"]);
+                    $opciones["limit"] = "$limite";
                 }
 
                 $vuelos = $vuelos->buscarTodos($opciones);

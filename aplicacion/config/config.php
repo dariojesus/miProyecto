@@ -11,6 +11,6 @@
 								"servidor"=>"localhost",
 								"usuario"=>"2daw17",
 								"contra"=>"2daw",
-								"basedatos"=>"BD2DAW17")
+								"basedatos"=>"horizons")
 				  );
 

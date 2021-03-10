@@ -9,6 +9,9 @@ $this->textoHead = "<script src='/javascript/peticiones.js' defer></script>";
       <p id="titulo">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam ut non officiis </p>
     </div>
   </header>
+  <section id="ultimoViaje">
+    <h2><b>¿Seguro que no quieres viajar a?</b></h2>
+  </section>
   <section id="seccion1">
     <h2>Corre que vuelan, quedan pocas plazas</h2>
   </section>

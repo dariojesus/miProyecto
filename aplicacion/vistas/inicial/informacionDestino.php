@@ -43,11 +43,17 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/destinos.css">';
 
     <nav aria-label="Page navigation example" id="paginado">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+        <?php
+            for ($cont=1; $cont < ceil(count($vuelos)/7)+1 ; $cont++){
+
+                $url = Sistema::app()->generaURL(["inicial","infoDestino"])."?codigo=".$planeta->cod_destino."&pag=".$cont;
+
+                echo CHTML::dibujaEtiqueta("li",["class"=>"page-item"],
+                        CHTML::dibujaEtiqueta("a",["class"=>"page-link", 
+                                                    "href"=>$url],
+                                                    $cont)).PHP_EOL;
+            }
+        ?>
         </ul>
     </nav>
 </section>
