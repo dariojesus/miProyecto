@@ -1,4 +1,13 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+
+require_once ("./librerias/PHPMailer-master/src/Exception.php");
+require_once ("./librerias/PHPMailer-master/src/PHPMailer.php");
+require_once ("./librerias/PHPMailer-master/src/SMTP.php");
+require_once ("./librerias/PHPMailer-master/src/OAuth.php");
+
 class Login extends CActiveRecord {
 
     protected function fijarNombre(){
@@ -83,5 +92,65 @@ class Login extends CActiveRecord {
         $acceso = Sistema::app()->acceso();
         $permisos = $acl->getPermisos($codigo);
         $acceso->registrarUsuario($this->nif,$permisos);
+    }
+
+    private function cambiarContrasenna($nif, ){
+
+    }
+
+    //Función estática para enviar un mail de recuperación al correo pasado por parámetro
+    public static function emailRecuperacion($correo){
+
+        $contra = Self::creaPassRandom(9);
+        $mail = new PHPMailer(true);
+
+            try {
+                //Configuración del servidor
+                $mail->isSMTP();
+                $mail->SMTPDebug = SMTP::DEBUG_OFF;
+                $mail->SMTPAuth   = true;
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Host = "smtp.gmail.com";
+
+                //Cuenta
+                $mail->Username = 'cuentapruebahorizons@gmail.com';
+                $mail->Password = 'Hor.1234';
+
+                //Puerto 
+                $mail->Port = 465;
+            
+                //Enviador y receptor
+                $mail->setFrom('cuentapruebahorizons@gmail.com', 'Horizons');
+                $mail->addAddress($correo, 'Admin user');
+                       
+                //Contenido
+                $mail->isHTML(true);
+                $mail->Subject = "Password recovery";
+                $mail->Body    = "This is your new password: <b>$contra</b> please don`t share with anyone and change it when you log in.";
+            
+                $mail->send();
+                return $contra;
+
+            } catch (Exception $e) {
+                //$mail->ErrorInfo;
+                return false;
+            }
+    }
+
+    //Función privada para crear una contraseña aleatoria de num caracteres
+     public static function creaPassRandom($num){
+
+        $pass = "";
+        $posibles[0] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+        $posibles[1] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+        $posibles [2] = ["0","1","2","3","4","5","6","7","8","9"];
+    
+        for ($i = 0 ; $i < $num ; $i++){
+            $arr = random_int(0,2);
+            $car = random_int(0,count($posibles[$arr])-1);
+            $pass .= $posibles[$arr][$car];
+        }
+                    
+        return $pass;
     }
 }

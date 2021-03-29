@@ -9,10 +9,6 @@
             <img src="../../../imagenes/iconos/usuario.png">
             <p>Mis datos</p>
         </a>
-        <a href="" class="deshabilitado">
-            <img src="../../../imagenes/iconos/tarjeta.png">
-            <p>Métodos de pago</p>
-        </a>
         <a href=<?php echo $link3 ?> class="habilitado">
             <img src="../../../imagenes/iconos/nave.png">
             <p>Proximos viajes</p>

@@ -1,5 +1,4 @@
 <?php
-	 
      //Controlador con acciones respectivas a la cuenta
 	class logueoControlador extends CControlador{
 
@@ -71,6 +70,59 @@
             }
 
             echo $this->dibujaVistaParcial("registro",array("modelo"=>$registro,"error"=>$exito),true).PHP_EOL;
+        }
+
+        //Acción para recuperar la contraseña del usuario dado el email
+        public function accionOlvido(){
+
+            //Si se ha enviado el formulario de recuperación de contra
+            if (isset($_POST["correo"])){
+
+                $correo = CGeneral::addSlashes($_POST["correo"]);
+                $nif = CGeneral::addSlashes($_POST["nif"]);
+                $usr = new Registro();
+
+                //Si el correo se encuentra en la base de datos de nuestros usuarios
+                if ($usr->buscarPor(array("where"=>"email = '$correo' and nif = '$nif'"))){
+
+                    $contra = Login::emailRecuperacion($correo);
+
+                    if (is_string($contra)){
+                        $_SESSION["aleatoria"] = $contra;
+                        $_SESSION["id"] = $nif;
+                        Sistema::app()->irAPagina(array("logueo","ConfirmarRecepcion"));
+                    }
+                    else
+                        Sistema::app()->PaginaError("504","No se ha podido enviar el correo de recuperación, disculpe las molestias");
+
+                    return;
+                }
+
+            }
+
+            echo $this->dibujaVistaParcial("olvido",[],true);
+            return;
+        }
+
+        //Acción para confirmar la recepción del correo de recuperación
+        public function accionConfirmarRecepcion(){
+
+            if ($_POST){
+
+                $acl = Sistema::app()->ACL();
+
+                $cod = $acl->getCodUsuario($_SESSION["id"]);
+                $acl->setContrasenia($cod, $_SESSION["aleatoria"]);
+    
+                unset($_SESSION["id"]);
+                unset($_SESSION["aleatoria"]);
+
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+                return;
+            }
+
+            echo $this->dibujaVistaParcial("confirmarRecepcion",[],true);
+            return;
         }
 
         //Accion para acceder a mi cuenta

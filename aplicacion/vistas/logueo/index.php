@@ -68,8 +68,7 @@
 
     echo CHTML::dibujaEtiqueta("hr") . PHP_EOL;
 
-    echo CHTML::botonHtml("Login mediante Google", ["class" => "btn btn-outline-warning"]) . PHP_EOL;
-    echo CHTML::botonHtml("Login mediante Facebook", ["class" => "btn btn-outline-primary"]) . PHP_EOL;
+    echo CHTML::link("Olvide mi contraseña", ["logueo", "Olvido"], ["class" => "btn btn-outline-danger"]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("main") . PHP_EOL;
     ?>
 </body>
