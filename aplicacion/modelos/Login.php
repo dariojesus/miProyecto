@@ -94,10 +94,6 @@ class Login extends CActiveRecord {
         $acceso->registrarUsuario($this->nif,$permisos);
     }
 
-    private function cambiarContrasenna($nif, ){
-
-    }
-
     //Función estática para enviar un mail de recuperación al correo pasado por parámetro
     public static function emailRecuperacion($correo){
 

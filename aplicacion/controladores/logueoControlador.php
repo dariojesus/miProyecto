@@ -136,25 +136,83 @@
                 $var = Sistema::app()->BD()->crearConsulta("SELECT `nombre`, `apellidos` FROM perfiles WHERE `nif`='$var'")->fila();
                 $var = $var["nombre"]." ".$var["apellidos"];
 
-                $prox = Sistema::app()->generaURL(array("logueo","Viajes"));
+                $opciones = array(
+                    "datos"=> Sistema::app()->generaURL(array("logueo","MisDatos")),
+                    "proximos"=> Sistema::app()->generaURL(array("logueo","Viajes"))."?op=1",
+                    "anteriores" => Sistema::app()->generaURL(array("logueo","Viajes"))."?op=2"
+                );
 
-                $this->dibujaVista("cuenta",array("nombre"=>$var,"link3"=>$prox),"Mi cuenta");
+                $this->dibujaVista("cuenta",array("nombre"=>$var,"op"=>$opciones),"Mi cuenta");
             }
                 
             else
                 Sistema::app()->irAPagina(array("logueo","Formulario"));
         }
 
-        //Acción para que el usuario consulte sus proximos viajes
+        //Acción para consultar los datos del usuario logueado
+        public function accionMisDatos(){
+
+            $acceso = Sistema::app()->acceso();
+            $acl = Sistema::app()->ACL();
+
+            //Si estas logueado accedes a tus datos, sino no tienes permiso
+            if ($acceso->hayUsuario()){
+
+                $usr = new Registro();
+                $nif = CGeneral::addSlashes($acceso->getNif());
+
+                $usr->buscarPor(array("where"=>"`nif` ='$nif'"));
+                
+                //Se ha pulsado el formulario para modificar los datos
+                if ($_POST){
+                    $usr->setValores($_POST[$usr->getNombre()]);
+
+                    //Si los datos personales son validos se guardan
+                    if ($usr->validar()){
+                        $usr->guardar();
+                        
+                        //Si se quiere cambiar la contraseña y la antigua es correcta
+                        if (!empty($_POST["newPass"]) && $acl->esValido($nif,$_POST["oldPass"]))
+                            $acl->setContrasenia($acl->getCodUsuario($nif), $_POST["newPass"]);
+                    }
+                        
+                }
+
+                $rol = $acl->getUsuarioRole($acl->getCodUsuario($nif));
+                $usr->fecha_nacimiento = CGeneral::fechaNormalAMysql($usr->fecha_nacimiento);
+                $this->dibujaVista("cuenta_datos",["modelo"=>$usr,"rol"=>$rol],"Datos de cuenta");
+            }
+
+            else
+                Sistema::app()->irAPagina(array("logueo","Formulario"));
+        }
+
+        //Acción para que el usuario consulte sus viajes pasados/proximos (segun op GET)
         public function accionViajes(){
             $acceso = Sistema::app()->acceso();
 
             if ($acceso->hayUsuario()){
+
+                if (!isset($_GET["op"])){
+                    Sistema::app()->paginaError("404","La página web solicitada no ha sido encontrada.");
+                    return;
+                }
+
+                if ($_GET["op"]!="1" && $_GET["op"]!="2"){
+                    Sistema::app()->paginaError("404","La página web solicitada no ha sido encontrada.");
+                    return;
+                }
+                
+                //Si es 1, son los viajes posteriores a la fecha, sino son los anteriores a la fecha
+                $operando = $_GET["op"]=="1"?">=":"<";
+
                 $var = CGeneral::addSlashes($acceso->getNif());
-                $var = Sistema::app()->BD()->crearConsulta("SELECT * FROM perfiles_vuelos WHERE `nif`='$var'")->filas();
+                $fec_actual = date("Y-m-d");
+
+                $var = Sistema::app()->BD()->crearConsulta("SELECT * FROM perfiles_vuelos WHERE `nif`='$var' AND `fecha_salida` $operando '$fec_actual'")->filas();
                 $url = Sistema::app()->generaURL(array("compra","ImprimirBillete"));
 
-                $this->dibujaVista("proximosViajes",array("billetes"=>$var,"url"=>$url),"Proximos viajes");
+                $this->dibujaVista("proximosViajes",array("billetes"=>$var,"url"=>$url),"Billetes");
 
             }
             else

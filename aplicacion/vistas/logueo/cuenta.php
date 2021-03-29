@@ -5,15 +5,15 @@
     </div>
 
     <section id="seccionCuenta">
-        <a href="" class="deshabilitado">
+        <a href=<?php echo $op["datos"] ?> class="habilitado">
             <img src="../../../imagenes/iconos/usuario.png">
             <p>Mis datos</p>
         </a>
-        <a href=<?php echo $link3 ?> class="habilitado">
+        <a href=<?php echo $op["proximos"] ?> class="habilitado">
             <img src="../../../imagenes/iconos/nave.png">
             <p>Proximos viajes</p>
         </a>
-        <a href="" class="deshabilitado">
+        <a href=<?php echo $op["anteriores"] ?> class="habilitado">
             <img src="../../../imagenes/iconos/billete.png">
             <p>Historial de viajes</p>
         </a>
