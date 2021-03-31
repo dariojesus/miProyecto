@@ -1,7 +1,11 @@
 <?php $this->textoHead = "<style>
-@media (max-width:400px){    
+@media (max-width:460px){    
     table > thead > tr > th:nth-child(3),
     table > tbody > tr > td:nth-child(3){
+        display: none;
+
+    table > thead > tr > th:nth-child(2),
+    table > tbody > tr > td:nth-child(2){
         display: none;
     }
   }
@@ -22,13 +26,38 @@
 
   <?php
     foreach ($billetes as $clave => $datos) {
+
+    //Se crea una ventana modal correspondiente al boton anular de cada billete
+    $ventana = new CModal(  "billete" . $datos["codigo"],
+                            "Anular billete",
+                            "Está a punto de anular el billete con destino <b>{$datos["destino"]}</b><br>Con fecha de salida <b>{$datos["fecha_salida"]}</b><br>
+                                          ¿Seguro que quiere proceder con la operación?",
+                            Sistema::app()->generaURL(array("Compra", "Anular"), array("codigo" => $datos["codigo"])));
+
+    $ventana->dibujate();
+    
+    //Se guardan en contenido los enlaces a descargar y anular
+    $contenido = CHTML::link(CHTML::imagen("../../../imagenes/iconos/descarga.png"),
+                              $url."?codigo={$datos['codigo']}",
+                              array("class" => "btn btn-info"));
+
+
+    if ($op =="1"){
+        $contenido .= CHTML::botonHtml( CHTML::imagen("../../../imagenes/iconos/borrar_vuelo.png"),
+        array(
+            "class" => "btn btn-danger",
+            "data-bs-toggle" => "modal",
+            "data-bs-target" => "#billete{$datos["codigo"]}"));
+      }
+
+
       echo CHTML::dibujaEtiqueta("tr",[],null,false).PHP_EOL;
 
       echo CHTML::dibujaEtiqueta("td",[],CGeneral::fechaMysqlANormal($datos["fecha_salida"])).PHP_EOL;
       echo CHTML::dibujaEtiqueta("td",[],$datos["hora_salida"]).PHP_EOL;
       echo CHTML::dibujaEtiqueta("td",[],$datos["clase"]).PHP_EOL;
       echo CHTML::dibujaEtiqueta("td",[],$datos["destino"]).PHP_EOL;
-      echo CHTML::dibujaEtiqueta("td",[],CHTML::link(CHTML::imagen("../../../imagenes/iconos/descarga.png"),$url."?codigo={$datos['codigo']}")).PHP_EOL;
+      echo CHTML::dibujaEtiqueta("td",[],$contenido).PHP_EOL;
 
       echo CHTML::dibujaEtiquetaCierre("tr").PHP_EOL;
     }

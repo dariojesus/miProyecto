@@ -209,10 +209,10 @@
                 $var = CGeneral::addSlashes($acceso->getNif());
                 $fec_actual = date("Y-m-d");
 
-                $var = Sistema::app()->BD()->crearConsulta("SELECT * FROM perfiles_vuelos WHERE `nif`='$var' AND `fecha_salida` $operando '$fec_actual'")->filas();
+                $var = Sistema::app()->BD()->crearConsulta("SELECT * FROM perfiles_vuelos WHERE `nif`='$var' AND `borrado`='0' AND `fecha_salida` $operando '$fec_actual'")->filas();
                 $url = Sistema::app()->generaURL(array("compra","ImprimirBillete"));
 
-                $this->dibujaVista("proximosViajes",array("billetes"=>$var,"url"=>$url),"Billetes");
+                $this->dibujaVista("proximosViajes",array("billetes"=>$var,"url"=>$url, "op"=>$_GET["op"]),"Billetes");
 
             }
             else
