@@ -1,21 +1,22 @@
+<?php $this->lang = $_COOKIE["lang"]; ?>
 <main id="cuenta">
     <div>
-        <h1>Tu cuenta</h1>
-        <h4>Hola <u><?php echo $nombre ?></u> aquí encontrarás toda la información relevante a tu cuenta.</h4>
+        <h1><?php echo "<b>".$palabras[0]."</b>";?></h1>
+        <h4><?php echo $palabras[1]." <u>".$nombre."</u> ".$palabras[2]; ?></h4>
     </div>
 
     <section id="seccionCuenta">
         <a href=<?php echo $op["datos"] ?> class="habilitado">
             <img src="../../../imagenes/iconos/usuario.png">
-            <p>Mis datos</p>
+            <p><?php echo $palabras[3];?></p>
         </a>
         <a href=<?php echo $op["proximos"] ?> class="habilitado">
             <img src="../../../imagenes/iconos/nave.png">
-            <p>Proximos viajes</p>
+            <p><?php echo $palabras[4];?></p>
         </a>
         <a href=<?php echo $op["anteriores"] ?> class="habilitado">
             <img src="../../../imagenes/iconos/billete.png">
-            <p>Historial de viajes</p>
+            <p><?php echo $palabras[5];?></p>
         </a>
     </section>
 </main>

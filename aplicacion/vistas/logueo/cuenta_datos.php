@@ -1,11 +1,12 @@
 <?php
-$this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <script src="/javascript/registro.js" defer></script>'
+$this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <script src="/javascript/registro.js" defer></script>';
+$this->lang = $_COOKIE["lang"];
 ?>
 
 <main>
     <form method="post">
         <fieldset>
-            <legend>Datos de la cuenta</legend>
+            <legend><?php echo $palabras[0]; ?></legend>
 
             <div class="form-floating m-2">
 
@@ -15,7 +16,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
                     "placeholder" => "nif",
                     "readonly" => "readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "nif") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[1],"nif").PHP_EOL;
                 ?>
 
             </div>
@@ -28,7 +29,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
                                         "placeholder" => "Tipo usuario",
                                         "readonly" => "readonly"
                                         ]).PHP_EOL;
-                echo CHTML::campoLabel("Tipo usuario","rol").PHP_EOL;
+                echo CHTML::campoLabel($palabras[2],"rol").PHP_EOL;
                 ?>
 
             </div>
@@ -41,7 +42,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
                     "id" => "email",
                     "placeholder" => "email"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "email") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[3], "email") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "email") . PHP_EOL;
                 ?>
 
@@ -55,7 +56,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
                     "id" => "poblacion",
                     "placeholder" => "poblacion"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "poblacion") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[4], "poblacion") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "poblacion") . PHP_EOL;
                 ?>
 
@@ -69,7 +70,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
                     "id" => "direccion",
                     "placeholder" => "direccion"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "direccion") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[5], "direccion") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "direccion") . PHP_EOL;
                 ?>
 
@@ -84,7 +85,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
                     "placeholder" => "nombre",
                     "autocomplete" => "username"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "nombre") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[6], "nombre") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "nombre") . PHP_EOL;
                 ?>
 
@@ -97,7 +98,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
                     "id" => "apellidos",
                     "placeholder" => "apellidos"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "apellidos") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[7], "apellidos") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "apellidos") . PHP_EOL;
                 ?>
 
@@ -110,7 +111,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
                     "id" => "nacimiento",
                     "placeholder" => "nacimiento"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "fecha_nacimiento") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[8], "fecha_nacimiento") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "fecha_nacimiento") . PHP_EOL;
                 ?>
 
@@ -120,7 +121,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
 
         <fieldset>
 
-            <legend>Modificar contraseña</legend>
+            <legend><?php echo $palabras[9]; ?></legend>
 
             <div class="form-floating m-2">
                 <?php
@@ -130,7 +131,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
                     "placeholder" => "contraseña",
                     "autocomplete" => "new-password"
                 ]) . PHP_EOL;
-                echo CHTML::campoLabel("Nueva contraseña", "contrasenna") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[10], "contrasenna") . PHP_EOL;
 
                 if (!empty($error))
                     echo CHTML::dibujaEtiqueta("div", ["class" => "error"], $error);
@@ -144,7 +145,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
                     "placeholder" => "contraseña",
                     "autocomplete" => "new-password"
                 ]) . PHP_EOL;
-                echo CHTML::campoLabel("Contraseña actual", "contrasenna") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[11], "contrasenna") . PHP_EOL;
 
                 if (!empty($error))
                     echo CHTML::dibujaEtiqueta("div", ["class" => "error"], $error);
@@ -153,7 +154,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/formularios.css"> <scr
 
         </fieldset>
         <div>
-            <?php echo CHTML::campoBotonSubmit("Guardar",["class"=>"btn btn-outline-success"])?>
+            <?php echo CHTML::campoBotonSubmit($palabras[12],["class"=>"btn btn-outline-success"])?>
         </div>
     </form>
 </main>

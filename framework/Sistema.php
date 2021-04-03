@@ -74,5 +74,3 @@
 	}
 
 	spl_autoload_register(array("Sistema","autoload"));
-	
-	

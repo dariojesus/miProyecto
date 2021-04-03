@@ -82,7 +82,10 @@
 													  $config["BD"]["contra"],
 													  $config["BD"]["basedatos"]);
 					}
-				}	
+				}
+				
+			if (!isset($_COOKIE["lang"]))	
+				setcookie("lang","en",time()+60*60*24*30);
 		}
 
 		public function sesion(){

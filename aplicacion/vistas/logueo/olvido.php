@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang=<?php echo $palabras[0]; ?> >
 
 <head>
     <meta charset="utf-8" />
@@ -38,7 +38,7 @@
         "id" => "nif",
         "placeholder" => "nif"
     ]) . PHP_EOL;
-    echo CHTML::campoLabel("NIF", "nif");
+    echo CHTML::campoLabel($palabras[1], "nif");
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "form-floating m-2"], null, false) . PHP_EOL;
@@ -47,12 +47,12 @@
         "id" => "email",
         "placeholder" => "email"
     ]) . PHP_EOL;
-    echo CHTML::campoLabel("Email", "correo");
+    echo CHTML::campoLabel($palabras[2],"correo");
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "m-2"], null, false) . PHP_EOL;
-    echo CHTML::campoBotonSubmit("Recuperar contraseña", ["class" => "btn btn-outline-success"]) . PHP_EOL;
-    echo CHTML::link("Cancelar", ["logueo", "Formulario"], ["class" => "btn btn-outline-danger"]) . PHP_EOL;
+    echo CHTML::campoBotonSubmit($palabras[3], ["class" => "btn btn-outline-success"]) . PHP_EOL;
+    echo CHTML::link($palabras[4], ["logueo", "Formulario"], ["class" => "btn btn-outline-danger"]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiquetaCierre("main") . PHP_EOL;

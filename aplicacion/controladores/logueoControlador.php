@@ -18,6 +18,17 @@
             }
 
             //Sino accedes al login
+
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $palabras = ["en","ID","Password","Remember my credentials","Login","Sign up","Forgotten password"]; 
+                    break;
+
+                default: 
+                    $palabras = ["es","NIF","Contraseña","Recuerda mis credenciales","Acceder","Registrarse","Contraseña olvidada"];
+                    break;
+            }
+
             $login = new Login();
             $datos = $login->getNombre();
 
@@ -31,7 +42,7 @@
                 }
             }
 
-            echo $this->dibujaVistaParcial("index",array("modelo"=>$login),true).PHP_EOL;
+            echo $this->dibujaVistaParcial("index",array("modelo"=>$login,"palabras"=>$palabras),true).PHP_EOL;
 		}
 
         //Accion para acceder al formulario de registro
@@ -46,6 +57,23 @@
             }
 
             //Si no, accedes al formulario de registro
+
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $palabras = ["en","Personal data","ID","Name","Subname","Birth date",
+                                     "Contact data","Email","Repeat email","Town","Direction",
+                                     "Security","Password","Repeat password",
+                                     "Sign up"]; 
+                    break;
+
+                default: 
+                    $palabras = ["es","Datos personales","NIF","Nombre","Apellidos","Fecha de nacimiento",
+                                      "Datos de contacto","Email","Repetir email","Población","Dirección",
+                                      "Seguridad","Contraseña","Repetir contraseña",
+                                      "Registrarse"]; 
+                    break;
+            }
+
             $registro = new Registro();
             $datos = $registro->getNombre();
             $exito = "";
@@ -69,11 +97,23 @@
                 }
             }
 
-            echo $this->dibujaVistaParcial("registro",array("modelo"=>$registro,"error"=>$exito),true).PHP_EOL;
+            echo $this->dibujaVistaParcial("registro",array("modelo"=>$registro,"error"=>$exito,"palabras"=>$palabras),true).PHP_EOL;
         }
 
         //Acción para recuperar la contraseña del usuario dado el email
         public function accionOlvido(){
+
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $palabras = ["en","ID","Email","Send email","Cancel"];
+                    $errPalabras = ["The email recovery password can't be send, try again later"]; 
+                    break;
+
+                default: 
+                    $palabras = ["es","DNI","Email","Enviar email","Cancelar"]; 
+                    $errPalabras = ["El email de recuperación de contraseña no pudo ser enviado, intentelo de nuevo mas tarde"]; 
+                    break;
+            }
 
             //Si se ha enviado el formulario de recuperación de contra
             if (isset($_POST["correo"])){
@@ -93,19 +133,31 @@
                         Sistema::app()->irAPagina(array("logueo","ConfirmarRecepcion"));
                     }
                     else
-                        Sistema::app()->PaginaError("504","No se ha podido enviar el correo de recuperación, disculpe las molestias");
+                        Sistema::app()->PaginaError("504",$errPalabras[0]);
 
                     return;
                 }
 
             }
 
-            echo $this->dibujaVistaParcial("olvido",[],true);
+            echo $this->dibujaVistaParcial("olvido",["palabras"=>$palabras],true);
             return;
         }
 
         //Acción para confirmar la recepción del correo de recuperación
         public function accionConfirmarRecepcion(){
+
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $palabras = ["en","Check your email inbox and confirm the password recovery email reception of our team",
+                                 "Email received","Cancel"];
+                    break;
+
+                default: 
+                    $palabras = ["es","Compruebe la bandeja de entrada en su correo electrónico y confirme si ha recibido el email de recuperación de nuestri equipo",
+                                 "Correo recibido","Cancelar"]; 
+                    break;
+            }
 
             if ($_POST){
 
@@ -121,13 +173,25 @@
                 return;
             }
 
-            echo $this->dibujaVistaParcial("confirmarRecepcion",[],true);
+            echo $this->dibujaVistaParcial("confirmarRecepcion",["palabras"=>$palabras],true);
             return;
         }
 
         //Accion para acceder a mi cuenta
         public function accionMiCuenta(){
             $acceso = Sistema::app()->acceso();
+
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $palabras = ["Your account","Hello","here you will find all the information about your profile",
+                                "My data","Next trips","Trips history"];
+                    break;
+
+                default: 
+                    $palabras = ["Tu cuenta","Hola","aquí encontraras toda la información sobre tu perfil",
+                                "Mis datos","Próximos viajes","Historial de viajes"]; 
+                    break;
+            }
 
             //Si estas logueado accedes a tu cuenta, sino no tienes permiso
             if ($acceso->hayUsuario()){
@@ -142,7 +206,7 @@
                     "anteriores" => Sistema::app()->generaURL(array("logueo","Viajes"))."?op=2"
                 );
 
-                $this->dibujaVista("cuenta",array("nombre"=>$var,"op"=>$opciones),"Mi cuenta");
+                $this->dibujaVista("cuenta",array("nombre"=>$var,"op"=>$opciones,"palabras"=>$palabras),"Mi cuenta");
             }
                 
             else
@@ -154,6 +218,18 @@
 
             $acceso = Sistema::app()->acceso();
             $acl = Sistema::app()->ACL();
+
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $palabras = ["Data account","ID","User type","Email","Town","Direction","Name","Subname","Birth date",
+                                 "Modify password","New password","Current password","Save and exit"];
+                    break;
+
+                default: 
+                    $palabras = ["Datos de la cuenta","NIF","Tipo de usuario","Email","Población","Dirección","Nombre","Apellido","Fecha de nacimiento",
+                                 "Modificar contraseña","Nueva contraseña","Contraseña actual","Guardar y salir"]; 
+                    break;
+            }
 
             //Si estas logueado accedes a tus datos, sino no tienes permiso
             if ($acceso->hayUsuario()){
@@ -180,7 +256,7 @@
 
                 $rol = $acl->getUsuarioRole($acl->getCodUsuario($nif));
                 $usr->fecha_nacimiento = CGeneral::fechaNormalAMysql($usr->fecha_nacimiento);
-                $this->dibujaVista("cuenta_datos",["modelo"=>$usr,"rol"=>$rol],"Datos de cuenta");
+                $this->dibujaVista("cuenta_datos",["modelo"=>$usr,"rol"=>$rol,"palabras"=>$palabras],"Datos de cuenta");
             }
 
             else
@@ -189,17 +265,32 @@
 
         //Acción para que el usuario consulte sus viajes pasados/proximos (segun op GET)
         public function accionViajes(){
+
             $acceso = Sistema::app()->acceso();
+
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $palabras = ["Date","Hour","Class","Destiny","Ticket",
+                                 "Cancel ticket","You're about to cancel the ticket with the destiny: ", "With departure date: ","Are you sure you want to proceed with the operation?"];
+                    $errPalabras = ["The page you're looking for can't be found"]; 
+                    break;
+
+                default: 
+                    $palabras = ["Fecha","Hora","Clase","Destino","Billete",
+                                 "Borrar billete","Estas a punto de anular el billete con destino: ", "Con fecha de salida: ","¿Estás seguro de que deseas proceder con la operación?"]; 
+                    $errPalabras = ["La página web solicitada no ha sido encontrada"]; 
+                    break;
+            }
 
             if ($acceso->hayUsuario()){
 
                 if (!isset($_GET["op"])){
-                    Sistema::app()->paginaError("404","La página web solicitada no ha sido encontrada.");
+                    Sistema::app()->paginaError("404",$errPalabras[0]);
                     return;
                 }
 
                 if ($_GET["op"]!="1" && $_GET["op"]!="2"){
-                    Sistema::app()->paginaError("404","La página web solicitada no ha sido encontrada.");
+                    Sistema::app()->paginaError("404",$errPalabras[0]);
                     return;
                 }
                 
@@ -212,7 +303,7 @@
                 $var = Sistema::app()->BD()->crearConsulta("SELECT * FROM perfiles_vuelos WHERE `nif`='$var' AND `borrado`='0' AND `fecha_salida` $operando '$fec_actual'")->filas();
                 $url = Sistema::app()->generaURL(array("compra","ImprimirBillete"));
 
-                $this->dibujaVista("proximosViajes",array("billetes"=>$var,"url"=>$url, "op"=>$_GET["op"]),"Billetes");
+                $this->dibujaVista("proximosViajes",array("billetes"=>$var,"url"=>$url, "op"=>$_GET["op"], "palabras"=>$palabras),"Billetes");
 
             }
             else

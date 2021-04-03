@@ -1,4 +1,6 @@
-<?php $this->textoHead = "<style>
+<?php 
+
+$this->textoHead = "<style>
 @media (max-width:460px){    
     table > thead > tr > th:nth-child(3),
     table > tbody > tr > td:nth-child(3){
@@ -9,17 +11,21 @@
         display: none;
     }
   }
-</style>"?>
+</style>";
+
+$this->lang = $_COOKIE["lang"];
+
+?>
 
 <div style="min-height: 500px;" class="p-1">
 <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">Fecha</th>
-      <th scope="col">Hora</th>
-      <th scope="col">Clase</th>
-      <th scope="col">Destino</th>
-      <th scope="col">Billete</th>
+      <th scope="col"><?php echo $palabras[0]; ?></th>
+      <th scope="col"><?php echo $palabras[1]; ?></th>
+      <th scope="col"><?php echo $palabras[2]; ?></th>
+      <th scope="col"><?php echo $palabras[3]; ?></th>
+      <th scope="col"><?php echo $palabras[4]; ?></th>
     </tr>
   </thead>
   <tbody>
@@ -29,9 +35,9 @@
 
     //Se crea una ventana modal correspondiente al boton anular de cada billete
     $ventana = new CModal(  "billete" . $datos["codigo"],
-                            "Anular billete",
-                            "Está a punto de anular el billete con destino <b>{$datos["destino"]}</b><br>Con fecha de salida <b>{$datos["fecha_salida"]}</b><br>
-                                          ¿Seguro que quiere proceder con la operación?",
+                            $palabras[5],
+                            "{$palabras[6]}<b>{$datos["destino"]}</b><br>{$palabras[7]}<b>{$datos["fecha_salida"]}</b><br>
+                             {$palabras[8]}",
                             Sistema::app()->generaURL(array("Compra", "Anular"), array("codigo" => $datos["codigo"])));
 
     $ventana->dibujate();

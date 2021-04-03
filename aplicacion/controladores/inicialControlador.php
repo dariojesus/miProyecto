@@ -9,7 +9,20 @@
 
         //Acción para mostrar la página de index
 		public function accionPrincipal(){
-            $this->dibujaVista("index",array(),"Indice de la aplicación");
+
+            switch($_COOKIE["lang"]){
+                    case("en"): 
+                        $palabras = ["en","Don't you really want to travel to..?","Go ahead and buy one, there are a few remains",
+                                     "Find your next destination"]; 
+                        break;
+
+                    default: 
+                        $palabras = ["es","¿Seguro que no quieres viajar a..?","Corre que vuelan, quedan pocas plazas",
+                                    "Encuentra tu próximo destino"];
+                        break;
+                }
+
+            $this->dibujaVista("index",array("palabras"=>$palabras),"Indice de la aplicación");
 		}
 
         //Acción para mostrar los planetas (destinos)
@@ -17,7 +30,7 @@
 
             $var = new Planetas();
             $var = $var->buscarTodos();
-            $this->dibujaVista("destinos",array("planetas"=>$var),"Destinos disponibles");
+            $this->dibujaVista("destinos",array("planetas"=>$var,"lang"=>$_COOKIE["lang"]),"Destinos disponibles");
         }
 
         //Acción para ver los vuelos correspondientes al destino

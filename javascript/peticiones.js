@@ -1,6 +1,21 @@
 /*Script para peticiones AJAX
 */
 
+//Función para obtener el valor de una clave dada (cookie)
+function obtenerCookie(clave) {
+    var name = clave + "=";
+    var ca = document.cookie.split(';');
+
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ')
+            c = c.substring(1);
+        if (c.indexOf(name) == 0)
+            return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
 //Función para cargar billetes con pocas plazas haciendo una llamada a mi propia API
 function cargarUltimos() {
 
@@ -13,13 +28,21 @@ function cargarUltimos() {
 
                 .then(function (resp) {
 
+                    //A partir de la cookie obtenemos el lenguaje
+                    let pal;
+
+                    switch(obtenerCookie("lang")){
+                        case ("en"): pal = "remainings"; break;
+                        default: pal = "plazas restantes"; break;
+                    }
+                            
                     for (let index = 0; index < resp.length; index++) {
                         
                         $("#seccion1").append("<div class='destino'>"
                         +"<h3>"+resp[index].compannia+"</h3>"
                         +"<h5>"+resp[index].fecha_salida+"</h5>"
                         +"<h5>"+resp[index].hora_salida+"</h5>"
-                        +"<h6>"+resp[index].plazas+" plazas</h6>"
+                        +"<h6>"+resp[index].plazas+" "+pal+"</h6>"
                         +"</div>");
                     }
                 })

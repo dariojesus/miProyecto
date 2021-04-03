@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang=<?php echo $palabras[0] ?> >
 
 <head>
     <meta charset="utf-8" />
@@ -40,7 +40,7 @@
                                                     "autocomplete" => "username",
                                                     "id" => "logNombre"
                                                 )) . PHP_EOL;
-    echo CHTML::modeloLabel($modelo,"nif") . PHP_EOL;
+    echo CHTML::campoLabel($palabras[1],"nif").PHP_EOL;
     echo CHTML::modeloError($modelo,"nif",["class"=>"error"]);
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
@@ -51,24 +51,24 @@
                                                     "placeholder" => "contra",
                                                     "autocomplete" => "current-password"
                                                 )) . PHP_EOL;
-    echo CHTML::modeloLabel($modelo, "contrasenna") . PHP_EOL;
+    echo CHTML::campoLabel($palabras[2],"contrasenna").PHP_EOL;
     echo CHTML::modeloError($modelo,"contrasenna",["class"=>"error"]);
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", ["class"=>"form-check"], null, false) . PHP_EOL;
     echo CHTML::campoCheckBox("recordar",true,["class"=>"form-check-input","id"=>"recordar"]).PHP_EOL;
-    echo CHTML::campoLabel("Recordar usuario y contraseña","recordar",["class"=>"form-check-label"]).PHP_EOL;
+    echo CHTML::campoLabel($palabras[3],"recordar",["class"=>"form-check-label"]).PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", [], null, false) . PHP_EOL;
-    echo CHTML::campoBotonSubmit("Acceder", ["class" => "btn btn-dark","id"=>"acceder"]) . PHP_EOL;
-    echo CHTML::link("Registrarse", ["logueo", "Registro"], ["class" => "btn btn-dark"]) . PHP_EOL;
+    echo CHTML::campoBotonSubmit($palabras[4], ["class" => "btn btn-dark","id"=>"acceder"]) . PHP_EOL;
+    echo CHTML::link($palabras[5], ["logueo", "Registro"], ["class" => "btn btn-dark"]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
     echo CHTML::finalizarForm() . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("hr") . PHP_EOL;
 
-    echo CHTML::link("Olvide mi contraseña", ["logueo", "Olvido"], ["class" => "btn btn-outline-danger"]) . PHP_EOL;
+    echo CHTML::link($palabras[6], ["logueo", "Olvido"], ["class" => "btn btn-outline-danger"]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("main") . PHP_EOL;
     ?>
 </body>

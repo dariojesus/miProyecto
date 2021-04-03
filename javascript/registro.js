@@ -7,6 +7,38 @@ var $poblacion = $("#poblacion");
 var $direccion = $("#direccion");
 var $contra = $("#contra");
 
+var palabras;
+
+//Control del idioma de los errores
+switch(obtenerCookie("lang")){
+
+    case ("en"): palabras = ["Check your ID have a valid format (8 digits, 1 capital letter)",
+                             "The name can't be empty or is too long",
+                             "The subname can't be empty or it's contain special characters",
+                             "The date can't be later than actual date",
+                             "Check that your email is valid",
+                             "The town field can't be empty or have more of 30 characters",
+                             "The emails doesn't match",
+                             "The field can't be empty",
+                             "The direction can't be empty or have more of 30 characters",
+                             "The password must have at least one capital letter, one lower case letter, one digit and be between 6 and 10 characters long ",
+                             "The passwords doesn't match"];
+                             break;
+
+    default: palabras = ["Comprueba que tu DNI tiene un formato válido (8 dígitos, 1 letra mayúscula)",
+                            "El nombre no puede estar vacío o es demasiado largo",
+                            "El apellido no puede estar vacío o contener caracteres especiales",
+                            "La fecha no puede ser posterior a la de hoy",
+                            "Comprueba que tu email tiene un formato correcto",
+                            "Eñ campo dirección no puede estar vacío o tener mas de 30 caracteres",
+                            "Los emails no coinciden",
+                            "El campo no puede estar vacío",
+                            "La dirección no puede estar vacía o tener mas de 30 caracteres",
+                            "La contraseña debe contener al menos una minúscula, mayúscula, un dígito <br> y tener entre 6 y 10 caracteres",
+                            "Las contraseñas no coinciden"];
+                            break;
+}
+
 
 //Se agregan los eventos on focus
 $nif.on("focus",limpiarEA);
@@ -29,7 +61,7 @@ $nif.on("focusout",function () {
         $nif.addClass("acierto");
     else{
         $nif.addClass("error");
-        $("<div class='error'>Compruebe su DNI</div>").insertAfter($nif);
+        $("<div class='error'>"+palabras[0]+"</div>").insertAfter($nif);
     }      
 });
 
@@ -41,7 +73,7 @@ $nombre.on("focusout",function(){
 
     if(!re.test(nombre)){
         $nombre.addClass("error");
-        $("<div class='error'>El nombre no puede estar vacío o es demasiado largo</div>").insertAfter($nombre);
+        $("<div class='error'>"+palabras[1]+"</div>").insertAfter($nombre);
     }
     else
         $nombre.addClass("acierto");
@@ -55,7 +87,7 @@ $apellidos.on("focusout",function(){
 
     if(!re.test(apellidos)){
         $apellidos.addClass("error");
-        $("<div class='error'>El apellido no puede estar vacío o contener caracteres especiales.</div>").insertAfter($apellidos);
+        $("<div class='error'>"+palabras[2]+"</div>").insertAfter($apellidos);
     }
     else
         $apellidos.addClass("acierto");
@@ -70,7 +102,7 @@ $nacimiento.on("focusout",function(){
 
     if ((fecha - hoy) > 0){
         $nacimiento.addClass("error");
-        $("<div class='error'>La fecha no puede ser posterior a la de hoy.</div>").insertAfter($nacimiento);
+        $("<div class='error'>"+palabras[3]+"</div>").insertAfter($nacimiento);
     }
     else
         $nacimiento.addClass("acierto");
@@ -82,7 +114,7 @@ $email.on("focusout",function(){
 
     if (!re.test($email.val().trim())){
         $email.addClass("error");
-        $("<div class='error'>Compruebe que es un email válido.</div>").insertAfter($email);
+        $("<div class='error'>"+palabras[4]+"</div>").insertAfter($email);
     }
     else
         $email.addClass("acierto");
@@ -97,7 +129,7 @@ $poblacion.on("focusout",function(){
 
     if(!re.test(poblacion)){
         $poblacion.addClass("error");
-        $("<div class='error'>La poblacion no puede estar vacía o ser mayor a 30 caracteres.</div>").insertAfter($poblacion);
+        $("<div class='error'>"+palabras[5]+"</div>").insertAfter($poblacion);
     }
     else
         $poblacion.addClass("acierto");
@@ -111,11 +143,11 @@ $("#emailRepetido").on("focusout",function(){
 
     if (!mail1.localeCompare(mail2)==0){
         $(this).addClass("error");
-        $("<div class='error'>Los emails no coinciden.</div>").insertAfter($(this));
+        $("<div class='error'>"+palabras[6]+"</div>").insertAfter($(this));
     }
     else if (mail1===""){
         $(this).addClass("error");
-        $("<div class='error'>El campo no puede estar vacío.</div>").insertAfter($(this));
+        $("<div class='error'>"+palabras[7]+"</div>").insertAfter($(this));
     }
     else
         $(this).addClass("acierto");
@@ -129,7 +161,7 @@ $direccion.on("focusout",function(){
 
     if(!re.test(direccion)){
         $direccion.addClass("error");
-        $("<div class='error'>La dirección no puede estar vacía o ser mayor a 30 caracteres.</div>").insertAfter($direccion);
+        $("<div class='error'>"+palabras[8]+"</div>").insertAfter($direccion);
     }
     else
         $direccion.addClass("acierto");
@@ -144,7 +176,7 @@ $contra.on("focusout",function(){
 
     if(!re.test(contra)){
         $contra.addClass("error");
-        $("<div class='error'>La contraseña debe contener al menos una minúscula, mayúscula, un dígito <br> y tener entre 6 y 10 caracteres</div>").insertAfter($contra);
+        $("<div class='error'>"+palabras[9]+"</div>").insertAfter($contra);
     }
     else
         $contra.addClass("acierto");
@@ -158,12 +190,12 @@ $("#contraRepetida").on("focusout",function(){
 
     if (!contra1.localeCompare(contra2)==0){
         $(this).addClass("error");
-        $("<div class='error'>Las contraseñas no coinciden.</div>").insertAfter($(this));
+        $("<div class='error'>"+palabras[10]+"</div>").insertAfter($(this));
     }
 
     else if (contra1===""){
         $(this).addClass("error");
-        $("<div class='error'>El campo no puede estar vacío.</div>").insertAfter($(this));
+        $("<div class='error'>"+palabras[7]+"</div>").insertAfter($(this));
     }
     else
         $(this).addClass("acierto");
@@ -186,4 +218,19 @@ function limpiarEA () {
     }
     else if ($(this).hasClass("acierto"))
         $(this).removeClass("acierto");
+}
+
+//Función para obtener el valor de una clave dada (cookie)
+function obtenerCookie(clave) {
+    var name = clave + "=";
+    var ca = document.cookie.split(';');
+
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ')
+            c = c.substring(1);
+        if (c.indexOf(name) == 0)
+            return c.substring(name.length, c.length);
+    }
+    return "";
 }

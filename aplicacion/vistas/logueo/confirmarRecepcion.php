@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang=<?php echo $palabras[0]; ?>>
 
 <head>
     <meta charset="utf-8" />
@@ -33,12 +33,12 @@
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "form-floating m-2"], null, false) . PHP_EOL;
-    echo CHTML::dibujaEtiqueta("p",[],"Revise su bandeja de entrada y confirme si ha recibido un correo de recuperación de contraseña de nuestro equipo.").PHP_EOL;
+    echo CHTML::dibujaEtiqueta("p",[],$palabras[1]).PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "m-2"], null, false) . PHP_EOL;
-    echo CHTML::campoBotonSubmit("Email recibido", ["class" => "btn btn-outline-success"]) . PHP_EOL;
-    echo CHTML::link("Cancelar", ["logueo", "Formulario"], ["class" => "btn btn-outline-danger"]) . PHP_EOL;
+    echo CHTML::campoBotonSubmit($palabras[2], ["class" => "btn btn-outline-success"]) . PHP_EOL;
+    echo CHTML::link($palabras[3], ["logueo", "Formulario"], ["class" => "btn btn-outline-danger"]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiquetaCierre("main") . PHP_EOL;
