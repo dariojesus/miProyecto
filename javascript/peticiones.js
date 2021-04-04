@@ -101,8 +101,6 @@ function ultimoViaje () {
         $("#ultimoViaje").css("display","block");
 
         //Se le añaden los eventos que tenia
-        $(".destinoPaisaje").on("mouseenter", agrandar);
-        $(".destinoPaisaje").on("mouseleave", normalizar);
         $(".destinoPaisaje").on("click", function() {
             window.location = $(this).data("location");
         });

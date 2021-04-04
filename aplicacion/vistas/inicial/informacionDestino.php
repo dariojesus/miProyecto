@@ -1,5 +1,6 @@
 <?php
 $this->textoHead = '<link rel="stylesheet" href="/estilos/destinos.css">';
+$this->lang = $palabras[0];
 ?>
 
 <section id="planeta">
@@ -11,8 +12,8 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/destinos.css">';
     echo CHTML::dibujaEtiqueta("div", array("id" => "dPlaneta"), null, false) . PHP_EOL;
     echo CHTML::dibujaEtiqueta("h2", [], $planeta->nombre) . PHP_EOL;
     echo CHTML::dibujaEtiqueta("h6", [], $planeta->descripcion) . PHP_EOL;
-    echo CHTML::dibujaEtiqueta("h6", [], "Clima: " . $planeta->clima) . PHP_EOL;
-    echo CHTML::dibujaEtiqueta("h6", [], "Tiempo de viaje: " . $planeta->duracion_viaje . " horas.") . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("h6", [], $palabras[1] . $planeta->clima) . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("h6", [], $palabras[2] . $planeta->duracion_viaje .$palabras[3]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiquetaCierre("article") . PHP_EOL;
@@ -21,10 +22,10 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/destinos.css">';
 
     echo CHTML::iniciarForm();
 
-    echo CHTML::campoText("compannia","",["placeholder"=>"Compañia"]).PHP_EOL;
+    echo CHTML::campoText("compannia","",["placeholder"=>$palabras[5]]).PHP_EOL;
     echo CHTML::campoDate("fecha").PHP_EOL;
     echo CHTML::campoHidden("codigo",$planeta->cod_destino).PHP_EOL;
-    echo CHTML::campoBotonSubmit("Filtrar",array("class"=>"btn btn-dark")).PHP_EOL;
+    echo CHTML::campoBotonSubmit($palabras[4],array("class"=>"btn btn-dark")).PHP_EOL;
 
     echo CHTML::finalizarForm();
 
@@ -35,7 +36,7 @@ $this->textoHead = '<link rel="stylesheet" href="/estilos/destinos.css">';
     //Se dibujan los billetes 1 a 1 
     foreach ($vuelos as $ind => $val){
         $url = Sistema::app()->generaURL(["compra","Compra"])."?codigo=".$val["cod_vuelo"];
-        echo $this->dibujaVistaParcial("billetePaginado", array("vuelo" => $val,"enlace"=>$url), true) . PHP_EOL;
+        echo $this->dibujaVistaParcial("billetePaginado", array("vuelo" => $val,"enlace"=>$url,"palabras"=>$palabras), true) . PHP_EOL;
     } 
 
     echo CHTML::dibujaEtiquetaCierre("article") . PHP_EOL;

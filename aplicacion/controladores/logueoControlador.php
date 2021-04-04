@@ -106,11 +106,13 @@
             switch($_COOKIE["lang"]){
                 case("en"): 
                     $palabras = ["en","ID","Email","Send email","Cancel"];
+                    $mensaje = ["This is your new password: "," please don`t share with anyone and change it when you log in."];
                     $errPalabras = ["The email recovery password can't be send, try again later"]; 
                     break;
 
                 default: 
-                    $palabras = ["es","DNI","Email","Enviar email","Cancelar"]; 
+                    $palabras = ["es","DNI","Email","Enviar email","Cancelar"];
+                    $mensaje = ["Esta es tu nueva contraseña: "," por favor no la compartas con nadie y cambiala cuando inicies sesión."];
                     $errPalabras = ["El email de recuperación de contraseña no pudo ser enviado, intentelo de nuevo mas tarde"]; 
                     break;
             }
@@ -125,7 +127,7 @@
                 //Si el correo se encuentra en la base de datos de nuestros usuarios
                 if ($usr->buscarPor(array("where"=>"email = '$correo' and nif = '$nif'"))){
 
-                    $contra = Login::emailRecuperacion($correo);
+                    $contra = Login::emailRecuperacion($correo,$mensaje);
 
                     if (is_string($contra)){
                         $_SESSION["aleatoria"] = $contra;

@@ -22,31 +22,46 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" href="/estilos/miEstilo.css">
+	<link rel="stylesheet" href="/estilos/destinos.css">
 	<script src="/javascript/miJs.js" defer></script>
+
+	<?php
+	if (isset($this->textoHead))
+		echo $this->textoHead;
+
+	switch ($_COOKIE["lang"]){
+
+			case ("en") : $palabras = ["Login","My account","Home","Trips","Trips management","Users management","Logout",
+									   "About us","Cookies and data privacy","User terms","Author"];break;
+
+			default: $palabras = ["Iniciar sesión","Mi cuenta","Inicio","Viajes","Gestión de viajes","Gestión de usuarios","Logout",
+										"Sobre nosotros","Protección de datos y cookies","Condiciones de uso","Autor"];break;
+	};
+	?>
 </head>
 
 <body>
 
-		<?php
+<?php
 		$acceso = Sistema::app()->acceso();
 		$links = array();
 		
 		if (!$acceso->hayUsuario())
-			$links[] = CHTML::link("Iniciar sesion", ["logueo", "formulario"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+			$links[] = CHTML::link($palabras[0], ["logueo", "formulario"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 		else
-			$links[] = CHTML::link("Mi cuenta", ["logueo", "MiCuenta"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+			$links[] = CHTML::link($palabras[1], ["logueo", "MiCuenta"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 			
-		$links[] = CHTML::link("Inicio", ["inicial", "Principal"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
-		$links[] = CHTML::link("Viajes", ["inicial", "Destinos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+		$links[] = CHTML::link($palabras[2], ["inicial", "Principal"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+		$links[] = CHTML::link($palabras[3], ["inicial", "Destinos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 
 		if ($acceso->puedePermisos(2))
-			$links[] =CHTML::link("Gestión de vuelos", ["gestionVuelos","CrudVuelos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+			$links[] =CHTML::link($palabras[4], ["gestionVuelos","CrudVuelos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 
 		if ($acceso->puedePermisos(4))
-			$links[] = CHTML::link("Gestión de usuarios", ["gestion","CrudUsuarios"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+			$links[] = CHTML::link($palabras[5], ["gestion","CrudUsuarios"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 		
 		if ($acceso->hayUsuario())
-			$links[] = CHTML::link("Logout",["logueo","QuitarRegistro"],["class"=>"list-group-item list-group-item-action list-group-item-danger"]);
+			$links[] = CHTML::link($palabras[6],["logueo","QuitarRegistro"],["class"=>"list-group-item list-group-item-action list-group-item-danger"]);
 		
 		$menu = new CMenu($links);
 		$menu->dibujate();
@@ -68,7 +83,7 @@
 		<div class="accordion-item">
 			<h2 class="accordion-header" id="flush-headingOne">
 				<button class="accordion-button collapsed blanco" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-					Sobre nosotros
+					<?php echo $palabras[7].PHP_EOL; ?>
 				</button>
 			</h2>
 			<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -80,7 +95,7 @@
 		<div class="accordion-item">
 			<h2 class="accordion-header" id="flush-headingTwo">
 				<button class="accordion-button collapsed blanco" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-					Protección de datos y cookies
+					<?php echo $palabras[8].PHP_EOL; ?>
 				</button>
 			</h2>
 			<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
@@ -93,7 +108,7 @@
 		<div class="accordion-item">
 			<h2 class="accordion-header" id="flush-headingThree">
 				<button class="accordion-button collapsed blanco" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-					Condiciones de uso
+					<?php echo $palabras[9].PHP_EOL; ?>
 				</button>
 			</h2>
 			<div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
@@ -110,8 +125,15 @@
 			<img src="/imagenes/logo/64.png">
 			<p>
 				<b>The <?php echo Sistema::app()->empresa ?> company</b><br>
-				<i>Autor: <?php echo Sistema::app()->autor ?></i>
+				<i><?php echo $palabras[10].": ".Sistema::app()->autor ?></i>
 			</p>
+		</div>
+		<div>
+			<select name="idioma" id="idiomaWeb">
+				<option value="null">Language</option>
+				<option value="en">English</option>
+				<option value="es">Spanish</option>
+			</select>
 		</div>
 		<div>
 			<a href="#"><img src="/imagenes/social/twitter.png" alt="" srcset=""></a>

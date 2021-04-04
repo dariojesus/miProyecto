@@ -160,3 +160,11 @@ $("#claseSeleccionada").change(function(){
 //     });
 //     });
 //    }
+
+/*--------------------------------------Script para el cambio de idioma------------------------------------------------------*/
+
+$("#idiomaWeb").change(function(){
+    let idioma = $("#idiomaWeb option:selected").val();
+    document.cookie = "lang="+idioma+";path=/";
+    location.reload();
+});

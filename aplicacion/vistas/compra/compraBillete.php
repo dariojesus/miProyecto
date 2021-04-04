@@ -1,11 +1,14 @@
-<?php $this->textoHead = "<link rel='stylesheet' href='/estilos/formularios.css'>"; ?>
+<?php 
+    $this->textoHead = "<link rel='stylesheet' href='/estilos/formularios.css'>"; 
+    $this->lang = $palabras[0];
+?>
 <body>
     <main>
 
         <?php echo CHTML::iniciarForm().PHP_EOL; ?>
 
         <fieldset>
-            <legend>Datos del vuelo</legend>
+            <legend><?php echo $palabras[1]; ?></legend>
 
             <div class="form-floating m-2">
 
@@ -15,7 +18,7 @@
                     "placeholder" => "Compañia",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($vuelo, "compannia") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[2], "compannia") . PHP_EOL;
                 echo CHTML::modeloError($vuelo, "compannia") . PHP_EOL;
                 ?>
 
@@ -28,7 +31,7 @@
                     "placeholder" => "Destino",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($vuelo, "cod_destino") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[3], "cod_destino") . PHP_EOL;
                 echo CHTML::modeloError($vuelo, "cod_destino") . PHP_EOL;
                 ?>
 
@@ -41,7 +44,7 @@
                     "placeholder" => "Fecha de salida",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($vuelo, "fecha_salida") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[4], "fecha_salida") . PHP_EOL;
                 echo CHTML::modeloError($vuelo, "fecha_salida") . PHP_EOL;
                 ?>
 
@@ -54,7 +57,7 @@
                     "placeholder" => "Hora de salida",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($vuelo, "hora_salida") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[5], "hora_salida") . PHP_EOL;
                 echo CHTML::modeloError($vuelo, "hora_salida") . PHP_EOL;
                 ?>
 
@@ -64,7 +67,7 @@
 
         <fieldset>
 
-            <legend>Datos del pasajero</legend>
+            <legend><?php echo $palabras[6]; ?></legend>
 
                 <div class="form-floating m-2">
 
@@ -74,7 +77,7 @@
                     "placeholder" => "NIF",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($usuario, "nif") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[7], "nif") . PHP_EOL;
                 echo CHTML::modeloError($usuario, "nif") . PHP_EOL;
                 ?>
 
@@ -88,7 +91,7 @@
                     "placeholder" => "Nombre",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($usuario, "nombre") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[8], "nombre") . PHP_EOL;
                 echo CHTML::modeloError($usuario, "nombre") . PHP_EOL;
                 ?>
 
@@ -102,7 +105,7 @@
                     "placeholder" => "Apellidos",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($usuario, "apellidos") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[9], "apellidos") . PHP_EOL;
                 echo CHTML::modeloError($usuario, "apellidos") . PHP_EOL;
                 ?>
 
@@ -116,7 +119,7 @@
                     "placeholder" => "Email",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($usuario, "email") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[10], "email") . PHP_EOL;
                 echo CHTML::modeloError($usuario, "email") . PHP_EOL;
                 ?>
 
@@ -126,7 +129,7 @@
 
         <fieldset>
 
-            <legend>Facturación</legend>
+            <legend><?php echo $palabras[11]; ?></legend>
 
             <div class="form-floating m-2">
 
@@ -137,7 +140,7 @@
                     "placeholder" => "Clase",
                     "id"=>"claseSeleccionada"]).PHP_EOL;
 
-                echo CHTML::campoLabel("Clase","clase"). PHP_EOL;
+                echo CHTML::campoLabel($palabras[12],"clase"). PHP_EOL;
                 ?>
 
             </div>
@@ -152,7 +155,7 @@
                     "id"=>"precio",
                     "readonly"=>"readonly"]).PHP_EOL;
 
-                echo CHTML::campoLabel("Precio","precio"). PHP_EOL;
+                echo CHTML::campoLabel($palabras[13],"precio"). PHP_EOL;
                 ?>
 
             </div>
@@ -160,7 +163,7 @@
             <div class="form-floating m-2">
 
                 <?php
-                echo CHTML::campoBotonSubmit("Comprar",array("class"=>"btn btn-outline-success w-100")).PHP_EOL;
+                echo CHTML::campoBotonSubmit($palabras[14],array("class"=>"btn btn-outline-success w-100")).PHP_EOL;
                 echo CHTML::finalizarForm().PHP_EOL;
                 ?>
 
@@ -169,7 +172,7 @@
             <div class="form-floating m-2">
 
                 <?php
-                echo CHTML::link("Cancelar",$url,array("class"=>"btn btn-outline-danger w-100")).PHP_EOL;
+                echo CHTML::link($palabras[15],$url,array("class"=>"btn btn-outline-danger w-100")).PHP_EOL;
                 ?>
 
             </div>

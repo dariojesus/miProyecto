@@ -95,7 +95,7 @@ class Login extends CActiveRecord {
     }
 
     //Función estática para enviar un mail de recuperación al correo pasado por parámetro
-    public static function emailRecuperacion($correo){
+    public static function emailRecuperacion($correo,$mensaje){
 
         $contra = Self::creaPassRandom(9);
         $mail = new PHPMailer(true);
@@ -122,7 +122,7 @@ class Login extends CActiveRecord {
                 //Contenido
                 $mail->isHTML(true);
                 $mail->Subject = "Password recovery";
-                $mail->Body    = "This is your new password: <b>$contra</b> please don`t share with anyone and change it when you log in.";
+                $mail->Body    = "{$mensaje[0]}<b>$contra</b>{$mensaje[1]}";
             
                 $mail->send();
                 return $contra;

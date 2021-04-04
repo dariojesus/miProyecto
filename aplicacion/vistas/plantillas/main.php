@@ -120,6 +120,13 @@
 			</p>
 		</div>
 		<div>
+			<select name="idioma" id="idiomaWeb">
+				<option value="null">Language</option>
+				<option value="en">English</option>
+				<option value="es">Spanish</option>
+			</select>
+		</div>
+		<div>
 			<a href="#"><img src="/imagenes/social/twitter.png" alt="" srcset=""></a>
 			<a href="#"><img src="/imagenes/social/insta.png" alt="" srcset=""></a>
 			<a href="#"><img src="/imagenes/social/facebook.png" alt="" srcset=""></a>

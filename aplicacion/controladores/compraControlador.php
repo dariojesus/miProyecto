@@ -13,6 +13,24 @@
         //Acción para proceder a la compra de un billete
 		public function accionCompra(){
 
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $palabras = ["en","Boarding data","Company","Destiny code","Boarding date","Boarding hour",
+                                "Passenger data","ID","Name","Subname","Email",
+                                "Billing","Class","Price",
+                                "Buy","Cancel"];
+                    $errPalabras = ["You don't have permissions to do this action"];
+                    break;
+
+                default: 
+                    $palabras = ["es","Datos de embarque","Compañia","Codigo de destino","Fecha de embarque","Hora de embarque",
+                                "Datos del pasajero","NIF","Nombre","Apellidos","Email",
+                                "Facturación","Clase","Precio",
+                                "Comprar","Cancelar"];
+                    $errPalabras = ["No tiene permisos para acceder a esta acción"];
+                    break;
+            }
+
             $acceso = Sistema::app()->acceso();
 
             //Si no estas logueado te manda al login
@@ -23,7 +41,7 @@
 
             //Si no tienes permiso, te da error
             if (!$acceso->puedePermisos(1)){
-                Sistema::app()->paginaError(401,"No tiene permisos para acceder a esta acción.");
+                Sistema::app()->paginaError(401,$errPalabras[0]);
             }
             
             //Se muestra primero el billete a comprar con todos sus datos
@@ -66,7 +84,7 @@
                 }
                
 
-                $this->dibujaVista("compraBillete",array("vuelo"=>$vuelo,"usuario"=>$usuario,"url"=>$url),"Compra de billete");
+                $this->dibujaVista("compraBillete",array("vuelo"=>$vuelo,"usuario"=>$usuario,"url"=>$url,"palabras"=>$palabras),"Compra de billete");
                 return;
             }
             
@@ -74,6 +92,18 @@
 
         //Acción para imprimir un billete comprado de un usuario
         public function accionImprimirBillete(){
+
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $palabras = ["Fly ticket","Passenger: ","Destiny: ","Identification: ","Boarding date: "
+                                ,"Class: ","Boarding hour: ","Company: ", "Fly duration: "," hours"];
+                    break;
+
+                default: 
+                    $palabras = ["Ticket de vuelo","Pasajero: ","Destino: ","Identificación: ","Fecha de embarque: "
+                                ,"Clase: ","Hora de embarque: ","Compañia: ","Duración del vuelo: "," horas"];
+                    break;
+            }
 
             if ($_GET["codigo"]){
 
@@ -95,7 +125,7 @@
                         $pdf->SetCreator("TCPDF");
                         $pdf->SetAuthor("Horizons-Darío Jesús Flores Sevilla");
                         $pdf->SetTitle("Ticket-".$acceso["destino"].$acceso["codigo"]);
-                        $pdf->SetSubject("Ticket de vuelo");
+                        $pdf->SetSubject($palabras[0]);
                         $pdf->SetKeywords("Ticket, Billete, Vuelo, Compra, Viaje");
                         
 
@@ -132,8 +162,8 @@
                         <div>
                             <table cellpadding="1" cellspacing="3">
                                 <tr>
-                                    <th>Pasajero: </th>
-                                    <th>Destino: </th>
+                                    <th>$palabras[1]</th>
+                                    <th>$palabras[2]</th>
                                     <td rowspan="8">Código QR</td>
                                 </tr>
                                 <tr>
@@ -141,28 +171,28 @@
                                     <td>&nbsp;{$acceso["destino"]}</td>
                                 </tr>
                                 <tr>
-                                    <th>Identificacion: </th>
-                                    <th>Fecha de salida: </th>
+                                    <th>$palabras[3]</th>
+                                    <th>$palabras[4]</th>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;{$acceso["nif"]}</td>
                                     <td>&nbsp;{$acceso["fecha_salida"]}</td>
                                 </tr>
                                 <tr>
-                                    <th>Clase: </th>
-                                    <th>Hora de salida: </th>
+                                    <th>$palabras[5]</th>
+                                    <th>$palabras[6]</th>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;{$acceso["clase"]}</td>
                                     <td>&nbsp;{$acceso["hora_salida"]}</td>
                                 </tr>
                                 <tr>
-                                    <th>Compañia: </th>
-                                    <th>Duración del viaje: </th>
+                                    <th>$palabras[7]</th>
+                                    <th>$palabras[8]</th>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;{$acceso["compannia"]}</td>
-                                    <td>&nbsp;{$acceso["duracion_viaje"]} horas</td>
+                                    <td>&nbsp;{$acceso["duracion_viaje"]}$palabras[9]</td>
                                 </tr>
                             </table>
                         </div>
@@ -186,6 +216,18 @@
         //Acción para anular un billete de un usuario
         public function accionAnular(){
 
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $errPalabras = ["The page you are looking for doesn't exist","The action can't be performed",
+                                    "The ticket can't be canceled when the boarding date is less than 24 hours"];
+                    break;
+
+                default: 
+                    $errPalabras = ["No existe la página que está buscando","No se puede realizar la acción que desea",
+                                    "No se puede anular un billete a menos de 24 horas de su salida"];
+                    break;
+            }
+
             $acceso = Sistema::app()->acceso();
 
             //Si no hay usuario
@@ -196,7 +238,7 @@
 
             //Si no viene el codigo del billete en el GET
             if (!isset($_GET["codigo"])){
-                Sistema::app()->paginaError(404,"No existe la página que está buscando");
+                Sistema::app()->paginaError(404,$errPalabras[0]);
                 return;
             }
 
@@ -208,7 +250,7 @@
 
             //Si el billete ya está borrado o no corresponde con el nif del cliente que lo desea borrar
             if ($var->numFilas()==0){
-                Sistema::app()->paginaError(500,"No se puede realizar la acción que desea");
+                Sistema::app()->paginaError(500,$errPalabras[1]);
                 return;
             }
 
@@ -223,7 +265,7 @@
 
             //Si faltan menos de 24 horas se produce un error
             if ($diferencia->days < 1 || $diferencia->invert == 1){
-                Sistema::app()->paginaError(500,"No se puede anular un billete a menos de 24 horas de su salida");
+                Sistema::app()->paginaError(500,$errPalabras[2]);
                 return;
             }
 

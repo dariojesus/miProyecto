@@ -6,8 +6,8 @@ echo CHTML::dibujaEtiqueta("section",array("class"=>"billete","data-location"=>$
 
         echo CHTML::dibujaEtiqueta("h3",[],$vuelo["compannia"],true).PHP_EOL;
 
-        echo CHTML::dibujaEtiqueta("h6",[],"Fecha: ".CGeneral::fechaMysqlANormal($vuelo["fecha_salida"]),true).PHP_EOL;
-        echo CHTML::dibujaEtiqueta("h6",[],"Hora: {$vuelo["hora_salida"]}",true).PHP_EOL;
+        echo CHTML::dibujaEtiqueta("h6",[],$palabras[6].CGeneral::fechaMysqlANormal($vuelo["fecha_salida"]),true).PHP_EOL;
+        echo CHTML::dibujaEtiqueta("h6",[],$palabras[7].$vuelo["hora_salida"],true).PHP_EOL;
 
     echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
 

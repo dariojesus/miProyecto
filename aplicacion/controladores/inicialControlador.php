@@ -28,13 +28,30 @@
         //Acción para mostrar los planetas (destinos)
         public function accionDestinos(){
 
+            switch($_COOKIE["lang"]){
+
+                case("en"): $palabras = ["en","Trip duration: "," hours"];break;
+                default: $palabras = ["es","Duración del viaje: "," horas"];break;
+              }
+
             $var = new Planetas();
             $var = $var->buscarTodos();
-            $this->dibujaVista("destinos",array("planetas"=>$var,"lang"=>$_COOKIE["lang"]),"Destinos disponibles");
+            $this->dibujaVista("destinos",array("planetas"=>$var,"palabras"=>$palabras),"Destinos disponibles");
         }
 
         //Acción para ver los vuelos correspondientes al destino
         public function accioninfoDestino(){
+
+            switch($_COOKIE["lang"]){
+
+                case("en"): $palabras = ["en","Wheater: ","Travel time: "," hours","Filter","Company","Boarding date: ","Boarding hour: "];
+                            $errPalabras =["Can't find the destiny you are looking for"];
+                            break;
+                
+                default: $palabras = ["es","Clima: ","Duración del viaje: "," horas","Filtrar","Compañía","Fecha de embarque: ","Hora de embarque: "];
+                        $errPalabras =["No se ha encontrado el destino que estaba buscando"];
+                        break;
+              }
 
             $planeta = new Planetas();
 
@@ -44,7 +61,7 @@
                 $codigo = CGeneral::addSlashes($_GET["codigo"]);
                 
                 if (!$planeta->buscarPorId($codigo)){
-                    Sistema::app()->paginaError(404,"No se ha encontrado el destino que estaba buscando.");
+                    Sistema::app()->paginaError(404,$errPalabras[0]);
                     return;
                 }
                 else{
@@ -71,14 +88,14 @@
                         $dato = CGeneral::peticionCurl($url,"GET",$opciones);
                         $dato = json_decode($dato,true);
         
-                        $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$dato),$planeta->nombre);
+                        $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$dato,"palabras"=>$palabras),$planeta->nombre);
                         return;
                     }
 
                     $datos = CGeneral::peticionCurl($url,"GET",$opciones);
                     $datos = json_decode($datos,true);
 
-                    $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$datos),$planeta->nombre);
+                    $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$datos,"palabras"=>$palabras),$planeta->nombre);
                     return;
                 }
             }
