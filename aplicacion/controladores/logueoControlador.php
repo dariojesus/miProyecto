@@ -61,7 +61,7 @@
             switch($_COOKIE["lang"]){
                 case("en"): 
                     $palabras = ["en","Personal data","ID","Name","Subname","Birth date",
-                                     "Contact data","Email","Repeat email","Town","Direction",
+                                     "Contact data","Email","Repeat email","Town","Address",
                                      "Security","Password","Repeat password",
                                      "Sign up"]; 
                     break;
@@ -223,7 +223,7 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["Data account","ID","User type","Email","Town","Direction","Name","Subname","Birth date",
+                    $palabras = ["Data account","ID","User type","Email","Town","Address","Name","Subname","Birth date",
                                  "Modify password","New password","Current password","Save and exit"];
                     break;
 

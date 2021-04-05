@@ -29,7 +29,7 @@
     <main>
 
         <fieldset>
-            <legend>Datos personales</legend>
+            <legend><?php echo $palabras[0]; ?></legend>
 
             <div class="form-floating m-2">
 
@@ -39,7 +39,7 @@
                     "id" => "nif",
                     "placeholder" => "nif"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "nif") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[1], "nif") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "nif") . PHP_EOL;
                 ?>
 
@@ -53,7 +53,7 @@
                     "placeholder" => "nombre",
                     "autocomplete" => "username"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "nombre") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[2], "nombre") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "nombre") . PHP_EOL;
                 ?>
 
@@ -66,7 +66,7 @@
                     "id" => "apellidos",
                     "placeholder" => "apellidos"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "apellidos") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[3], "apellidos") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "apellidos") . PHP_EOL;
                 ?>
 
@@ -79,7 +79,7 @@
                     "id" => "nacimiento",
                     "placeholder" => "nacimiento"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "fecha_nacimiento") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[4], "fecha_nacimiento") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "fecha_nacimiento") . PHP_EOL;
                 ?>
 
@@ -89,7 +89,7 @@
 
 
         <fieldset>
-            <legend>Datos de contacto</legend>
+            <legend><?php echo $palabras[5]; ?></legend>
 
             <div class="form-floating m-2">
 
@@ -99,7 +99,7 @@
                     "id" => "email",
                     "placeholder" => "email"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "email") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[6], "email") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "email") . PHP_EOL;
                 ?>
 
@@ -114,7 +114,7 @@
                     "placeholder" => "poblacion",
                     "list" => "opciones"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "poblacion") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[7], "poblacion") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "poblacion") . PHP_EOL;
                 ?>
 
@@ -128,7 +128,7 @@
                     "id" => "direccion",
                     "placeholder" => "direccion"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "direccion") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[8], "direccion") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "direccion") . PHP_EOL;
                 ?>
 
@@ -137,7 +137,7 @@
         </fieldset>
 
         <fieldset>
-            <legend>Seguridad</legend>
+            <legend><?php echo $palabras[9]; ?></legend>
 
               <div class="form-floating m-2">
 
@@ -146,7 +146,7 @@
                                                             "id"=>"contra",
                                                             "placeholder"=>"contraseña",
                                                             "autocomplete"=>"new-password"]).PHP_EOL;
-                echo CHTML::campoLabel("Contraseña","contrasenna").PHP_EOL;
+                echo CHTML::campoLabel($palabras[10],"contrasenna").PHP_EOL;
 
                 if (!empty($error))
                     echo CHTML::dibujaEtiqueta("div",["class"=>"error"],$error);
@@ -155,7 +155,7 @@
             </div>
             <div class="form-floating m-2">
                 <input type="password" class="form-control" id="contraRepetida" placeholder="contraseña" autocomplete="new-password">
-                <label for="contra">Confirmar contraseña</label>
+                <label for="contra"><?php echo $palabras[11]; ?></label>
             </div>
             <div class="form-floating m-2">
 
@@ -163,7 +163,7 @@
                 echo CHTML::campoListaDropDown("rol",0,$roles,["class"=>"form-control",
                                                             "id"=>"rol",
                                                             "placeholder"=>"Rol"]).PHP_EOL;
-                echo CHTML::campoLabel("Rol","rol").PHP_EOL;
+                echo CHTML::campoLabel($palabras[12],"rol").PHP_EOL;
 
                 if (!empty($error))
                     echo CHTML::dibujaEtiqueta("div",["class"=>"error"],$error);
@@ -173,7 +173,7 @@
         </fieldset>
 
             <?php
-            echo CHTML::campoBotonSubmit("Agregar", ["class" => "btn btn-outline-success w-50"]) . PHP_EOL;
+            echo CHTML::campoBotonSubmit($palabras[13], ["class" => "btn btn-outline-success w-50"]) . PHP_EOL;
             ?>
 
     </main>

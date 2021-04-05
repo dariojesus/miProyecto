@@ -24,7 +24,7 @@
     <main>
 
         <fieldset>
-            <legend>Datos personales</legend>
+            <legend><?php echo $palabras[0]; ?></legend>
 
             <div class="form-floating m-2">
 
@@ -35,7 +35,7 @@
                     "placeholder" => "nif",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "nif") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[1], "nif") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "nif") . PHP_EOL;
                 ?>
 
@@ -50,7 +50,7 @@
                     "autocomplete" => "username",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "nombre") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[2], "nombre") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "nombre") . PHP_EOL;
                 ?>
 
@@ -64,7 +64,7 @@
                     "placeholder" => "apellidos",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "apellidos") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[3], "apellidos") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "apellidos") . PHP_EOL;
                 ?>
 
@@ -78,7 +78,7 @@
                     "placeholder" => "nacimiento",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "fecha_nacimiento") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[4], "fecha_nacimiento") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "fecha_nacimiento") . PHP_EOL;
                 ?>
 
@@ -88,7 +88,7 @@
 
 
         <fieldset>
-            <legend>Datos de contacto</legend>
+            <legend><?php echo $palabras[5]; ?></legend>
 
             <div class="form-floating m-2">
 
@@ -99,7 +99,7 @@
                     "placeholder" => "email",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "email") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[6], "email") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "email") . PHP_EOL;
                 ?>
 
@@ -114,7 +114,7 @@
                     "placeholder" => "poblacion",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "poblacion") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[7], "poblacion") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "poblacion") . PHP_EOL;
                 ?>
 
@@ -129,7 +129,7 @@
                     "placeholder" => "direccion",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "direccion") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[8], "direccion") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "direccion") . PHP_EOL;
                 ?>
 
@@ -138,7 +138,7 @@
         </fieldset>
 
         <fieldset>
-            <legend>Datos de cuenta</legend>
+            <legend><?php echo $palabras[9] ?></legend>
 
                 <div class="form-floating m-2">
 
@@ -148,7 +148,7 @@
                     "placeholder" => "borrado",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::modeloLabel($modelo, "borrado") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[10], "borrado") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "borrado") . PHP_EOL;
                 ?>
 
