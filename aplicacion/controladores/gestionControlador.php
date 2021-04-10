@@ -13,14 +13,14 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["Yes","Login","My account","Home","Trips","Trips management","Users management","Logout",
+                    $palabras = ["Yes","No","Login","My account","Home","Trips","Trips management","Users management","Logout",
                                  "ID","Email","Name","Subname","Birth date","Town","Address","Deleted","Action",
                                  "Delete user","You are about to delete the user ","Are you sure you want to proceed with the operation?"]; 
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
-                    $palabras = ["Si","Iniciar sesión","Mi cuenta","Inicio","Viajes","Gestión de viajes","Gestión de usuarios","Logout",
+                    $palabras = ["Si","No","Iniciar sesión","Mi cuenta","Inicio","Viajes","Gestión de viajes","Gestión de usuarios","Logout",
                                  "NIF","Email","Nombre","Apellidos","Fecha de nacimiento","Población","Dirección","Borrado","Acción",
                                  "Borrar usuario","Está a punto de borrar el usuario ","¿Seguro que quiere proceder con la operación?"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
@@ -45,7 +45,7 @@
 
             for ($cont=0; $cont < count($usuarios) ; $cont++) { 
                 $usuarios[$cont]["fecha_nacimiento"] = CGeneral::fechaMysqlANormal($usuarios[$cont]["fecha_nacimiento"]);
-                $usuarios[$cont]["borrado"] = $usuarios[$cont]["borrado"]==1? $palabras[0]:"No";
+                $usuarios[$cont]["borrado"] = $usuarios[$cont]["borrado"]==1? $palabras[0]:$palabras[1];
             }
 
             echo $this->dibujaVistaParcial("crudUsuarios",["usr"=>$usuarios,"palabras"=>$palabras],true).PHP_EOL;

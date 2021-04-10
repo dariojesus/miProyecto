@@ -28,21 +28,21 @@
 		$links = array();
 		
 		if (!$acceso->hayUsuario())
-			$links[] = CHTML::link($palabras[1], ["logueo", "formulario"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+			$links[] = CHTML::link($palabras[2], ["logueo", "formulario"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 		else
-			$links[] = CHTML::link($palabras[2], ["logueo", "MiCuenta"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+			$links[] = CHTML::link($palabras[3], ["logueo", "MiCuenta"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 			
-		$links[] = CHTML::link($palabras[3], ["inicial", "Principal"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
-		$links[] = CHTML::link($palabras[4], ["inicial", "Destinos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+		$links[] = CHTML::link($palabras[4], ["inicial", "Principal"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+		$links[] = CHTML::link($palabras[5], ["inicial", "Destinos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 
 		if ($acceso->puedePermisos(2))
-			$links[] =CHTML::link($palabras[5], ["gestionVuelos","CrudVuelos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+			$links[] =CHTML::link($palabras[6], ["gestionVuelos","CrudVuelos"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 
 		if ($acceso->puedePermisos(4))
-			$links[] = CHTML::link($palabras[6], ["gestion","CrudUsuarios"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
+			$links[] = CHTML::link($palabras[7], ["gestion","CrudUsuarios"], ["class" => "list-group-item list-group-item-action list-group-item-dark"]);
 		
 		if ($acceso->hayUsuario())
-			$links[] = CHTML::link($palabras[7],["logueo","QuitarRegistro"],["class"=>"list-group-item list-group-item-action list-group-item-danger"]);
+			$links[] = CHTML::link($palabras[8],["logueo","QuitarRegistro"],["class"=>"list-group-item list-group-item-action list-group-item-danger"]);
 		
 		$menu = new CMenu($links);
 		$menu->dibujate();
@@ -65,7 +65,6 @@
                 <thead>
                     <tr>
                         <?php
-                        echo CHTML::dibujaEtiqueta("th",[],$palabras[8]).PHP_EOL;
                         echo CHTML::dibujaEtiqueta("th",[],$palabras[9]).PHP_EOL;
                         echo CHTML::dibujaEtiqueta("th",[],$palabras[10]).PHP_EOL;
                         echo CHTML::dibujaEtiqueta("th",[],$palabras[11]).PHP_EOL;
@@ -74,6 +73,7 @@
                         echo CHTML::dibujaEtiqueta("th",[],$palabras[14]).PHP_EOL;
                         echo CHTML::dibujaEtiqueta("th",[],$palabras[15]).PHP_EOL;
                         echo CHTML::dibujaEtiqueta("th",[],$palabras[16]).PHP_EOL;
+                        echo CHTML::dibujaEtiqueta("th",[],$palabras[17]).PHP_EOL;
                         ?>
                     </tr>
                 </thead>
@@ -84,8 +84,8 @@
                         //Se crea una ventana modal correspondiente al boton eliminar de cada persona
                         $ventana = new CModal(
                             "persona" . $usuario["cod_perfil"],
-                            $palabras[17],
-                            "$palabras[18]<b>{$usuario["nombre"]} {$usuario["apellidos"]}</b><br>$palabras[19]",
+                            $palabras[18],
+                            "$palabras[19]<b>{$usuario["nombre"]} {$usuario["apellidos"]}</b><br>$palabras[20]",
                             Sistema::app()->generaURL(array("gestion", "Borrar"), array("codigo" => $usuario["cod_perfil"]))
                         );
 
