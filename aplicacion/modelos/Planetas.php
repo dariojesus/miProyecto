@@ -89,16 +89,22 @@ class Planetas extends CActiveRecord{
             $this->setError("nif","El planeta ya se encuentra registrado en los destinos.");
     }
 
-    public static function devuelvePlanetas($codigo=null){
+    public static function devuelvePlanetas($codigo=null,$idioma="es"){
+
+        switch($idioma){
+            case("en"): $campo = "nombre_en"; break;
+            default: $campo = "nombre"; break;
+        }
 
         //Si no llega un codigo se devuelven todos los pares (planeta:codigo) en un array asociativo
         if (is_null($codigo)){
             $array = [];
-            $destinos = Sistema::app()->BD()->crearConsulta("SELECT `cod_destino`,`nombre` FROM destinos");
+
+            $destinos = Sistema::app()->BD()->crearConsulta("SELECT `cod_destino`,`$campo` FROM destinos");
             $destinos = $destinos->filas();
 
             foreach ($destinos as $clave => $valor)
-                $array[$valor["nombre"]]=$valor["cod_destino"];
+                $array[$valor[$campo]]=$valor["cod_destino"];
 
             return $array;
         }
@@ -110,10 +116,10 @@ class Planetas extends CActiveRecord{
         //En otro caso se devuelve el planeta correspondiente al codigo si lo hubiese
         else{
             $codigo = CGeneral::addSlashes($codigo);
-            $existe = Sistema::app()->BD()->crearConsulta("SELECT `nombre` FROM destinos WHERE `cod_destino` = '".$codigo."'");
+            $existe = Sistema::app()->BD()->crearConsulta("SELECT `$campo` FROM destinos WHERE `cod_destino` = '".$codigo."'");
             
             if ($existe)
-                 return $existe->filas()[0]["nombre"];
+                 return $existe->filas()[0][$campo];
             else
                 return false;
         }

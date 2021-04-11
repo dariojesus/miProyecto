@@ -34,17 +34,17 @@ $this->lang = $_COOKIE["lang"];
     foreach ($billetes as $clave => $datos) {
 
     //Se crea una ventana modal correspondiente al boton anular de cada billete
-    $ventana = new CModal(  "billete" . $datos["codigo"],
+    $ventana = new CModal(  "billete" . $datos[2],
                             $palabras[5],
-                            "{$palabras[6]}<b>{$datos["destino"]}</b><br>{$palabras[7]}<b>{$datos["fecha_salida"]}</b><br>
+                            "{$palabras[6]}<b>{$datos[1]}</b><br>{$palabras[7]}<b>{$datos[3]}</b><br>
                              {$palabras[8]}",
-                            Sistema::app()->generaURL(array("Compra", "Anular"), array("codigo" => $datos["codigo"])));
+                            Sistema::app()->generaURL(array("Compra", "Anular"), array("codigo" => $datos[2])));
 
     $ventana->dibujate();
     
     //Se guardan en contenido los enlaces a descargar y anular
     $contenido = CHTML::link(CHTML::imagen("../../../imagenes/iconos/descarga.png"),
-                              $url."?codigo={$datos['codigo']}",
+                              $url."?codigo={$datos[2]}",
                               array("class" => "btn btn-info"));
 
 
@@ -53,16 +53,16 @@ $this->lang = $_COOKIE["lang"];
         array(
             "class" => "btn btn-danger",
             "data-bs-toggle" => "modal",
-            "data-bs-target" => "#billete{$datos["codigo"]}"));
+            "data-bs-target" => "#billete{$datos[2]}"));
       }
 
 
       echo CHTML::dibujaEtiqueta("tr",[],null,false).PHP_EOL;
 
-      echo CHTML::dibujaEtiqueta("td",[],CGeneral::fechaMysqlANormal($datos["fecha_salida"])).PHP_EOL;
-      echo CHTML::dibujaEtiqueta("td",[],$datos["hora_salida"]).PHP_EOL;
-      echo CHTML::dibujaEtiqueta("td",[],$datos["clase"]).PHP_EOL;
-      echo CHTML::dibujaEtiqueta("td",[],$datos["destino"]).PHP_EOL;
+      echo CHTML::dibujaEtiqueta("td",[],CGeneral::fechaMysqlANormal($datos[3])).PHP_EOL;
+      echo CHTML::dibujaEtiqueta("td",[],$datos[4]).PHP_EOL;
+      echo CHTML::dibujaEtiqueta("td",[],$datos[0]).PHP_EOL;
+      echo CHTML::dibujaEtiqueta("td",[],$datos[1]).PHP_EOL;
       echo CHTML::dibujaEtiqueta("td",[],$contenido).PHP_EOL;
 
       echo CHTML::dibujaEtiquetaCierre("tr").PHP_EOL;

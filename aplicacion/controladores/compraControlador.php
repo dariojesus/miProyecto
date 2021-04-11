@@ -97,11 +97,13 @@
                 case("en"): 
                     $palabras = ["Fly ticket","Passenger: ","Destiny: ","Identification: ","Boarding date: "
                                 ,"Class: ","Boarding hour: ","Company: ", "Fly duration: "," hours"];
+                    $campos = ["clase_en","destino_en"];
                     break;
 
                 default: 
                     $palabras = ["Ticket de vuelo","Pasajero: ","Destino: ","Identificación: ","Fecha de embarque: "
                                 ,"Clase: ","Hora de embarque: ","Compañia: ","Duración del vuelo: "," horas"];
+                    $campos = ["clase","destino"];
                     break;
             }
 
@@ -114,9 +116,23 @@
                     $acceso = CGeneral::addSlashes($acceso->getNif());
                     $codigo = CGeneral::addSlashes($_GET["codigo"]);
 
-                    $acceso = Sistema::app()->BD()->crearConsulta("SELECT * FROM perfiles_vuelos WHERE `nif`='$acceso' AND `codigo`='$codigo'");
+                    $acceso = Sistema::app()->BD()->crearConsulta("SELECT nif,
+                                                                          nombre_completo,
+                                                                          codigo,
+                                                                          fecha_salida,
+                                                                          hora_salida,
+                                                                          compannia,
+                                                                          {$campos[0]},
+                                                                          precio,
+                                                                          {$campos[1]},
+                                                                          duracion_viaje
+                                                                    FROM perfiles_vuelos 
+                                                                    WHERE `nif`='$acceso' 
+                                                                    AND `codigo`='$codigo'");
 
                     if ($acceso = $acceso->fila()){
+
+                        $acceso = array_values($acceso);
 
                         //Se crea el documento
                         $pdf = new TCPDF("L",PDF_UNIT,"A6");
@@ -124,7 +140,7 @@
                         //Configuraciones generales del pdf
                         $pdf->SetCreator("TCPDF");
                         $pdf->SetAuthor("Horizons-Darío Jesús Flores Sevilla");
-                        $pdf->SetTitle("Ticket-".$acceso["destino"].$acceso["codigo"]);
+                        $pdf->SetTitle("Ticket-".$acceso[8].$acceso[2]);
                         $pdf->SetSubject($palabras[0]);
                         $pdf->SetKeywords("Ticket, Billete, Vuelo, Compra, Viaje");
                         
@@ -167,32 +183,32 @@
                                     <td rowspan="8">Código QR</td>
                                 </tr>
                                 <tr>
-                                    <td>&nbsp;{$acceso["nombre_completo"]}</td>
-                                    <td>&nbsp;{$acceso["destino"]}</td>
+                                    <td>&nbsp;{$acceso[1]}</td>
+                                    <td>&nbsp;{$acceso[8]}</td>
                                 </tr>
                                 <tr>
                                     <th>$palabras[3]</th>
                                     <th>$palabras[4]</th>
                                 </tr>
                                 <tr>
-                                    <td>&nbsp;{$acceso["nif"]}</td>
-                                    <td>&nbsp;{$acceso["fecha_salida"]}</td>
+                                    <td>&nbsp;{$acceso[0]}</td>
+                                    <td>&nbsp;{$acceso[3]}</td>
                                 </tr>
                                 <tr>
                                     <th>$palabras[5]</th>
                                     <th>$palabras[6]</th>
                                 </tr>
                                 <tr>
-                                    <td>&nbsp;{$acceso["clase"]}</td>
-                                    <td>&nbsp;{$acceso["hora_salida"]}</td>
+                                    <td>&nbsp;{$acceso[6]}</td>
+                                    <td>&nbsp;{$acceso[4]}</td>
                                 </tr>
                                 <tr>
                                     <th>$palabras[7]</th>
                                     <th>$palabras[8]</th>
                                 </tr>
                                 <tr>
-                                    <td>&nbsp;{$acceso["compannia"]}</td>
-                                    <td>&nbsp;{$acceso["duracion_viaje"]}$palabras[9]</td>
+                                    <td>&nbsp;{$acceso[5]}</td>
+                                    <td>&nbsp;{$acceso[9]}$palabras[9]</td>
                                 </tr>
                             </table>
                         </div>
@@ -200,7 +216,7 @@
 
                         $pdf->writeHTML($html,true,false,true,false,"");
                         $pdf->lastPage();
-                        $pdf->Output("Ticket-".$acceso["destino"].$acceso["codigo"].".pdf","I");
+                        $pdf->Output("Ticket-".$acceso[8].$acceso[2].".pdf","I");
                     }
 
 

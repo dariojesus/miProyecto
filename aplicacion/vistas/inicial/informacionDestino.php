@@ -6,14 +6,13 @@ $this->lang = $palabras[0];
 <section id="planeta">
 
     <?php
-    $foto = $planeta->foto;
-    echo CHTML::dibujaEtiqueta("article", array("style" => "background-image: url($foto)", "id" => "principal"), null, false) . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("article", array("style" => "background-image: url({$planeta[5]})", "id" => "principal"), null, false) . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", array("id" => "dPlaneta"), null, false) . PHP_EOL;
-    echo CHTML::dibujaEtiqueta("h2", [], $planeta->nombre) . PHP_EOL;
-    echo CHTML::dibujaEtiqueta("h6", [], $planeta->descripcion) . PHP_EOL;
-    echo CHTML::dibujaEtiqueta("h6", [], $palabras[1] . $planeta->clima) . PHP_EOL;
-    echo CHTML::dibujaEtiqueta("h6", [], $palabras[2] . $planeta->duracion_viaje .$palabras[3]) . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("h2", [], $planeta[1]) . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("h6", [], $planeta[2]) . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("h6", [], $palabras[1] . $planeta[3]) . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("h6", [], $palabras[2] . $planeta[4] .$palabras[3]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiquetaCierre("article") . PHP_EOL;
@@ -24,7 +23,7 @@ $this->lang = $palabras[0];
 
     echo CHTML::campoText("compannia","",["placeholder"=>$palabras[5]]).PHP_EOL;
     echo CHTML::campoDate("fecha").PHP_EOL;
-    echo CHTML::campoHidden("codigo",$planeta->cod_destino).PHP_EOL;
+    echo CHTML::campoHidden("codigo",$planeta[0]).PHP_EOL;
     echo CHTML::campoBotonSubmit($palabras[4],array("class"=>"btn btn-dark")).PHP_EOL;
 
     echo CHTML::finalizarForm();
@@ -47,7 +46,7 @@ $this->lang = $palabras[0];
         <?php
             for ($cont=1; $cont < ceil(count($vuelos)/7)+1 ; $cont++){
 
-                $url = Sistema::app()->generaURL(["inicial","infoDestino"])."?codigo=".$planeta->cod_destino."&pag=".$cont;
+                $url = Sistema::app()->generaURL(["inicial","infoDestino"])."?codigo=".$planeta[0]."&pag=".$cont;
 
                 echo CHTML::dibujaEtiqueta("li",["class"=>"page-item"],
                         CHTML::dibujaEtiqueta("a",["class"=>"page-link", 

@@ -47,7 +47,7 @@
             for ($i = 0; $i < count($datos); $i++) {
                 $aux=get_object_vars($datos[$i]);
                 $aux["fecha_salida"]=CGeneral::fechaMysqlANormal($aux["fecha_salida"]);
-                $aux["cod_destino"]=Planetas::devuelvePlanetas($aux["cod_destino"]);
+                $aux["cod_destino"]=Planetas::devuelvePlanetas($aux["cod_destino"],$_COOKIE["lang"]);
                 $aux["borrado"]=$aux["borrado"]=="1"?$palabras[0]:$palabras[1];
                 $array[]=$aux;
             }
@@ -85,7 +85,7 @@
 
             $vuelo = new Vuelos();
             $datos = $vuelo->getNombre();
-            $destinos = array_flip(Planetas::devuelvePlanetas());
+            $destinos = array_flip(Planetas::devuelvePlanetas(null,$_COOKIE["lang"]));
 
             if ($_POST){
 

@@ -274,12 +274,14 @@
                 case("en"): 
                     $palabras = ["Date","Hour","Class","Destiny","Ticket",
                                  "Cancel ticket","You're about to cancel the ticket with the destiny: ", "With departure date: ","Are you sure you want to proceed with the operation?"];
+                    $campos = ["clase_en","destino_en"];
                     $errPalabras = ["The page you're looking for can't be found"]; 
                     break;
 
                 default: 
                     $palabras = ["Fecha","Hora","Clase","Destino","Billete",
                                  "Borrar billete","Estas a punto de anular el billete con destino: ", "Con fecha de salida: ","¿Estás seguro de que deseas proceder con la operación?"]; 
+                    $campos = ["clase","destino"];
                     $errPalabras = ["La página web solicitada no ha sido encontrada"]; 
                     break;
             }
@@ -302,7 +304,19 @@
                 $var = CGeneral::addSlashes($acceso->getNif());
                 $fec_actual = date("Y-m-d");
 
-                $var = Sistema::app()->BD()->crearConsulta("SELECT * FROM perfiles_vuelos WHERE `nif`='$var' AND `borrado`='0' AND `fecha_salida` $operando '$fec_actual'")->filas();
+                $var = Sistema::app()->BD()->crearConsulta("SELECT {$campos[0]}, 
+                                                                   {$campos[1]}, 
+                                                                   codigo,
+                                                                   fecha_salida,
+                                                                   hora_salida
+                                                                   FROM perfiles_vuelos 
+                                                                   WHERE `nif`='$var' 
+                                                                   AND `borrado`='0' 
+                                                                   AND `fecha_salida` $operando '$fec_actual'")->filas();
+
+                for ($i=0; $i < count($var) ; $i++)
+                    $var[$i] = array_values($var[$i]);
+                
                 $url = Sistema::app()->generaURL(array("compra","ImprimirBillete"));
 
                 $this->dibujaVista("proximosViajes",array("billetes"=>$var,"url"=>$url, "op"=>$_GET["op"], "palabras"=>$palabras),"Billetes");
