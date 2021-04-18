@@ -111,10 +111,13 @@ footer{
 }
 
 .empresa{
-    margin-top:3%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.empresa > * {
+    margin: 0.5em;
 }
 
 #copyright > *{

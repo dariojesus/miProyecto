@@ -23,6 +23,7 @@ $this->lang = $palabras[0];
 
     echo CHTML::campoText("compannia","",["placeholder"=>$palabras[5]]).PHP_EOL;
     echo CHTML::campoDate("fecha").PHP_EOL;
+    echo CHTML::campoDate("fecha_llegada").PHP_EOL;
     echo CHTML::campoHidden("codigo",$planeta[0]).PHP_EOL;
     echo CHTML::campoBotonSubmit($palabras[4],array("class"=>"btn btn-dark")).PHP_EOL;
 

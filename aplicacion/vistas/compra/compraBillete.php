@@ -135,7 +135,7 @@
 
                 <?php
 
-                echo CHTML::campoListaDropDown("clase",0,Clases::dameTiposClases(),[
+                echo CHTML::campoListaDropDown("clase",0,Clases::dameTiposClases($_COOKIE["lang"]),[
                     "class" => "form-control",
                     "placeholder" => "Clase",
                     "id"=>"claseSeleccionada"]).PHP_EOL;

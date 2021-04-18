@@ -60,12 +60,12 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["General data","Company","Departure date","Departure hour","Seats","Destiny","Add"];
+                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny","Add"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
-                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Plazas","Destino","Agregar"];
+                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Fecha de llegada","Hora de llegada","Plazas","Destino","Agregar"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }
@@ -91,6 +91,7 @@
 
                 $datos = $_POST[$datos];
                 $datos["hora_salida"] .= ":00";
+                $datos["hora_llegada"] .= ":00";
 
                 $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosAgregar"]);
                 $datos = CGeneral::peticionCurl($url,"POST",$datos);
@@ -117,12 +118,12 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["General data","Company","Departure date","Departure hour","Seats","Destiny code","Administrative data","Deleted"];
+                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny code","Administrative data","Deleted"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
-                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Plazas","Destino","Datos administrativos","Borrado"];
+                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Fecha de llegada","Hora de llegada","Plazas","Destino","Datos administrativos","Borrado"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }
@@ -151,7 +152,7 @@
                 $datos = json_decode($datos);
                 $datos = get_object_vars($datos[0]);
                 $vuelo->setValores($datos);
-
+                
                 echo $this->dibujaVistaParcial("mostrarVuelo",array("modelo"=>$vuelo,"palabras"=>$palabras),true);
 
             }
@@ -162,12 +163,12 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["General data","Company","Departure date","Departure hour","Seats","Destiny code","Administrative data","Deleted","Modify"];
+                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny code","Administrative data","Deleted","Modify"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
-                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Plazas","Destino","Datos administrativos","Borrado","Modificar"];
+                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Hora de salida","Fecha de llegada","Plazas","Destino","Datos administrativos","Borrado","Modificar"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }
@@ -207,6 +208,7 @@
             else if ($_POST){
             
                 $_POST[$vuelo->getNombre()]["hora_salida"] .= ":00";
+                $_POST[$vuelo->getNombre()]["hora_llegada"] .= ":00";
 
                 $datos = $_POST[$vuelo->getNombre()];
                 $vuelo->setValores($datos);

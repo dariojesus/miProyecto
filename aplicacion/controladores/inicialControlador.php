@@ -52,12 +52,12 @@
 
             switch($_COOKIE["lang"]){
 
-                case("en"): $palabras = ["en","Wheater: ","Travel time: "," hours","Filter","Company","Boarding date: ","Boarding hour: "];
+                case("en"): $palabras = ["en","Wheater: ","Travel time: "," hours","Filter","Company","Boarding date","Boarding hour","Arrival date", "Arrival hour"];
                             $errPalabras =["Can't find the destiny you are looking for"];
                             $campos = ["nombre_en","descripcion_en","clima_en"];
                             break;
                 
-                default: $palabras = ["es","Clima: ","Duración del viaje: "," horas","Filtrar","Compañía","Fecha de embarque: ","Hora de embarque: "];
+                default: $palabras = ["es","Clima: ","Duración del viaje: "," horas","Filtrar","Compañía","Fecha de salida","Hora de salida","Fecha de llegada","Hora de llegada"];
                          $errPalabras =["No se ha encontrado el destino que estaba buscando"];
                          $campos = ["nombre","descripcion","clima"];
                          break;
@@ -102,6 +102,9 @@
         
                         if (!empty($_POST["fecha"]))
                             $opciones["fecha"] = CGeneral::fechaMysqlANormal($_POST["fecha"]);
+
+                        if (!empty($_POST["fecha_llegada"]))
+                            $opciones["fecha_llegada"] = CGeneral::fechaMysqlANormal($_POST["fecha_llegada"]);
 
                         $dato = CGeneral::peticionCurl($url,"GET",$opciones);
                         $dato = json_decode($dato,true);

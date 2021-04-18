@@ -16,7 +16,7 @@ protected function fijarId(){
 
 protected function fijarAtributos(){
     
-    return array("cod_vuelo","fecha_salida","hora_salida","compannia","plazas","borrado","cod_destino");
+    return array("cod_vuelo","fecha_salida","hora_salida","fecha_llegada","hora_llegada","compannia","plazas","borrado","cod_destino");
 }
 
 protected function fijarDescripciones(){
@@ -24,6 +24,8 @@ protected function fijarDescripciones(){
     return array("cod_vuelo"=>"Codigo de vuelo",
                  "fecha_salida"=>"Fecha de salida",
                  "hora_salida"=>"Hora de salida",
+                 "fecha_llegada"=>"Fecha de llegada",
+                 "hora_llegada"=>"Hora de llegada",
                  "compannia"=>"Compañia",
                  "plazas"=>"Plazas",
                  "borrado"=>"Borrado",
@@ -39,7 +41,7 @@ protected function fijarRestricciones(){
                     "TIPO"=>"ENTERO"
                 ),
 
-                array("ATRI"=>"fecha_salida, hora_salida, compannia, plazas, cod_destino","TIPO"=>"REQUERIDO"),
+                array("ATRI"=>"fecha_salida, hora_salida, fecha_llegada, hora_llegada compannia, plazas, cod_destino","TIPO"=>"REQUERIDO"),
 
                 array(
                     "ATRI"=>"fecha_salida",
@@ -48,7 +50,18 @@ protected function fijarRestricciones(){
                 ),
 
                 array(
+                    "ATRI"=>"fecha_llegada",
+                    "TIPO"=>"FUNCION",
+                    "FUNCION"=>"compruebaFecha"
+                ),
+
+                array(
                     "ATRI"=>"hora_salida",
+                    "TIPO"=>"HORA"
+                ),
+
+                array(
+                    "ATRI"=>"hora_llegada",
                     "TIPO"=>"HORA"
                 ),
 
@@ -104,6 +117,8 @@ protected function compruebaDestino(){
 protected function afterCreate(){
     $this->fecha_salida = "";
     $this->hora_salida = "";
+    $this->fecha_llegada = "";
+    $this->hora_llegada = "";
     $this->compannia = "";
     $this->plazas = 0;
     $this->borrado= 0;
@@ -114,13 +129,15 @@ public function fijarSentenciaInsert(){
 
     $fec = CGeneral::addSlashes($this->fecha_salida);
     $hor = CGeneral::addSlashes($this->hora_salida);
+    $fecLlega = CGeneral::addSlashes($this->fecha_llegada);
+    $horLlega = CGeneral::addSlashes($this->hora_llegada);
     $com = CGeneral::addSlashes($this->compannia);
     $plz = CGeneral::addSlashes($this->plazas);
     $bor = CGeneral::addSlashes($this->borrado);
     $des = CGeneral::addSlashes($this->cod_destino);
 
-    $sentencia = "INSERT INTO  vuelos (`fecha_salida`, `hora_salida`, `compannia`, `plazas`, `borrado`, `cod_destino`)".
-                                "values ('$fec', '$hor', '$com', '$plz', '$bor', '$des')";
+    $sentencia = "INSERT INTO  vuelos (`fecha_salida`, `hora_salida`,`fecha_llegada`, `hora_llegada`, `compannia`, `plazas`, `borrado`, `cod_destino`)".
+                                "values ('$fec', '$hor','$fecLlega', '$horLlega', '$com', '$plz', '$bor', '$des')";
 
     return $sentencia;
 }
@@ -131,6 +148,8 @@ public function fijarSentenciaUpdate(){
 
     $fec = CGeneral::addSlashes($this->fecha_salida);
     $hor = CGeneral::addSlashes($this->hora_salida);
+    $fecLlega = CGeneral::addSlashes($this->fecha_llegada);
+    $horLlega = CGeneral::addSlashes($this->hora_llegada);
     $com = CGeneral::addSlashes($this->compannia);
     $plz = CGeneral::addSlashes($this->plazas);
     $bor = CGeneral::addSlashes($this->borrado);
@@ -138,6 +157,8 @@ public function fijarSentenciaUpdate(){
 
     $sentencia = "UPDATE vuelos SET `fecha_salida` = '$fec'".
                                         ", `hora_salida` ='".$hor."'".
+                                        ", `fecha_llegada` ='".$fecLlega."'".
+                                        ", `hora_llegada` ='".$horLlega."'".
                                         ", `compannia` ='".$com."'".
                                         ", `plazas` ='".$plz."'".
                                         ", `borrado` ='".$bor."'".

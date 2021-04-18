@@ -70,6 +70,37 @@
                 ?>
 
             </div>
+
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloDate($modelo, "fecha_llegada", [
+                    "class" => "form-control",
+                    "id" => "fecha_ll",
+                    "placeholder" => "Fecha de salida",
+                    "readonly"=>"readonly"
+                ]) . PHP_EOL;
+                echo CHTML::campoLabel($palabras[4], "fecha_llegada") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "fecha_salida") . PHP_EOL;
+                ?>
+
+            </div>
+
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloTime($modelo, "hora_llegada", [
+                    "class" => "form-control",
+                    "id" => "hora_ll",
+                    "placeholder" => "Hora de salida",
+                    "readonly"=>"readonly"
+                ]) . PHP_EOL;
+                echo CHTML::campoLabel($palabras[5], "hora_llegada") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "hora_salida") . PHP_EOL;
+                ?>
+
+            </div>
+
             <div class="form-floating m-2">
 
                 <?php
@@ -79,7 +110,7 @@
                     "placeholder" => "Plazas",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::campoLabel($palabras[4], "plazas") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[6], "plazas") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "plazas") . PHP_EOL;
                 ?>
             </div>
@@ -92,14 +123,14 @@
                     "placeholder" => "Destino",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::campoLabel($palabras[5], "cod_destino") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[7], "cod_destino") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "cod_destino") . PHP_EOL;
                 ?>
             </div>
         </fieldset>
 
         <fieldset>
-            <legend><?php echo $palabras[6]; ?></legend>
+            <legend><?php echo $palabras[8]; ?></legend>
                 <div class="form-floating m-2">
 
                 <?php
@@ -109,7 +140,7 @@
                     "placeholder" => "Cancelado",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
-                echo CHTML::campoLabel($palabras[7], "borrado") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[9], "borrado") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "borrado") . PHP_EOL;
                 ?>
             </div>

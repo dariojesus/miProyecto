@@ -55,30 +55,6 @@
     border-bottom-right-radius: 25px;
 }
 
-#billetes{    
-    display: flex;
-    flex-wrap: wrap;
-    overflow-y: auto;
-}
-
-.billete{
-    display: none;
-    width: 21%;
-    margin: 2%;
-    height: 30%;
-    border-radius: 25px;
-    background: radial-gradient(var(--azulClaro), var(--azulOscuro));
-    box-shadow: 9px 11px 25px -14px rgba(0,0,0,0.75);
-    border: 1px solid grey;
-    color: white;
-}
-
-.billete:hover{
-    transform: scale(1.1);
-    transition-duration: 1s;
-}
-
-
 #filtro{
     background-color: rgba(0, 0, 0, 0.74);
     box-shadow: 9px 11px 48px -14px rgba(0,0,0,0.75);
@@ -89,29 +65,59 @@
     justify-content: flex-end;
 }
 
-.mitad1{
-    width: 60%;
-    height: 70%;
-    margin-left: 10%;
-    margin-top: 5%;
-    display: inline-block;
+#billetes{    
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
 }
 
-.mitad2{
-    width: 10%;
-    height: 100%;
-    margin-right: 7%;
-    vertical-align: top;
-    float: right;
+.billete{
+    display: grid;
+    grid-template-columns: 42.5% 42.5% 15%;
+    grid-template-rows: auto 38% 38%;
+
+    width: 23%;
+    margin: 1%;
+    height: 35%;
+    border-radius: 25px;
+    background: radial-gradient(var(--azulClaro), var(--azulOscuro));
+    box-shadow: 9px 11px 25px -14px rgba(0,0,0,0.75);
+    border: 1px solid grey;
+    color: white;
+}
+
+.billete > h3, h6 {
+    align-self: center;
+    margin-left: 0.5em;
+    margin-bottom: 0%;
+}
+
+.titulo{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.lateral{
+    grid-column-start: 3;
+    grid-row-start: 1;
+    grid-row-end: 4;
+
+    width: 50%;
     background-color: rgba(0, 0, 0, 0.507);
     text-align: center;
+}
+
+
+.billete:hover{
+    transform: scale(1.05);
+    transition-duration: 1s;
 }
 
 #paginado{
     justify-self: center;
 }
 
-@media (max-width:1000px){
+@media (max-width:1120px){
     #dPlaneta{
         width: 90%;
         padding: 3%;
@@ -122,13 +128,13 @@
     }
 
     .billete{
-        width: 40%;
+        width: 30%;
     }
 }
-@media (max-width:600px){
+@media (max-width:950px){
 
     .billete{
-        width: 87%;
+        width: 20em;
         margin: 3%;
     }
 }

@@ -66,14 +66,19 @@ class Clases extends CActiveRecord{
         $this->caracteristicas="";
     }
 
-    public static function dameTiposClases(){
-        $array = [];
+    public static function dameTiposClases($idioma="es"){
 
-        $tipos = Sistema::app()->BD()->crearConsulta("SELECT `cod_clase`, `nombre` FROM clases");
+        switch($idioma){
+            case("en"): $campo = "nombre_en"; break;
+            default: $campo = "nombre"; break;
+        }
+
+        $array = [];
+        $tipos = Sistema::app()->BD()->crearConsulta("SELECT `cod_clase`, `$campo` FROM clases");
         $tipos = $tipos->filas();
 
         foreach ($tipos as $clave => $valor)
-            $array[$valor["cod_clase"]]=$valor["nombre"];
+            $array[$valor["cod_clase"]]=$valor[$campo];
 
         return $array;
     }

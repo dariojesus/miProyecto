@@ -63,6 +63,21 @@
                     }
                 }
 
+                //Filtramos por fecha de llegada
+                if (isset($_GET["fecha_llegada"])){
+                    $dato = CGeneral::addSlashes($_GET["fecha_llegada"]);
+
+                    if (!CValidaciones::validaFecha($dato)){
+                        echo json_encode(array("Error"=>"La fecha no esta en formato correcto compruebe dd/mm/yyyy"));
+                        return;
+                    }
+                        
+                    else{
+                        $dato = CGeneral::fechaNormalAMysql($dato);
+                        $opciones["where"].= " and fecha_llegada ='$dato'";
+                    }
+                }
+
                 //Filtramos con un limite de resultados
                 if (isset($_GET["limite"])){
                     $limite = CGeneral::addSlashes($_GET["limite"]);

@@ -81,6 +81,35 @@
                 ?>
 
             </div>
+
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloDate($modelo, "fecha_llegada", [
+                    "class" => "form-control",
+                    "id" => "fecha",
+                    "placeholder" => "Fecha de salida"
+                ]) . PHP_EOL;
+                echo CHTML::campoLabel($palabras[4], "fecha_llegada") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "fecha_llegada") . PHP_EOL;
+                ?>
+
+            </div>
+
+            <div class="form-floating m-2">
+
+                <?php
+                echo CHTML::modeloTime($modelo, "hora_llegada", [
+                    "class" => "form-control",
+                    "id" => "hora",
+                    "placeholder" => "Hora de salida"
+                ]) . PHP_EOL;
+                echo CHTML::campoLabel($palabras[5], "hora_llegada") . PHP_EOL;
+                echo CHTML::modeloError($modelo, "hora_llegada") . PHP_EOL;
+                ?>
+
+            </div>
+
             <div class="form-floating m-2">
 
                 <?php
@@ -89,10 +118,11 @@
                     "id" => "plazas",
                     "placeholder" => "Plazas"
                 ]) . PHP_EOL;
-                echo CHTML::campoLabel($palabras[4], "plazas") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[6], "plazas") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "plazas") . PHP_EOL;
                 ?>
             </div>
+
             <div class="form-floating m-2">
 
                 <?php
@@ -101,13 +131,13 @@
                     "id" => "destino",
                     "placeholder" => "Destino"
                 ]) . PHP_EOL;
-                echo CHTML::campoLabel($palabras[5], "cod_destino") . PHP_EOL;
+                echo CHTML::campoLabel($palabras[7], "cod_destino") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "cod_destino") . PHP_EOL;
                 ?>
             </div>
         </fieldset>
         <?php 
-        echo CHTML::campoBotonSubmit($palabras[6],array("class"=>"btn btn-outline-success")).PHP_EOL;
+        echo CHTML::campoBotonSubmit($palabras[8],array("class"=>"btn btn-outline-success")).PHP_EOL;
         echo CHTML::finalizarForm().PHP_EOL;
         ?>
     </main>
