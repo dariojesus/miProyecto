@@ -21,9 +21,15 @@ $this->lang = $palabras[0];
 
     echo CHTML::iniciarForm();
 
-    echo CHTML::campoText("compannia","",["placeholder"=>$palabras[5]]).PHP_EOL;
+    echo CHTML::campoLabel($palabras[5]." :","compannia").PHP_EOL;
+    echo CHTML::campoText("compannia").PHP_EOL;
+
+    echo CHTML::campoLabel($palabras[6]." :","fecha").PHP_EOL;
     echo CHTML::campoDate("fecha").PHP_EOL;
+
+    echo CHTML::campoLabel($palabras[8]." :","fecha_llegada").PHP_EOL;
     echo CHTML::campoDate("fecha_llegada").PHP_EOL;
+
     echo CHTML::campoHidden("codigo",$planeta[0]).PHP_EOL;
     echo CHTML::campoBotonSubmit($palabras[4],array("class"=>"btn btn-dark")).PHP_EOL;
 

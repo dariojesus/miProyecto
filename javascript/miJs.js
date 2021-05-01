@@ -51,15 +51,8 @@ $(window).on("load",function(){
     }
 });
 
-$("div.destinoPaisaje").click(function(){
 
-    //Se guarda en localStorage el destino consultado
-    localStorage.estilo = $(this).attr("style");
-    localStorage.link = $(this).attr("data-location");
-    localStorage.destino = $(this).children(".datos").children("h2").html();
-    localStorage.hora = $(this).children(".datos").children("p").html();
-
-    //Se va a la ubicación
+$(".destinoPaisaje").click(function(){
     window.location = $(this).data("location");
 });
 

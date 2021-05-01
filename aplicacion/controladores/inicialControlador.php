@@ -12,13 +12,11 @@
 
             switch($_COOKIE["lang"]){
                     case("en"): 
-                        $palabras = ["en","Don't you really want to travel to..?","Go ahead and buy one, there are a few remains",
-                                     "Find your next destination"]; 
+                        $palabras = ["en","Go ahead and buy one, there are a few remains","Find your next destination"]; 
                         break;
 
                     default: 
-                        $palabras = ["es","¿Seguro que no quieres viajar a..?","Corre que vuelan, quedan pocas plazas",
-                                    "Encuentra tu próximo destino"];
+                        $palabras = ["es","Corre que vuelan, quedan pocas plazas","Encuentra tu próximo destino"];
                         break;
                 }
 
@@ -85,7 +83,8 @@
                 else{
                     $planeta = array_values($planeta[0]);
                     $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
-                    $opciones["destino"] = $planeta[6]? $planeta[6]:$planeta[1];
+                    $opciones["destino"] = array_key_exists(6,$planeta)? $planeta[6]:$planeta[1];
+                    
 
                     $pagina = isset($_GET["pag"])? CGeneral::addSlashes($_GET["pag"]) : 1;
                     

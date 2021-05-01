@@ -19,7 +19,7 @@ function obtenerCookie(clave) {
 //Función para cargar billetes con pocas plazas haciendo una llamada a mi propia API
 function cargarUltimos() {
 
-    fetch("/api/VuelosDisponibles?limite=4", {
+    fetch("/api/VuelosDisponibles?limite=4&fullData", {
         headers: { "Content-Type": "application/json" },
         method: "GET"
     })
@@ -37,14 +37,24 @@ function cargarUltimos() {
                     }
                             
                     for (let index = 0; index < resp.length; index++) {
-                        
-                        $("#seccion1").append("<div class='destino'>"
-                        +"<h3>"+resp[index].compannia+"</h3>"
-                        +"<h5>"+resp[index].fecha_salida+"</h5>"
-                        +"<h5>"+resp[index].hora_salida+"</h5>"
-                        +"<h6>"+resp[index].plazas+" "+pal+"</h6>"
+
+                        let img = `/imagenes/${resp[index].nombre.toLowerCase()}-sq.jpg`;
+                        let url = `/compra/Compra?codigo=${resp[index].cod_vuelo}`;
+                                              
+                        $("#seccion1").append(`<div class='destino' data-location='${url}'>`
+                            +"<div>"
+                                +"<h3>"+resp[index].nombre+"</h3>"
+                                +"<h5>"+resp[index].fecha_salida+"</h5>"
+                                +"<h5>"+resp[index].hora_salida+"</h5>"
+                                +"<h6>"+resp[index].plazas+" "+pal+"</h6>"
+                            +"</div>"
+                            +`<div style='background-image: url(${img})'></div>`
                         +"</div>");
                     }
+
+                    $("div.destino").click(function(){
+                        window.location = $(this).data("location");
+                    });
                 })
                 .catch(function (e) {
                     console.log("Data error:" + e);
@@ -80,34 +90,32 @@ function cargarFotoDelDia(){
             });
 }
 
-/*Script de petición a localstorage
-*/
-function ultimoViaje () {
+//Función para obtener los planetas y rellenar la datalist
+function cargaBarraBusqueda(){
 
-    //Si se ha consultado un ultimo destino
-    if (localStorage.destino){
+    let idioma = obtenerCookie("lang");
 
-        //Se crea el nodo de ese destino
-        let nodo = "<div class='destinoPaisaje' style='"+localStorage.getItem("estilo")+"'"+
-                                              " data-location='"+localStorage.getItem("link")+"'>";
-        
-        nodo += "<div class='datos'>"+
-                    "<h2>"+localStorage.getItem("destino")+"</h2>"+
-                    "<p>"+localStorage.getItem("hora")+"</p>"+
-                "</div></div>";
-        
-        //Se añade el nodo
-        $("#ultimoViaje").append($(nodo));
-        $("#ultimoViaje").css("display","block");
+    fetch(`/api/PlanetasLista?idioma=${idioma}`, {
+        headers: { "Content-Type": "application/json" },
+        method: "GET"
+    })
+        .then(function (response) {
+            response.json()
 
-        //Se le añaden los eventos que tenia
-        $(".destinoPaisaje").on("click", function() {
-            window.location = $(this).data("location");
+                .then(function (resp) {
+
+                    for (const nombre in resp) 
+                        $("#listaPlanetas").append(`<option value='${nombre}' />`);
+                })
+                .catch(function (e) {
+                    console.log("Data error:" + e);
+                });
+        })
+        .catch(err => {
+            console.log("Error:" + err);
         });
-    }
-
 }
 
-ultimoViaje();
 cargarUltimos();
 cargarFotoDelDia();
+cargaBarraBusqueda();

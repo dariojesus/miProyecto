@@ -4,6 +4,11 @@
 	class apiControlador extends CControlador{
 
         public function __construct(){}
+
+        /*
+        * Métodos para la gestion del CRUD de vuelos
+        *
+        */
         
         //Acción que devuelde los vuelos deseados (filtros)
         public function accionVuelosDisponibles(){
@@ -84,13 +89,30 @@
                     $opciones["limit"] = "$limite";
                 }
 
-                $vuelos = $vuelos->buscarTodos($opciones);
 
-                $vuelos = json_encode($vuelos);
-                echo $vuelos;
+                //En el caso de que se requieran los datos completos del vuelo con su destino
+                if (isset($_GET["fullData"])){
+
+                    $sent = "SELECT * FROM vuelos_destinos WHERE {$opciones['where']} ORDER BY {$opciones['order']} LIMIT {$opciones['limit']}";
+                    
+                    $sent = Sistema::app()->BD()->crearConsulta($sent)->filas();
+                    
+                    
+                    $sent = json_encode($sent);
+                    echo $sent;
+                }
+
+                //En el caso de que solo se necesiten los datos del vuelo sin destino
+                else{
+                    $vuelos = $vuelos->buscarTodos($opciones);
+
+                    $vuelos = json_encode($vuelos);
+                    echo $vuelos;
+                }
             }
         }
 
+        //Acción para crear un vuelo
         public function accionVuelosAgregar(){
             if ($_SERVER["REQUEST_METHOD"]=="POST"){
                 $vuelos = new Vuelos();
@@ -191,7 +213,13 @@
             }
         }
 
-        //Acción que devuelve los datos de una clase dado algun parámetro
+
+        /*
+        * Métodos útiles para los JS de la página
+        *
+        */
+
+        //Acción que devuelve los datos de clase dado el código
         public function accionClaseDatos(){
 
             if ($_SERVER["REQUEST_METHOD"]=="GET"){
@@ -211,5 +239,20 @@
                 echo $clase;
             }
 
+        }
+
+        //Acción que devuelve una lista con los planetas y su codigo
+        public function accionPlanetasLista(){
+
+            if ($_SERVER["REQUEST_METHOD"]=="GET"){
+
+                if(isset($_GET["idioma"]))
+                    $idioma = CGeneral::addSlashes($_GET["idioma"]);
+                    
+                $lista = Planetas::devuelvePlanetas(null,$idioma);
+
+                $lista = json_encode($lista);
+                echo $lista;
+            }
         }
 	}

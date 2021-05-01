@@ -21,6 +21,17 @@
 	<link rel="stylesheet" href="/estilos/destinos.css">
 	<script src="/javascript/miJs.js" defer></script>
 
+	<script type="text/javascript"
+		id="botcopy-embedder-d7lcfheammjct"
+		class="botcopy-embedder-d7lcfheammjct" 
+		data-botId="607ade552391c1000862b999">
+		
+		var s = document.createElement('script'); 
+		s.type = 'text/javascript'; s.async = true; 
+		s.src = 'https://widget.botcopy.com/js/injection.js'; 
+		document.getElementById('botcopy-embedder-d7lcfheammjct').appendChild(s);
+	</script>
+
 	<?php
 	if (isset($this->textoHead))
 		echo $this->textoHead;
