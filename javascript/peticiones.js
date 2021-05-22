@@ -32,8 +32,8 @@ function cargarUltimos() {
                     let pal;
 
                     switch(obtenerCookie("lang")){
-                        case ("en"): pal = "remainings"; break;
-                        default: pal = "plazas restantes"; break;
+                        case ("en"):pal = "remainings";break;
+                        default:pal = "plazas restantes";break;
                     }
                             
                     for (let index = 0; index < resp.length; index++) {
@@ -43,7 +43,7 @@ function cargarUltimos() {
                                               
                         $("#seccion1").append(`<div class='destino' data-location='${url}'>`
                             +"<div>"
-                                +"<h3>"+resp[index].nombre+"</h3>"
+                                +"<h3><b>"+resp[index].nombre+"</b></h3>"
                                 +"<h5>"+resp[index].fecha_salida+"</h5>"
                                 +"<h5>"+resp[index].hora_salida+"</h5>"
                                 +"<h6>"+resp[index].plazas+" "+pal+"</h6>"
@@ -65,31 +65,6 @@ function cargarUltimos() {
         });
 }
 
-//Función para obtener la imagen del día a traves de la API de la NASA
-function cargarFotoDelDia(){
-
-        fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY", {
-            headers: { "Content-Type": "application/json" },
-            method: "GET"
-        })
-            .then(function (response) {
-                response.json()
-                    .then(function (resp) {
-
-                        if (resp.hdurl){
-                            let imagen = "url('"+resp.hdurl+"')";
-                            $("#cabecera").css("background",imagen);
-                        }
-                    })
-                    .catch(function (e) {
-                        console.log("Data error:" + e);
-                    });
-            })
-            .catch(err => {
-                console.log("Error:" + err);
-            });
-}
-
 //Función para obtener los planetas y rellenar la datalist
 function cargaBarraBusqueda(){
 
@@ -105,7 +80,7 @@ function cargaBarraBusqueda(){
                 .then(function (resp) {
 
                     for (const nombre in resp) 
-                        $("#listaPlanetas").append(`<option value='${nombre}' />`);
+                        $("#listaPlanetas").append(`<option value='${nombre}'>${nombre}</option>`);
                 })
                 .catch(function (e) {
                     console.log("Data error:" + e);
@@ -117,5 +92,4 @@ function cargaBarraBusqueda(){
 }
 
 cargarUltimos();
-cargarFotoDelDia();
 cargaBarraBusqueda();

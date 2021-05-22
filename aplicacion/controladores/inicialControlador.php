@@ -19,6 +19,15 @@
                         $palabras = ["es","Corre que vuelan, quedan pocas plazas","Encuentra tu próximo destino"];
                         break;
                 }
+            
+
+            //Redirección en el caso de que se haya buscado un planeta
+            if (isset($_POST["buscar"])){
+                $array = Planetas::devuelvePlanetas(null,$palabras[0]);
+                $array = $array[$_POST["buscar"]];
+                Sistema::app()->irAPagina(array("inicial","infoDestino?codigo=".$array));
+                return;
+            }
 
             $this->dibujaVista("index",array("palabras"=>$palabras),"Indice de la aplicación");
 		}

@@ -18,19 +18,21 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/estilos/miEstilo.css">
-    <link rel="stylesheet" href="/estilos/formularios.css">
     <script src="/javascript/registro.js" defer></script>
 </head>
 
-<body>
+<?php
+    echo CHTML::dibujaEtiqueta("body",["class"=>"fondo"],null,false).PHP_EOL;
 
-    <?php
-    echo CHTML::iniciarForm() . PHP_EOL;
     echo CHTML::dibujaEtiqueta("main", ["class" => "login"], null, false) . PHP_EOL;
+
+    echo CHTML::iniciarForm("","post",["class" => "loginFormu"]) . PHP_EOL;
     echo CHTML::dibujaEtiqueta("div", ["class" => "logo"], null, false) . PHP_EOL;
     echo CHTML::link("<img src='../../../imagenes/logo/64.png'>", ["inicial"]);
     echo CHTML::dibujaEtiqueta("h1", [], Sistema::app()->empresa);
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
+
+    echo CHTML::dibujaEtiqueta("h6",[],$palabras[5]).PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "form-floating m-2"], null, false) . PHP_EOL;
     echo CHTML::campoText("nif", "", [
@@ -51,14 +53,15 @@
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "m-2"], null, false) . PHP_EOL;
-    echo CHTML::campoBotonSubmit($palabras[3], ["class" => "btn btn-outline-success"]) . PHP_EOL;
-    echo CHTML::link($palabras[4], ["logueo", "Formulario"], ["class" => "btn btn-outline-danger"]) . PHP_EOL;
+    echo CHTML::campoBotonSubmit($palabras[3], ["class" => "btn btn-success"]) . PHP_EOL;
+    echo CHTML::link($palabras[4], ["logueo", "Formulario"], ["class" => "btn btn-danger"]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
-    echo CHTML::dibujaEtiquetaCierre("main") . PHP_EOL;
     echo CHTML::finalizarForm();
+    echo CHTML::dibujaEtiquetaCierre("main") . PHP_EOL;
 
-    ?>
-</body>
+    echo CHTML::dibujaEtiquetaCierre("body").PHP_EOL;
+
+?>
 
 </html>

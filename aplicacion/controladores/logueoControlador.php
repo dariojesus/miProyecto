@@ -105,13 +105,13 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["en","ID","Email","Send email","Cancel"];
+                    $palabras = ["en","ID","Email","Send email","Cancel","Fill the fields with you ID and email if they match with our records an password recovery mail will be send."];
                     $mensaje = ["This is your new password: "," please don`t share with anyone and change it when you log in."];
                     $errPalabras = ["The email recovery password can't be send, try again later"]; 
                     break;
 
                 default: 
-                    $palabras = ["es","DNI","Email","Enviar email","Cancelar"];
+                    $palabras = ["es","DNI","Email","Enviar email","Cancelar","Indícanos tu dni y email, si coincide con nuestros registros recibirás un correo electrónico con la nueva contraseña."];
                     $mensaje = ["Esta es tu nueva contraseña: "," por favor no la compartas con nadie y cambiala cuando inicies sesión."];
                     $errPalabras = ["El email de recuperación de contraseña no pudo ser enviado, intentelo de nuevo mas tarde"]; 
                     break;

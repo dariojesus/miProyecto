@@ -21,12 +21,13 @@
     <script src="/javascript/miJs.js" defer></script>
 </head>
 
-<body>
+<?php
 
-    <?php
-    echo CHTML::iniciarForm() . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("body",["class"=>"fondo"],null,false).PHP_EOL;
 
-    echo CHTML::dibujaEtiqueta("main", ["class" => "login"], null, false) . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("section", ["class"=>"login"], null, false) . PHP_EOL;
+
+    echo CHTML::iniciarForm("","post",["class"=>"loginFormu"]) . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "logo"], null, false) . PHP_EOL;
     echo CHTML::link("<img src='../../../imagenes/logo/64.png'>", ["inicial"]) . PHP_EOL;
@@ -35,7 +36,7 @@
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "form-floating"], null, false) . PHP_EOL;
     echo CHTML::modeloText($modelo, "nif", array(
-                                                    "class" => "form-control",
+                                                    "class" => "form-control transparencia",
                                                     "placeholder" => "identificacion",
                                                     "autocomplete" => "username",
                                                     "id" => "logNombre"
@@ -47,7 +48,7 @@
 
     echo CHTML::dibujaEtiqueta("div", ["class" => "form-floating"], null, false) . PHP_EOL;
     echo CHTML::modeloPassword($modelo, "contrasenna", array(
-                                                    "class" => "form-control",
+                                                    "class" => "form-control transparencia",
                                                     "placeholder" => "contra",
                                                     "autocomplete" => "current-password"
                                                 )) . PHP_EOL;
@@ -64,13 +65,14 @@
     echo CHTML::campoBotonSubmit($palabras[4], ["class" => "btn btn-dark","id"=>"acceder"]) . PHP_EOL;
     echo CHTML::link($palabras[5], ["logueo", "Registro"], ["class" => "btn btn-dark"]) . PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
-    echo CHTML::finalizarForm() . PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("hr") . PHP_EOL;
+    echo CHTML::link($palabras[6], ["logueo", "Olvido"], ["class" => "btn btn-danger"]) . PHP_EOL;
 
-    echo CHTML::link($palabras[6], ["logueo", "Olvido"], ["class" => "btn btn-outline-danger"]) . PHP_EOL;
-    echo CHTML::dibujaEtiquetaCierre("main") . PHP_EOL;
-    ?>
-</body>
+    echo CHTML::finalizarForm() . PHP_EOL;
 
+    echo CHTML::dibujaEtiquetaCierre("section") . PHP_EOL;
+
+    echo CHTML::dibujaEtiquetaCierre("body").PHP_EOL;
+?>
 </html>

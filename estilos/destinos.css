@@ -35,15 +35,18 @@
     width: 94%;
 
     display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 30% 10% auto 5%;
+    grid-template-columns: 25% auto 20%;
+    grid-template-rows: 30% auto 5%;
+    column-gap: 1.5%;
 }
 
 #principal {
     width: 100%;
     background-size: cover;
     border-radius: 25px;
-    box-shadow: 9px 11px 48px -14px rgba(0,0,0,0.75);
+    box-shadow: 6px -2px 20px 0px rgb(0 0 0 / 75%);
+    grid-column-start: 1;
+    grid-column-end: 4;
 }
 
 #dPlaneta{
@@ -56,91 +59,154 @@
 }
 
 #filtro{
-    background-color: rgba(0, 0, 0, 0.74);
-    box-shadow: 9px 11px 48px -14px rgba(0,0,0,0.75);
-    border-radius: 25px;
-    padding: 2%;
-    
-    display: flex;
-    justify-content: flex-end;
+    box-shadow: 4px -1px 19px 2px rgb(0 0 0 / 75%);
+    padding: 5% 4% 8% 6%;
+    margin-top: 4%;
+    height: 50%;
+    border-radius: 15px;
+}
+
+#filtro > form{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(auto,10%);
+    row-gap: 5%;
 }
 
 #billetes{    
     display: flex;
+    align-content: flex-start;
     flex-wrap: wrap;
     overflow-y: auto;
+    margin: 1%;
 }
 
 .billete{
     display: grid;
-    grid-template-columns: 42.5% 42.5% 15%;
-    grid-template-rows: auto 38% 38%;
+    grid-template-columns: repeat(4,23%) auto;
 
-    width: 23%;
-    margin: 1%;
-    height: 35%;
+    width: 95%;
+    height: 30%;
+    margin-top: 1%;
     border-radius: 25px;
-    background: radial-gradient(var(--azulClaro), var(--azulOscuro));
+    background: linear-gradient(-90deg,var(--azulOscuro), var(--azulClaro));
     box-shadow: 9px 11px 25px -14px rgba(0,0,0,0.75);
     border: 1px solid grey;
     color: white;
 }
 
-
 .billete > h6{
-    align-self: center;
     margin-left: 1.5em;
-    margin-bottom: 0%;
-}
-
-.billete > h3{
-    align-self: center;
-    margin: 0.2em 0em 0em 0.8em;
 }
 
 .titulo{
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 5;
+    align-self: center;
+    background-color: rgba(0, 0, 0, 0.507);
+    padding-left: 1em;
 }
 
 .lateral{
-    grid-column-start: 3;
-    grid-row-start: 1;
-    grid-row-end: 4;
-
-    width: 50%;
     background-color: rgba(0, 0, 0, 0.507);
     text-align: center;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+    grid-column-start: 5;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 3;
 }
 
+#banners{
 
-.billete:hover{
-    transform: scale(1.05);
-    transition-duration: 1s;
+}
+
+.banner{
+    height: 30%;
+    margin-top: 5%;
+    background-size: cover;
+    padding-top: 50%;
+    border-radius: 15px;
+}
+
+.datosBanner{
+    background-color:#04394e3d;
+    color: white;
+    height: 100%;
+    text-align: center;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
 }
 
 #paginado{
     justify-self: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
+
+/*----------------------------------------------------CSS de personalización de scroll bar-------------------------------*/
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: whitesmoke;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: var(--azulOscuro); 
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--azulClaro);
+  }
+
+/*---------------------------------------------------Media queries---------------------------------------------------------*/
 
 @media (max-width:1120px){
     #dPlaneta{
         width: 90%;
         padding: 3%;
     }
-
-    #billetes{
-        justify-content: center;
-    }
-
-    .billete{
-        width: 30%;
-    }
 }
 @media (max-width:950px){
+    #filtro{
+        display: none;
+    }
+
+    #planeta{
+        grid-template-columns: 100%;
+        grid-template-rows: 30% auto 5%;
+    }
+
+    #paginado{
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+}
+
+@media (max-width:600px){
 
     .billete{
-        width: 20em;
-        margin: 3%;
+        width: 96%;
+        grid-template-columns: 90% 10%;
+        grid-template-rows: repeat(5,20%);
+    }
+
+    .titulo{
+        grid-column-start: 1;
+        grid-column-end: 2;
+        border-top-left-radius: inherit;
+    }
+
+    .lateral{
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 6;
     }
 }
