@@ -10,6 +10,15 @@
     color: white;
 }
 
+.miBoton{
+    background-image: url("../imagenes/iconos/lupa.png");
+    width: 34px;
+    height: 34px;
+    background-color: #00000000;
+    border: none;
+    padding: 12px;
+}
+
 p{
     font-size: 1em;
 }
@@ -206,7 +215,8 @@ nav.barra{
     color: white;
 }
 
-.form-floating>.form-control, .form-floating>.form-select {
+.loginFormu > .form-floating > .form-control, 
+.loginFormu > .form-floating> .form-select {
     background-color: rgba(0, 0, 0, 0.158);
     border: none;
     color: white;
@@ -309,7 +319,7 @@ nav.barra{
     }
 }
 
-@media (max-width:600px){
+@media (max-width:670px){
 
     #seccion1{
         grid-template-columns: 98%;
@@ -318,6 +328,21 @@ nav.barra{
 
     #seccion1 > h2{
         grid-column-end: 2;
+    }
+
+    .fondo{
+        background-image: url('../imagenes/fondo-mobile.jpg');
+        background-size: cover;
+    }
+
+    .login{
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 30%;
+    }
+
+    #seccionCuenta{
+        justify-content: center;
     }
 
     .destino:hover{

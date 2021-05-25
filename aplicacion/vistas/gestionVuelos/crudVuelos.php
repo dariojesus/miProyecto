@@ -89,7 +89,9 @@
                                           <br>{$palabras[9]}:  {$vuelo["fecha_salida"]}-{$vuelo["hora_salida"]}
                                           <br>{$palabras[13]}: {$vuelo["cod_destino"]}</b>
                                           <br>{$palabras[18]}",
-                            Sistema::app()->generaURL(array("gestionVuelos", "Borrar"), array("codigo" => $vuelo["cod_vuelo"]))
+                            Sistema::app()->generaURL(array("gestionVuelos", "Borrar"), array("codigo" => $vuelo["cod_vuelo"])),
+                            $palabras[19],
+                            $palabras[20]
                         );
 
                         $ventana->dibujate();

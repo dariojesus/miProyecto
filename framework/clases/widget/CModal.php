@@ -6,13 +6,17 @@ class CModal extends CWidget{
     private $_titulo="";
     private $_contenido="";
     private $_linkAccion="";
+    private $_txtConfirm="";
+    private $_txtCancel="";
  
-    public function __construct($id,$titulo,$contenido="",$linkAccion="#")
+    public function __construct($id,$titulo,$contenido="",$linkAccion="#",$txtConfirm="Confirmar",$txtCancel="Cancelar")
     {
         $this->_id=$id;
         $this->_titulo=$titulo;
         $this->_contenido=$contenido;
         $this->_linkAccion=$linkAccion;
+        $this->_txtConfirm=$txtConfirm;
+        $this->_txtCancel=$txtCancel;
     }
 
     public function dibujaApertura()
@@ -45,8 +49,8 @@ class CModal extends CWidget{
 
     public function dibujaPie(){
         echo CHTML::dibujaEtiqueta("div",array("class"=>"modal-footer"),null,false).PHP_EOL;
-        echo CHTML::botonHtml("Cancelar",array("class"=>"btn btn-danger", "data-bs-dismiss"=>"modal")).PHP_EOL;
-        echo CHTML::link("Confirmar",$this->_linkAccion,array("class"=>"btn btn-success")).PHP_EOL;
+        echo CHTML::link($this->_txtConfirm,$this->_linkAccion,array("class"=>"btn btn-success")).PHP_EOL;
+        echo CHTML::botonHtml($this->_txtCancel,array("class"=>"btn btn-danger", "data-bs-dismiss"=>"modal")).PHP_EOL;
         echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
     }
 

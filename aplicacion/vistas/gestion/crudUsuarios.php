@@ -86,7 +86,8 @@
                             "persona" . $usuario["cod_perfil"],
                             $palabras[18],
                             "$palabras[19]<b>{$usuario["nombre"]} {$usuario["apellidos"]}</b><br>$palabras[20]",
-                            Sistema::app()->generaURL(array("gestion", "Borrar"), array("codigo" => $usuario["cod_perfil"]))
+                            Sistema::app()->generaURL(array("gestion", "Borrar"), array("codigo" => $usuario["cod_perfil"])),
+                            $palabras[21],$palabras[22]
                         );
 
                         $ventana->dibujate();

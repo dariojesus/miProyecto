@@ -118,10 +118,6 @@
     grid-row-end: 3;
 }
 
-#banners{
-
-}
-
 .banner{
     height: 30%;
     margin-top: 5%;
@@ -133,7 +129,6 @@
 .datosBanner{
     background-color:#04394e3d;
     color: white;
-    height: 100%;
     text-align: center;
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
@@ -180,12 +175,30 @@
 
     #planeta{
         grid-template-columns: 100%;
-        grid-template-rows: 30% auto 5%;
+        grid-template-rows: 25% auto 5% 18%;
+        column-gap: 0%;
+        row-gap: 0.5%;
     }
 
     #paginado{
         grid-column-start: 1;
         grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;
+    }
+
+    #banners{
+        grid-column-start: 1;
+        grid-column-end: 2;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .banner{
+        padding-top: 0%;
+        margin-top: 0%;
+        width: 45%;
+        height: 100%;
     }
 }
 
@@ -193,20 +206,30 @@
 
     .billete{
         width: 96%;
-        grid-template-columns: 90% 10%;
-        grid-template-rows: repeat(5,20%);
+        grid-template-columns: 45% 45% 10%;
+        grid-template-rows: 20% 40% 40%;
+    }
+
+    .billete > h6{
+        font-size:0.8rem;
     }
 
     .titulo{
         grid-column-start: 1;
-        grid-column-end: 2;
+        grid-column-end: 3;
         border-top-left-radius: inherit;
+        margin: 0%;
+        font-size: 1rem;
     }
 
     .lateral{
-        grid-column-start: 2;
-        grid-column-end: 3;
+        grid-column-start: 3;
+        grid-column-end: 4;
         grid-row-start: 1;
-        grid-row-end: 6;
+        grid-row-end: 4;
+    }
+
+    .billete > h6{
+        align-self: center;
     }
 }

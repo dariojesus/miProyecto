@@ -13,14 +13,14 @@
                 case("en"): 
                     $palabras = ["Yes","No","Login","My account","Home","Trips","Trips management","Users management","Logout",
                                  "Departure date","Departure hour","Company","Seats","Destiny","Deleted","Action",
-                                 "Delete flight","You are abou to delete the flight with the next data:","Are you sure you want to proceed with the operation?"];
+                                 "Delete flight","You are abou to delete the flight with the next data:","Are you sure you want to proceed with the operation?","Proceed","Cancel"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
                     $palabras = ["Si","No","Iniciar sesión","Mi cuenta","Inicio","Viajes","Gestión de viajes","Gestión de usuarios","Logout",
                                  "Fecha de salida","Hora de salida","Compañia","Plazas","Destino","Borrado","Acción",
-                                 "Borrar vuelo","Está a punto de borrar el vuelo","¿Está seguro de que desea proceder con la operación?"];
+                                 "Borrar vuelo","Está a punto de borrar el vuelo","¿Está seguro de que desea proceder con la operación?","Confirmar","Cancelar"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }

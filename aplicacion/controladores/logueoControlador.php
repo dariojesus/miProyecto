@@ -273,14 +273,14 @@
             switch($_COOKIE["lang"]){
                 case("en"): 
                     $palabras = ["Date","Hour","Class","Destiny","Ticket",
-                                 "Cancel ticket","You're about to cancel the ticket with the destiny: ", "With departure date: ","Are you sure you want to proceed with the operation?"];
+                                 "Cancel ticket","You're about to cancel the ticket with the destiny: ", "With departure date: ","Are you sure you want to proceed with the operation?","Proceed","Cancel"];
                     $campos = ["clase_en","destino_en"];
                     $errPalabras = ["The page you're looking for can't be found"]; 
                     break;
 
                 default: 
                     $palabras = ["Fecha","Hora","Clase","Destino","Billete",
-                                 "Borrar billete","Estas a punto de anular el billete con destino: ", "Con fecha de salida: ","¿Estás seguro de que deseas proceder con la operación?"]; 
+                                 "Borrar billete","Estas a punto de anular el billete con destino: ", "Con fecha de salida: ","¿Estás seguro de que deseas proceder con la operación?","Confirmar","Cancelar"]; 
                     $campos = ["clase","destino"];
                     $errPalabras = ["La página web solicitada no ha sido encontrada"]; 
                     break;

@@ -37,8 +37,10 @@ $this->lang = $_COOKIE["lang"];
     $ventana = new CModal(  "billete" . $datos[2],
                             $palabras[5],
                             "{$palabras[6]}<b>{$datos[1]}</b><br>{$palabras[7]}<b>{$datos[3]}</b><br>
-                             {$palabras[8]}",
-                            Sistema::app()->generaURL(array("Compra", "Anular"), array("codigo" => $datos[2])));
+                            {$palabras[8]}",
+                            Sistema::app()->generaURL(array("Compra", "Anular"), array("codigo" => $datos[2])),
+                            $palabras[9],
+                            $palabras[10]);
 
     $ventana->dibujate();
     

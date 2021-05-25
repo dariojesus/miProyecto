@@ -7,8 +7,10 @@ $this->lang = $palabras[0];
   <header id="cabecera">
     <div class="principal">
       <form method="POST">
-        <input list="listaPlanetas" id="busqueda" name="buscar" class="buscar" placeholder= "<?php echo $palabras[2] ?>" >
-        <button type="submit" class="miBoton">Buscar</button>
+        <div>
+          <input list="listaPlanetas" id="busqueda" name="buscar" class="buscar" placeholder= "<?php echo $palabras[2] ?>" >
+          <button type="submit" class="miBoton"></button>
+        </div>
         <datalist id="listaPlanetas"></datalist>
         <p id="titulo">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam ut non officiis </p>
       </form>
