@@ -1,3 +1,35 @@
+/*--------------------------------------------CSS DE FORMULARIO DE COMPRA (UNICO)-----------------------------------------*/
+article{
+    margin-left: 15%;
+    display: grid;
+    grid-template-columns: 70%;
+    grid-template-rows: 5% auto;
+    row-gap: 4%;
+}
+
+section.tarjeta{
+    height: 500px;
+    padding: 0.5rem;
+    border-radius: 15px;
+}
+
+.w-33{
+    width: 33.3%!important;
+}
+
+.invisible{
+    display: none;
+}
+
+.bg-dis{
+    background-color: #9a9da0;
+}
+
+.bg-actual{
+    background-color: #04394e;
+}
+
+
 /*--------------------------------------------CSS DE FORMULARIOS (COMUN)--------------------------------------------------*/
 
 main {
@@ -19,5 +51,23 @@ main {
     legend {
         grid-column-start: 1;
         grid-column-end: 3;
+    }
+
+}
+
+@media (max-width: 600px){
+
+    main{
+        grid-template-columns: 90%;
+    }
+
+    article{
+        margin-left: 0%;
+        grid-template-columns: 100%;
+    }
+
+    .progress{
+        height: 3rem !important;
+        font-size: 0.70rem;
     }
 }

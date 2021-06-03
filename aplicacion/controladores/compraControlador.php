@@ -15,7 +15,7 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["en","Boarding data","Company","Destiny code","Boarding date","Boarding hour",
+                    $palabras = ["en","Boarding data","Company","Destiny","Boarding date","Boarding hour",
                                 "Passenger data","ID","Name","Subname","Email",
                                 "Billing","Class","Price",
                                 "Buy","Cancel"];
@@ -23,7 +23,7 @@
                     break;
 
                 default: 
-                    $palabras = ["es","Datos de embarque","Compañia","Codigo de destino","Fecha de embarque","Hora de embarque",
+                    $palabras = ["es","Datos de embarque","Compañia","Destino","Fecha de embarque","Hora de embarque",
                                 "Datos del pasajero","NIF","Nombre","Apellidos","Email",
                                 "Facturación","Clase","Precio",
                                 "Comprar","Cancelar"];
@@ -83,8 +83,8 @@
                     }
                 }
                
-
-                $this->dibujaVista("compraBillete",array("vuelo"=>$vuelo,"usuario"=>$usuario,"url"=>$url,"palabras"=>$palabras),"Compra de billete");
+                $destino = Planetas::devuelvePlanetas($vuelo->__get("cod_destino"),$palabras[0]);
+                $this->dibujaVista("compraBillete",array("vuelo"=>$vuelo,"usuario"=>$usuario,"url"=>$url,"palabras"=>$palabras,"dest"=>$destino),"Compra de billete");
                 return;
             }
             

@@ -113,6 +113,27 @@ $("section.billete").click(function(){
     window.location = $(this).data("location");
 });
 
+$("#boarData,#userData").click(progresa);
+
+//Función para ir avanzando en la barra de progreso y visibilidad de las tarjetas
+function progresa(){
+
+    //Barra de progreso
+    $(".progress-bar.bg-actual").first().addClass("bg-success");
+    $(".progress-bar.bg-actual").first().removeClass("bg-actual");
+
+    $(".progress-bar.bg-dis").first().addClass("bg-actual");
+    $(".progress-bar.bg-dis").first().removeClass("bg-dis");
+
+    //Visibilidad de tarjetas
+    let $actual = $("section.actual");
+
+    $actual.addClass("invisible");
+    $actual.next().removeClass("invisible");
+    $actual.next().addClass("actual");
+    $actual.removeClass("actual");
+}
+
 //Función para obtener el precio de una clase mediante una peticion fetch
 $("#claseSeleccionada").change(function(){
     let cod = $("#claseSeleccionada option:selected").val();

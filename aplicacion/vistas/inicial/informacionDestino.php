@@ -17,11 +17,9 @@ $this->lang = $palabras[0];
 
     echo CHTML::dibujaEtiquetaCierre("article") . PHP_EOL;
 
-    
-
     echo CHTML::dibujaEtiqueta("article",array("id" => "filtro"),null,false).PHP_EOL;
 
-    echo CHTML::iniciarForm(). PHP_EOL;
+    echo CHTML::iniciarForm("","get"). PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div",[],null,false).PHP_EOL;
         echo CHTML::campoLabel($palabras[5],"compannia").PHP_EOL;
@@ -41,7 +39,7 @@ $this->lang = $palabras[0];
         echo CHTML::campoDate("fecha_llegada").PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
 
-    echo CHTML::campoHidden("codigo",$planeta[0]).PHP_EOL;
+    echo CHTML::campoHidden("planeta",$planeta[1]).PHP_EOL;
 
     echo CHTML::campoBotonSubmit($palabras[4],array("class"=>"btn btn-dark w-50")).PHP_EOL;
 

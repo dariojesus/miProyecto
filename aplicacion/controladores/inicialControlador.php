@@ -51,7 +51,7 @@
             $sentencia = "SELECT cod_destino, $nombre, duracion_viaje, foto FROM destinos";
             $var = $var->ejecutarSentencia($sentencia);
 
-            $this->dibujaVista("destinos",array("planetas"=>$var,"palabras"=>$palabras),"Destinos disponibles");
+            $this->dibujaVista("destinos",array("planetas"=>$var,"palabras"=>$palabras, "nombre"=>$nombre),"Destinos disponibles");
         }
 
         //Acción para ver los vuelos correspondientes al destino
@@ -73,9 +73,16 @@
             $planeta = new Planetas();
 
             //Control de vuelos a patir de un código de destino
-            if(isset($_GET["codigo"])){
-                
-                $codigo = CGeneral::addSlashes($_GET["codigo"]);
+            if(isset($_GET["planeta"])){
+                              
+                $planetaURL = CGeneral::addSlashes($_GET["planeta"]);
+                $codigo = Planetas::devuelvePlanetas(null,$palabras[0]);
+
+                if (array_key_exists($planetaURL,$codigo))
+                    $codigo = $codigo[$planetaURL];
+                else
+                    $codigo = null;
+
                 $planeta = $planeta->ejecutarSentencia("SELECT cod_destino, 
                                                                {$campos[0]},  
                                                                {$campos[1]}, 
@@ -103,16 +110,20 @@
                     $opciones["limite"] = "$linf,$lsup";
 
                     //Control del formulario para filtrar los resultados
-                    if ($_POST){
+                    if (isset($_GET["compannia"]) || isset($_GET["fecha"]) || isset($_GET["fecha_llegada"])){
 
-                        if (!empty($_POST["compannia"]))
-                            $opciones["compannia"] = CGeneral::addSlashes($_POST["compannia"]);
+                        if (!empty($_GET["compannia"]))
+                            $opciones["compannia"] = CGeneral::addSlashes($_GET["compannia"]);
         
-                        if (!empty($_POST["fecha"]))
-                            $opciones["fecha"] = CGeneral::fechaMysqlANormal($_POST["fecha"]);
+                        if (!empty($_GET["fecha"])){
+                            if (strlen($_GET["fecha"]) > 10)
+                                $opciones["fecha"] = CGeneral::fechaMysqlANormal(substr($_GET["fecha"],0,10));
+                            else
+                                $opciones["fecha"] = CGeneral::fechaMysqlANormal($_GET["fecha"]);
+                        }
 
-                        if (!empty($_POST["fecha_llegada"]))
-                            $opciones["fecha_llegada"] = CGeneral::fechaMysqlANormal($_POST["fecha_llegada"]);
+                        if (!empty($_GET["fecha_llegada"]))
+                            $opciones["fecha_llegada"] = CGeneral::fechaMysqlANormal($_GET["fecha_llegada"]);
 
                         $dato = CGeneral::peticionCurl($url,"GET",$opciones);
                         $dato = json_decode($dato,true);

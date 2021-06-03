@@ -7,7 +7,7 @@
     <section>
     <?php
         foreach ($planetas as $clave => $planeta){
-            $url = Sistema::app()->generaURL(["inicial","infoDestino"])."?codigo=".$planeta["cod_destino"];
+            $url = Sistema::app()->generaURL(["inicial","infoDestino"])."?planeta=".$planeta[$nombre];
             echo $this->dibujaVistaParcial("destinoPaginado",array("planeta"=>array_values($planeta),"datos"=>$url,"palabras"=>$palabras),true).PHP_EOL;  
         }   
     ?>

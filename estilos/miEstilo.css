@@ -79,7 +79,7 @@ main{
 #seccion1{
     height: 300px;
     width: 95%;
-    margin: 2.5% 2.5% 0% 2.5%;
+    margin: 2em 2.5% 2em 2.5%;
 
     display: grid;
     grid-template-columns: repeat(4,23%);
@@ -101,18 +101,16 @@ main{
 
     display: flex;
     justify-content: space-between;
+    background-color: bisque;
+    border-radius: 15px;
 }
 
-.destino > div{
-    width: 50%;
+.destino > aside{
+    width: 115px;
+    height: 115px;
     background-size: contain;
     background-repeat: no-repeat;
     border-radius: 20px;
-}
-
-.destino:hover{
-    transform: scale(1.1);
-    transition: 1s;
 }
 
 /*Estilo del footer*/
@@ -234,8 +232,8 @@ nav.barra{
 /*--------------------------------------------------CSS DE OPCIONES DE CUENTA----------------------------------------------------*/
 
 #cuenta{
-    width: 90%;
-    margin: 5%;
+    width: 70%;
+    margin: 9%;
 }
 
 #seccionCuenta{
@@ -249,11 +247,10 @@ nav.barra{
 #seccionCuenta > a {
     min-width: 250px;
     min-height: 25%;
-    background-color: rgb(245, 241, 233);
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 5px;
-    color: #000000;
+    color: white;
 
-    border: 1px solid rgb(248, 247, 247);
     box-shadow:5px 5px 10px grey;
     text-align: center;
     text-decoration: none;
@@ -261,16 +258,11 @@ nav.barra{
     margin: 2%;
 }
 
-#seccionCuenta > a.deshabilitado{
-    background-color: rgba(173, 216, 230, 0.616);
-    box-shadow: none;
-    cursor: not-allowed;
-}
-
 #seccionCuenta > a.habilitado:hover{
     transform: scale(1.1);
-    background-color:var(--azulClaro);
+    background-color: rgba(0, 0, 0, 0.85);
     color: white;
+    box-shadow: none;
     transition-duration: 0.2s;
 }
 
@@ -310,6 +302,10 @@ nav.barra{
         height: 470px;
     }
 
+    #seccionCuenta{
+        justify-content: center;
+    }
+    
     .fondo{
         background-size:170vw;
     }
@@ -339,10 +335,6 @@ nav.barra{
         width: 80%;
         margin-left: 10%;
         margin-top: 30%;
-    }
-
-    #seccionCuenta{
-        justify-content: center;
     }
 
     .destino:hover{

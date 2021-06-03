@@ -38,7 +38,7 @@ function cargarUltimos() {
                             
                     for (let index = 0; index < resp.length; index++) {
 
-                        let img = `/imagenes/${resp[index].nombre.toLowerCase()}-sq.jpg`;
+                        let img = `/imagenes/${resp[index].nombre.toLowerCase()}-sq.png`;
                         let url = `/compra/Compra?codigo=${resp[index].cod_vuelo}`;
                                               
                         $("#seccion1").append(`<div class='destino' data-location='${url}'>`
@@ -48,7 +48,7 @@ function cargarUltimos() {
                                 +"<h5>"+resp[index].hora_salida+"</h5>"
                                 +"<h6>"+resp[index].plazas+" "+pal+"</h6>"
                             +"</div>"
-                            +`<div style='background-image: url(${img})'></div>`
+                            +`<aside style='background-image: url(${img})'></aside>`
                         +"</div>");
                     }
 
