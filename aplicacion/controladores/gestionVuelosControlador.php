@@ -118,12 +118,12 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny code","Administrative data","Deleted"];
+                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny","Administrative data","Deleted","Yes","No"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
-                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Fecha de llegada","Hora de llegada","Plazas","Destino","Datos administrativos","Borrado"];
+                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Fecha de llegada","Hora de llegada","Plazas","Destino","Datos administrativos","Borrado","Si","No"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }
@@ -152,8 +152,11 @@
                 $datos = json_decode($datos);
                 $datos = get_object_vars($datos[0]);
                 $vuelo->setValores($datos);
+
+                $destino = Planetas::devuelvePlanetas($vuelo->__get("cod_destino"),$_COOKIE["lang"]);
+                $borrado = $vuelo->__get("borrado")=="1"? $palabras[10] : $palabras[11];
                 
-                echo $this->dibujaVistaParcial("mostrarVuelo",array("modelo"=>$vuelo,"palabras"=>$palabras),true);
+                echo $this->dibujaVistaParcial("mostrarVuelo",array("modelo"=>$vuelo,"palabras"=>$palabras,"dest"=>$destino,"borr"=>$borrado),true);
 
             }
         }

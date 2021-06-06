@@ -76,7 +76,7 @@
                         echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
 
                         echo CHTML::dibujaEtiqueta("div",["class"=>"form-floating m-3"],null,false).PHP_EOL;
-                            echo CHTML::botonHtml("Next",["class"=>"btn btn-dark","id"=>"boarData"]).PHP_EOL;
+                            echo CHTML::botonHtml($palabras[14],["class"=>"btn btn-dark","id"=>"boarData"]).PHP_EOL;
                         echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
 
                     echo CHTML::dibujaEtiquetaCierre("section").PHP_EOL;
@@ -124,7 +124,7 @@
                         echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
 
                     echo CHTML::dibujaEtiqueta("div",["class"=>"form-floating m-3"],null,false).PHP_EOL;
-                        echo CHTML::botonHtml("Next",["class"=>"btn btn-dark","id"=>"userData"]).PHP_EOL;
+                        echo CHTML::botonHtml($palabras[14],["class"=>"btn btn-dark","id"=>"userData"]).PHP_EOL;
                     echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
 
                     echo CHTML::dibujaEtiquetaCierre("section").PHP_EOL;
@@ -151,8 +151,8 @@
 
 
                         echo CHTML::dibujaEtiqueta("div",["class"=>"form-floating m-3"],null,false).PHP_EOL;
-                            echo CHTML::campoBotonSubmit($palabras[14],array("class"=>"btn btn-outline-success w-50")).PHP_EOL;
-                            echo CHTML::link($palabras[15],$url,array("class"=>"btn btn-outline-danger w-50")).PHP_EOL;
+                            echo CHTML::campoBotonSubmit($palabras[15],array("class"=>"btn btn-outline-success w-50")).PHP_EOL;
+                            echo CHTML::link($palabras[16],$url,array("class"=>"btn btn-outline-danger w-50")).PHP_EOL;
                         echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
 
                     echo CHTML::dibujaEtiquetaCierre("section").PHP_EOL;

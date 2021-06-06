@@ -44,8 +44,6 @@
                     $dato = CGeneral::addSlashes($_GET["borrado"]);
                     $opciones["where"].= " and borrado ='$dato'";
                 }
-                else
-                    $opciones["where"].= " and borrado ='0'";
                 
                 //Filtramos por compannia de vuelo
                 if (isset($_GET["compannia"])){

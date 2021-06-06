@@ -156,7 +156,7 @@
                     break;
 
                 default: 
-                    $palabras = ["es","Compruebe la bandeja de entrada en su correo electrónico y confirme si ha recibido el email de recuperación de nuestri equipo",
+                    $palabras = ["es","Compruebe la bandeja de entrada en su correo electrónico y confirme si ha recibido el email de recuperación de nuestro equipo",
                                  "Correo recibido","Cancelar"]; 
                     break;
             }

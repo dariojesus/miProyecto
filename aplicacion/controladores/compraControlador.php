@@ -17,7 +17,7 @@
                 case("en"): 
                     $palabras = ["en","Boarding data","Company","Destiny","Boarding date","Boarding hour",
                                 "Passenger data","ID","Name","Subname","Email",
-                                "Billing","Class","Price",
+                                "Billing","Class","Price","Next",
                                 "Buy","Cancel"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
@@ -25,7 +25,7 @@
                 default: 
                     $palabras = ["es","Datos de embarque","Compañia","Destino","Fecha de embarque","Hora de embarque",
                                 "Datos del pasajero","NIF","Nombre","Apellidos","Email",
-                                "Facturación","Clase","Precio",
+                                "Facturación","Clase","Precio","Siguiente",
                                 "Comprar","Cancelar"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
@@ -77,7 +77,7 @@
                             $plazas = intval($plazas)-1;
                             Sistema::app()->BD()->crearConsulta("UPDATE vuelos SET `plazas`='$plazas' WHERE `cod_vuelo`='{$vuelo->cod_vuelo}'");
 
-                            Sistema::app()->irAPagina(array("logueo","MiCuenta"));
+                            Sistema::app()->irAPagina(array("compra","Correcta"));
                             return;
                         }
                     }
@@ -296,6 +296,26 @@
 
             //Se vuelve a la página de mis viajes proximos
             Sistema::app()->irAPagina(array("logueo","Viajes?op=1"));
+            return;
+        }
+
+        //Acción para confirmar la compra del billete
+        public function accionCorrecta(){
+
+            switch($_COOKIE["lang"]){
+                case("en"): 
+                    $mensaje = "Your purchase have been made correctly, you can check your tickets on next trips section.";
+                    $txtBoton = "Continue";
+                    break;
+
+                default: 
+                    $mensaje = "Su compra se ha relizado correctamente, puede consultar sus billetes en su sección de próximos viajes.";
+                    $txtBoton = "Continuar";
+                    break;
+            }
+
+
+            echo $this->dibujaVistaParcial("correcto",array("mensaje"=>$mensaje,"txt"=>$txtBoton),true).PHP_EOL;
             return;
         }
 

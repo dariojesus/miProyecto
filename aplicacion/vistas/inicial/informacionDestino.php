@@ -24,19 +24,19 @@ $this->lang = $palabras[0];
     echo CHTML::dibujaEtiqueta("div",[],null,false).PHP_EOL;
         echo CHTML::campoLabel($palabras[5],"compannia").PHP_EOL;
         echo CHTML::dibujaEtiqueta("br").PHP_EOL;
-        echo CHTML::campoText("compannia").PHP_EOL;
+        echo CHTML::campoText("compannia",$datos["comp"]).PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div",[],null,false).PHP_EOL;
         echo CHTML::campoLabel($palabras[6],"fecha").PHP_EOL;
         echo CHTML::dibujaEtiqueta("br").PHP_EOL;
-        echo CHTML::campoDate("fecha").PHP_EOL;
+        echo CHTML::campoDate("fecha",$datos["fech"]).PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("div",[],null,false).PHP_EOL;
         echo CHTML::campoLabel($palabras[8],"fecha_llegada").PHP_EOL;
         echo CHTML::dibujaEtiqueta("br").PHP_EOL;
-        echo CHTML::campoDate("fecha_llegada").PHP_EOL;
+        echo CHTML::campoDate("fecha_llegada",$datos["lleg"]).PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
 
     echo CHTML::campoHidden("planeta",$planeta[1]).PHP_EOL;

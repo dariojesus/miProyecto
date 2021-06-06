@@ -117,14 +117,13 @@
             <div class="form-floating m-2">
 
                 <?php
-                echo CHTML::modeloText($modelo, "cod_destino", [
+                echo CHTML::campoText("destino",$dest,[
                     "class" => "form-control",
                     "id" => "destino",
                     "placeholder" => "Destino",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
                 echo CHTML::campoLabel($palabras[7], "cod_destino") . PHP_EOL;
-                echo CHTML::modeloError($modelo, "cod_destino") . PHP_EOL;
                 ?>
             </div>
         </fieldset>
@@ -134,14 +133,13 @@
                 <div class="form-floating m-2">
 
                 <?php
-                echo CHTML::modeloText($modelo, "borrado", [
+                echo CHTML::campoText("borrado", $borr, [
                     "class" => "form-control",
                     "id" => "borrado",
                     "placeholder" => "Cancelado",
                     "readonly"=>"readonly"
                 ]) . PHP_EOL;
                 echo CHTML::campoLabel($palabras[9], "borrado") . PHP_EOL;
-                echo CHTML::modeloError($modelo, "borrado") . PHP_EOL;
                 ?>
             </div>
         </fieldset>

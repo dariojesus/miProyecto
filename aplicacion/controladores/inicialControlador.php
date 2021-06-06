@@ -23,9 +23,7 @@
 
             //Redirección en el caso de que se haya buscado un planeta
             if (isset($_POST["buscar"])){
-                $array = Planetas::devuelvePlanetas(null,$palabras[0]);
-                $array = $array[$_POST["buscar"]];
-                Sistema::app()->irAPagina(array("inicial","infoDestino?codigo=".$array));
+                Sistema::app()->irAPagina(array("inicial","infoDestino?planeta=".$_POST["buscar"]));
                 return;
             }
 
@@ -71,6 +69,9 @@
               }
 
             $planeta = new Planetas();
+            $formu = ["comp"=>"",
+                     "fech"=>"",
+                     "lleg"=>""];
 
             //Control de vuelos a patir de un código de destino
             if(isset($_GET["planeta"])){
@@ -100,6 +101,7 @@
                     $planeta = array_values($planeta[0]);
                     $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
                     $opciones["destino"] = array_key_exists(6,$planeta)? $planeta[6]:$planeta[1];
+                    $opciones["borrado"] = "0";
                     
 
                     $pagina = isset($_GET["pag"])? CGeneral::addSlashes($_GET["pag"]) : 1;
@@ -112,30 +114,38 @@
                     //Control del formulario para filtrar los resultados
                     if (isset($_GET["compannia"]) || isset($_GET["fecha"]) || isset($_GET["fecha_llegada"])){
 
-                        if (!empty($_GET["compannia"]))
+                        if (!empty($_GET["compannia"])){
                             $opciones["compannia"] = CGeneral::addSlashes($_GET["compannia"]);
+                            $formu["comp"] = $opciones["compannia"];
+                        }
+                            
         
                         if (!empty($_GET["fecha"])){
                             if (strlen($_GET["fecha"]) > 10)
                                 $opciones["fecha"] = CGeneral::fechaMysqlANormal(substr($_GET["fecha"],0,10));
                             else
                                 $opciones["fecha"] = CGeneral::fechaMysqlANormal($_GET["fecha"]);
+
+                            $formu["fech"] = $_GET["fecha"];
                         }
 
-                        if (!empty($_GET["fecha_llegada"]))
+                        if (!empty($_GET["fecha_llegada"])){
                             $opciones["fecha_llegada"] = CGeneral::fechaMysqlANormal($_GET["fecha_llegada"]);
+                            $formu["lleg"] = $_GET["fecha_llegada"];
+                        }
+                            
 
                         $dato = CGeneral::peticionCurl($url,"GET",$opciones);
                         $dato = json_decode($dato,true);
         
-                        $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$dato,"palabras"=>$palabras),$planeta[1]);
+                        $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$dato,"palabras"=>$palabras,"datos"=>$formu),$planeta[1]);
                         return;
                     }
 
                     $datos = CGeneral::peticionCurl($url,"GET",$opciones);
                     $datos = json_decode($datos,true);
 
-                    $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$datos,"palabras"=>$palabras),$planeta[1]);
+                    $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$datos,"palabras"=>$palabras,"datos"=>$formu),$planeta[1]);
                     return;
                 }
             }
