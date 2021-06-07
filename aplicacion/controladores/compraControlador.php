@@ -153,10 +153,8 @@
                         //Ajuste de margenes
                         $pdf->setHeaderMargin(PDF_MARGIN_HEADER);
                         $pdf->SetMargins(7,PDF_MARGIN_TOP,7);
-                        $pdf->SetAutoPageBreak(true,15);
+                        $pdf->SetAutoPageBreak(false);
                         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-                        
 
                         //Ajuste del tipo de letra
                         $pdf->SetFont("helvetica","",10);
@@ -164,9 +162,19 @@
                         //Se añade la página
                         $pdf->AddPage();
 
-                        //Se crea el código QR
-                        $qr_code = new TCPDF2DBarcode("www.horizons.com","QRCODE,H");
+                        //Se crea el código QR y su estilo
+                        
+                        $style = array(
+                            'border' => false,
+                            'padding' => 0,
+                            'fgcolor' => array(4, 57, 78),
+                            'bgcolor' => false
+                        );
 
+                        $datos = $palabras[1].":".$acceso[1]."-".$acceso[0]."|".$palabras[2].":".$acceso[8]."-".$acceso[5]."-".$acceso[3];
+                        $codigo_qr = $pdf->serializeTCPDFtagParameters(array($datos, 'QRCODE,H', 90, 25, 50, 50, $style, 'N'));
+                        
+                        
                         //Se escribe el contenido del pdf
                         $html = <<<EOF
                         <style>
@@ -176,11 +184,11 @@
                         </style>
 
                         <div>
-                            <table cellpadding="1" cellspacing="3">
+                            <table cellpadding="1" cellspacing="2">
                                 <tr>
                                     <th>$palabras[1]</th>
                                     <th>$palabras[2]</th>
-                                    <td rowspan="8">Código QR</td>
+                                    <td rowspan="8"><tcpdf method="write2DBarcode" params="$codigo_qr" /></td>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;{$acceso[1]}</td>

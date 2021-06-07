@@ -1,7 +1,7 @@
 :root{
-    --negro: black;
-    --azulOscuro:  #021C26;
-    --azulClaro: #04394e;
+    --negro: rgb(0, 0, 0);
+    --azulOscuro:  rgb(2, 28, 38);
+    --azulClaro: rgb(4, 57, 78);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
