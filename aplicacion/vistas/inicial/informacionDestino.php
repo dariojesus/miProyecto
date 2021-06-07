@@ -17,35 +17,7 @@ $this->lang = $palabras[0];
 
     echo CHTML::dibujaEtiquetaCierre("article") . PHP_EOL;
 
-    echo CHTML::dibujaEtiqueta("article",array("id" => "filtro"),null,false).PHP_EOL;
-
-    echo CHTML::iniciarForm("","get"). PHP_EOL;
-
-    echo CHTML::dibujaEtiqueta("div",[],null,false).PHP_EOL;
-        echo CHTML::campoLabel($palabras[5],"compannia").PHP_EOL;
-        echo CHTML::dibujaEtiqueta("br").PHP_EOL;
-        echo CHTML::campoText("compannia",$datos["comp"]).PHP_EOL;
-    echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
-
-    echo CHTML::dibujaEtiqueta("div",[],null,false).PHP_EOL;
-        echo CHTML::campoLabel($palabras[6],"fecha").PHP_EOL;
-        echo CHTML::dibujaEtiqueta("br").PHP_EOL;
-        echo CHTML::campoDate("fecha",$datos["fech"]).PHP_EOL;
-    echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
-
-    echo CHTML::dibujaEtiqueta("div",[],null,false).PHP_EOL;
-        echo CHTML::campoLabel($palabras[8],"fecha_llegada").PHP_EOL;
-        echo CHTML::dibujaEtiqueta("br").PHP_EOL;
-        echo CHTML::campoDate("fecha_llegada",$datos["lleg"]).PHP_EOL;
-    echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
-
-    echo CHTML::campoHidden("planeta",$planeta[1]).PHP_EOL;
-
-    echo CHTML::campoBotonSubmit($palabras[4],array("class"=>"btn btn-dark w-50")).PHP_EOL;
-
-    echo CHTML::finalizarForm();
-
-    echo CHTML::dibujaEtiquetaCierre("article") . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("article",["id"=>"filtroMob"],CHTML::botonHtml("",["class"=>"miBoton","id"=>"btnFiltro"])).PHP_EOL;
 
     echo CHTML::dibujaEtiqueta("article", array("id" => "billetes"), null, false) . PHP_EOL;
 
@@ -84,3 +56,34 @@ $this->lang = $palabras[0];
         </ul>
     </nav>
 </section>
+<?php
+    echo CHTML::dibujaEtiqueta("article",array("id" => "filtro"),null,false).PHP_EOL;
+
+    echo CHTML::iniciarForm("","get"). PHP_EOL;
+
+    echo CHTML::dibujaEtiqueta("div",[],null,false).PHP_EOL;
+            echo CHTML::campoLabel($palabras[5],"compannia").PHP_EOL;
+            echo CHTML::dibujaEtiqueta("br").PHP_EOL;
+            echo CHTML::campoText("compannia",$datos["comp"]).PHP_EOL;
+    echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
+
+    echo CHTML::dibujaEtiqueta("div",[],null,false).PHP_EOL;
+            echo CHTML::campoLabel($palabras[6],"fecha").PHP_EOL;
+            echo CHTML::dibujaEtiqueta("br").PHP_EOL;
+            echo CHTML::campoDate("fecha",$datos["fech"]).PHP_EOL;
+    echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
+
+    echo CHTML::dibujaEtiqueta("div",[],null,false).PHP_EOL;
+            echo CHTML::campoLabel($palabras[8],"fecha_llegada").PHP_EOL;
+            echo CHTML::dibujaEtiqueta("br").PHP_EOL;
+            echo CHTML::campoDate("fecha_llegada",$datos["lleg"]).PHP_EOL;
+    echo CHTML::dibujaEtiquetaCierre("div").PHP_EOL;
+
+    echo CHTML::campoHidden("planeta",$planeta[1]).PHP_EOL;
+
+    echo CHTML::campoBotonSubmit($palabras[4],array("class"=>"btn btn-dark w-50")).PHP_EOL;
+
+    echo CHTML::finalizarForm();
+
+    echo CHTML::dibujaEtiquetaCierre("article") . PHP_EOL;
+?>

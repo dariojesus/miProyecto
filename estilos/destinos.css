@@ -36,7 +36,7 @@
 
     display: grid;
     grid-template-columns: 25% auto 20%;
-    grid-template-rows: 30% auto 5%;
+    grid-template-rows: 30% 5% auto 5%;
     column-gap: 1.5%;
 }
 
@@ -58,12 +58,34 @@
     border-bottom-right-radius: 25px;
 }
 
+#filtroMob{
+    background-color: rgba(0, 0, 0, 0.575);
+    box-shadow: 6px -2px 20px 0px rgb(0 0 0 / 75%);
+    grid-column-start: 1;
+    grid-column-end: 4;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: row-reverse;
+    opacity: 0;
+}
+
+#btnFiltro{
+    margin: 0.5%;
+}
+
 #filtro{
     box-shadow: 4px -1px 19px 2px rgb(0 0 0 / 75%);
-    padding: 5% 4% 8% 6%;
+    background-color: ghostwhite;
+    padding: 2% 3% 4% 2%;
     margin-top: 4%;
     height: 50%;
     border-radius: 15px;
+
+    position: absolute;
+    top: 50%;
+    right: 74%;
+    left: 3%;
 }
 
 #filtro > form{
@@ -80,13 +102,16 @@
     flex-wrap: wrap;
     overflow-y: auto;
     margin: 1%;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
 
 .billete{
     display: grid;
     grid-template-columns: repeat(4,23%) auto;
 
-    width: 85%;
+    width: 90%;
     height: 30%;
     margin-top: 1%;
     border-radius: 25px;
@@ -121,6 +146,11 @@
     grid-column-end: 6;
     grid-row-start: 1;
     grid-row-end: 3;
+}
+
+#banners{
+    grid-column-start: 3;
+    grid-column-end: 4;
 }
 
 .banner{
@@ -172,27 +202,44 @@
     }
 }
 @media (max-width:950px){
+
+    #filtroMob{
+        opacity: 1;
+    }
+
     #filtro{
-        display: none;
+        width: fit-content;
+        top: 42%;
+        height: 63%;
+        left: -50%;
     }
 
     #planeta{
         grid-template-columns: 100%;
-        grid-template-rows: 25% auto 5% 18%;
+        grid-template-rows: 25% 4% auto 5% 18%;
         column-gap: 0%;
         row-gap: 0.5%;
+    }
+
+    #billetes{
+        grid-row-start: 3;
+        grid-row-end: 4;
+        grid-column-start: 1;
+        grid-column-end: 2;
     }
 
     #paginado{
         grid-column-start: 1;
         grid-column-end: 2;
-        grid-row-start: 3;
-        grid-row-end: 4;
+        grid-row-start: 4;
+        grid-row-end: 5;
     }
 
     #banners{
         grid-column-start: 1;
         grid-column-end: 2;
+        grid-row-start: 5;
+        grid-row-end: 6;
         display: flex;
         justify-content: space-around;
     }

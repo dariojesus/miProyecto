@@ -166,12 +166,12 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny code","Administrative data","Deleted","Modify"];
+                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny","Administrative data","Deleted","Modify","Yes","No"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
-                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Hora de salida","Fecha de llegada","Plazas","Destino","Datos administrativos","Borrado","Modificar"];
+                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Hora de salida","Fecha de llegada","Plazas","Destino","Datos administrativos","Borrado","Modificar","Si","No"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }

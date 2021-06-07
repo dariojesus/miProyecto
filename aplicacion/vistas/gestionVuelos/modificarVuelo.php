@@ -126,11 +126,10 @@
             <div class="form-floating m-2">
 
                 <?php
-                echo CHTML::modeloText($modelo, "cod_destino", [
+                echo CHTML::modeloListaDropDown($modelo,"cod_destino",array_flip(Planetas::devuelvePlanetas(null,$_COOKIE["lang"])),[
                     "class" => "form-control",
                     "id" => "destino",
-                    "placeholder" => "Destino"
-                ]) . PHP_EOL;
+                    "placeholder" => "Destino"]). PHP_EOL;
                 echo CHTML::campoLabel($palabras[7], "cod_destino") . PHP_EOL;
                 echo CHTML::modeloError($modelo, "cod_destino") . PHP_EOL;
                 ?>
@@ -142,7 +141,7 @@
                 <div class="form-floating m-2">
 
                 <?php
-                echo CHTML::modeloText($modelo, "borrado", [
+                echo CHTML::modeloListaDropDown($modelo,"borrado",array("1"=>$palabras[11],"0"=>$palabras[12]),[
                     "class" => "form-control",
                     "id" => "borrado",
                     "placeholder" => "Cancelado"
