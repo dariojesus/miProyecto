@@ -58,12 +58,14 @@
             switch($_COOKIE["lang"]){
 
                 case("en"): $palabras = ["en","Wheater: ","Travel time: "," hours","Filter","Company","Boarding date","Boarding hour","Arrival date", "Arrival hour"];
-                            $errPalabras =["Can't find the destiny you are looking for"];
+                            $errPalabras =["Can't find the destiny you are looking for",
+                                           "We couldn't find tickets with your search criteria, please try again futher in time."];
                             $campos = ["nombre_en","descripcion_en","clima_en"];
                             break;
                 
                 default: $palabras = ["es","Clima: ","Duración del viaje: "," horas","Filtrar","Compañía","Fecha de salida","Hora de salida","Fecha de llegada","Hora de llegada"];
-                         $errPalabras =["No se ha encontrado el destino que estaba buscando"];
+                         $errPalabras =["No se ha encontrado el destino que estaba buscando",
+                                        "No se han encontrado vuelos con los criterios de búsqueda solicitados, inténtelo de nuevo más adelante."];
                          $campos = ["nombre","descripcion","clima"];
                          break;
               }
@@ -138,14 +140,14 @@
                         $dato = CGeneral::peticionCurl($url,"GET",$opciones);
                         $dato = json_decode($dato,true);
         
-                        $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$dato,"palabras"=>$palabras,"datos"=>$formu),$planeta[1]);
+                        $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$dato,"palabras"=>$palabras,"datos"=>$formu,"err"=>$errPalabras),$planeta[1]);
                         return;
                     }
 
                     $datos = CGeneral::peticionCurl($url,"GET",$opciones);
                     $datos = json_decode($datos,true);
 
-                    $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$datos,"palabras"=>$palabras,"datos"=>$formu),$planeta[1]);
+                    $this->dibujaVista("informacionDestino",array("planeta"=>$planeta,"vuelos"=>$datos,"palabras"=>$palabras,"datos"=>$formu,"err"=>$errPalabras),$planeta[1]);
                     return;
                 }
             }

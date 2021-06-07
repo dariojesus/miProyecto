@@ -36,8 +36,31 @@
 
     display: grid;
     grid-template-columns: 25% auto 20%;
-    grid-template-rows: 30% 5% auto 5%;
+    grid-template-rows: 30% 2% auto 5%;
     column-gap: 1.5%;
+}
+
+#noResul{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    margin-top: 2%;
+    padding: 5%;
+
+    font-size:x-large;
+    background-image: url("/imagenes/lost.jpg");
+    background-size: cover;
+    border-radius: 15px;
+    text-align: end;
+
+    box-shadow: 6px -2px 20px 0px rgb(0 0 0 / 75%);
+}
+
+#noResul > h3{
+    color: white;
+    position: relative;
+    top: 25px;
 }
 
 #principal {
@@ -72,20 +95,23 @@
 
 #btnFiltro{
     margin: 0.5%;
+    margin-right: 2.5%;
 }
 
 #filtro{
     box-shadow: 4px -1px 19px 2px rgb(0 0 0 / 75%);
     background-color: ghostwhite;
     padding: 2% 3% 4% 2%;
-    margin-top: 4%;
     height: 50%;
     border-radius: 15px;
 
-    position: absolute;
-    top: 50%;
+    position:absolute;
+    top: 54%;
     right: 74%;
     left: 3%;
+
+    transition-property: left;
+    transition-duration: 1s;
 }
 
 #filtro > form{
@@ -211,7 +237,7 @@
         width: fit-content;
         top: 42%;
         height: 63%;
-        left: -50%;
+        left: -100%;
     }
 
     #planeta{
@@ -219,6 +245,14 @@
         grid-template-rows: 25% 4% auto 5% 18%;
         column-gap: 0%;
         row-gap: 0.5%;
+    }
+
+    #noResul{
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        margin-top: 2%;
     }
 
     #billetes{

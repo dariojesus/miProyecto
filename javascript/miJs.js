@@ -1,7 +1,9 @@
-/*--------------------------------------------------Script del menú de navegación---------------------------------------------*/
+/*--------------------------------------------------Script del menú de navegación y filtro---------------------------------------------*/
 var $botonMenu = $("#btnMenu");
 var $menu = $("#menu");
 var $fondo = $("#fondo");
+var $btnF = $("#btnFiltro");
+var $filtro = $("#filtro");
 
 //Abrir menu
 $botonMenu.click(
@@ -21,6 +23,22 @@ $fondo.click(
         $menu.css("width", "0px");
     }
 )
+
+$btnF.bind("click", aparece);
+
+//Se despliega el filtro (mobile)
+function aparece(){
+    $filtro.css("left","3%");
+    $btnF.unbind("click", aparece);
+    $btnF.bind("click", desapararece);
+}
+
+//Se repliega el filtro (mobile)
+function desapararece(){
+    $filtro.css("left","-100%");
+    $btnF.unbind("click", desapararece);
+    $btnF.bind("click", aparece);
+}
 
 /*---------------------------------------------------Script de los destinos----------------------------------------------*/
 
