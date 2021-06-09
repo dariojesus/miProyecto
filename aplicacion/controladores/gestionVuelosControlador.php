@@ -13,14 +13,16 @@
                 case("en"): 
                     $palabras = ["Yes","No","Login","My account","Home","Trips","Trips management","Users management","Logout",
                                  "Departure date","Departure hour","Company","Seats","Destiny","Deleted","Action",
-                                 "Delete flight","You are abou to delete the flight with the next data:","Are you sure you want to proceed with the operation?","Proceed","Cancel"];
+                                 "Delete flight","You are abou to delete the flight with the next data:","Are you sure you want to proceed with the operation?","Proceed","Cancel",
+                                 "Trips management"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
                     $palabras = ["Si","No","Iniciar sesión","Mi cuenta","Inicio","Viajes","Gestión de viajes","Gestión de usuarios","Logout",
                                  "Fecha de salida","Hora de salida","Compañia","Plazas","Destino","Borrado","Acción",
-                                 "Borrar vuelo","Está a punto de borrar el vuelo","¿Está seguro de que desea proceder con la operación?","Confirmar","Cancelar"];
+                                 "Borrar vuelo","Está a punto de borrar el vuelo","¿Está seguro de que desea proceder con la operación?","Confirmar","Cancelar",
+                                 "Gestión de viajes"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }
@@ -60,12 +62,12 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny","Add"];
+                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny","Add","Add flight"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
-                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Fecha de llegada","Hora de llegada","Plazas","Destino","Agregar"];
+                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Fecha de llegada","Hora de llegada","Plazas","Destino","Agregar","Agregar vuelo"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }
@@ -118,12 +120,12 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny","Administrative data","Deleted","Yes","No"];
+                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny","Administrative data","Deleted","Yes","No","Flight information"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
-                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Fecha de llegada","Hora de llegada","Plazas","Destino","Datos administrativos","Borrado","Si","No"];
+                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Fecha de llegada","Hora de llegada","Plazas","Destino","Datos administrativos","Borrado","Si","No","Información del vuelo"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }
@@ -166,12 +168,12 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny","Administrative data","Deleted","Modify","Yes","No"];
+                    $palabras = ["General data","Company","Departure date","Departure hour","Arrival date","Arrival hour","Seats","Destiny","Administrative data","Deleted","Modify","Yes","No","Modify flight"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
-                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Hora de salida","Fecha de llegada","Plazas","Destino","Datos administrativos","Borrado","Modificar","Si","No"];
+                    $palabras = ["Datos generales","Compañia","Fecha de salida","Hora de salida","Hora de salida","Fecha de llegada","Plazas","Destino","Datos administrativos","Borrado","Modificar","Si","No","Modificar vuelo"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }

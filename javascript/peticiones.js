@@ -32,21 +32,23 @@ function cargarUltimos() {
                     let pal;
 
                     switch(obtenerCookie("lang")){
-                        case ("en"):pal = "remainings";break;
-                        default:pal = "plazas restantes";break;
+                        case ("en"):pal = ["remainings",7];break;
+                        default:pal = ["plazas restantes",6];break;
                     }
                             
                     for (let index = 0; index < resp.length; index++) {
 
-                        let img = `/imagenes/${resp[index].nombre.toLowerCase()}-sq.png`;
-                        let url = `/compra/Compra?codigo=${resp[index].cod_vuelo}`;
+                        let datos = convierteJsonArray(resp[index]);
+
+                        let img = `/imagenes/${datos[6].toLowerCase()}-sq.png`;
+                        let url = `/compra/Compra?codigo=${datos[0]}`;
                                               
                         $("#seccion1").append(`<div class='destino' data-location='${url}'>`
                             +"<div>"
-                                +"<h3><b>"+resp[index].nombre+"</b></h3>"
-                                +"<h5>"+resp[index].fecha_salida+"</h5>"
-                                +"<h5>"+resp[index].hora_salida+"</h5>"
-                                +"<h6>"+resp[index].plazas+" "+pal+"</h6>"
+                                +"<h3><b>"+datos[pal[1]]+"</b></h3>"
+                                +"<h5>"+datos[1]+"</h5>"
+                                +"<h5>"+datos[2]+"</h5>"
+                                +"<h6>"+datos[4]+" "+pal[0]+"</h6>"
                             +"</div>"
                             +`<aside style='background-image: url(${img})'></aside>`
                         +"</div>");
@@ -63,6 +65,17 @@ function cargarUltimos() {
         .catch(err => {
             console.log("Error:" + err);
         });
+}
+
+//Función útil para convertir un JSON en un array
+function convierteJsonArray(json){
+
+    let array = [];
+
+    for (const indx in json) 
+        array.push(json[indx]);
+    
+    return array;  
 }
 
 //Función para obtener los planetas y rellenar la datalist

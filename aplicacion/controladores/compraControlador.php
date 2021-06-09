@@ -18,7 +18,7 @@
                     $palabras = ["en","Boarding data","Company","Destiny","Boarding date","Boarding hour",
                                 "Passenger data","ID","Name","Subname","Email",
                                 "Billing","Class","Price","Next",
-                                "Buy","Cancel"];
+                                "Buy","Cancel","Buying process"];
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
@@ -26,7 +26,7 @@
                     $palabras = ["es","Datos de embarque","Compañia","Destino","Fecha de embarque","Hora de embarque",
                                 "Datos del pasajero","NIF","Nombre","Apellidos","Email",
                                 "Facturación","Clase","Precio","Siguiente",
-                                "Comprar","Cancelar"];
+                                "Comprar","Cancelar","Proceso de compra"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }
@@ -84,7 +84,7 @@
                 }
                
                 $destino = Planetas::devuelvePlanetas($vuelo->__get("cod_destino"),$palabras[0]);
-                $this->dibujaVista("compraBillete",array("vuelo"=>$vuelo,"usuario"=>$usuario,"url"=>$url,"palabras"=>$palabras,"dest"=>$destino),"Compra de billete");
+                $this->dibujaVista("compraBillete",array("vuelo"=>$vuelo,"usuario"=>$usuario,"url"=>$url,"palabras"=>$palabras,"dest"=>$destino),$palabras[17]);
                 return;
             }
             

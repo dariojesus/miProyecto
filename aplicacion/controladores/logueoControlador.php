@@ -105,13 +105,15 @@
 
             switch($_COOKIE["lang"]){
                 case("en"): 
-                    $palabras = ["en","ID","Email","Send email","Cancel","Fill the fields with you ID and email if they match with our records an password recovery mail will be send."];
+                    $palabras = ["en","ID","Email","Send email","Cancel","Fill the fields with you ID and email if they match with our records an password recovery mail will be send.",
+                                 "Password recovery"];
                     $mensaje = ["This is your new password: "," please don`t share with anyone and change it when you log in."];
                     $errPalabras = ["The email recovery password can't be send, try again later"]; 
                     break;
 
                 default: 
-                    $palabras = ["es","DNI","Email","Enviar email","Cancelar","Indícanos tu dni y email, si coincide con nuestros registros recibirás un correo electrónico con la nueva contraseña."];
+                    $palabras = ["es","DNI","Email","Enviar email","Cancelar","Indícanos tu dni y email, si coincide con nuestros registros recibirás un correo electrónico con la nueva contraseña.",
+                                 "Recuperación de contraseña"];
                     $mensaje = ["Esta es tu nueva contraseña: "," por favor no la compartas con nadie y cambiala cuando inicies sesión."];
                     $errPalabras = ["El email de recuperación de contraseña no pudo ser enviado, intentelo de nuevo mas tarde"]; 
                     break;
@@ -152,12 +154,12 @@
             switch($_COOKIE["lang"]){
                 case("en"): 
                     $palabras = ["en","Check your email inbox and confirm the password recovery email reception of our team",
-                                 "Email received","Cancel"];
+                                 "Email received","Cancel","Email confirmation"];
                     break;
 
                 default: 
                     $palabras = ["es","Compruebe la bandeja de entrada en su correo electrónico y confirme si ha recibido el email de recuperación de nuestro equipo",
-                                 "Correo recibido","Cancelar"]; 
+                                 "Correo recibido","Cancelar","Email de confirmación"]; 
                     break;
             }
 
@@ -208,7 +210,7 @@
                     "anteriores" => Sistema::app()->generaURL(array("logueo","Viajes"))."?op=2"
                 );
 
-                $this->dibujaVista("cuenta",array("nombre"=>$var,"op"=>$opciones,"palabras"=>$palabras),"Mi cuenta");
+                $this->dibujaVista("cuenta",array("nombre"=>$var,"op"=>$opciones,"palabras"=>$palabras),$palabras[0]);
             }
                 
             else
@@ -258,7 +260,7 @@
 
                 $rol = $acl->getUsuarioRole($acl->getCodUsuario($nif));
                 $usr->fecha_nacimiento = CGeneral::fechaNormalAMysql($usr->fecha_nacimiento);
-                $this->dibujaVista("cuenta_datos",["modelo"=>$usr,"rol"=>$rol,"palabras"=>$palabras],"Datos de cuenta");
+                $this->dibujaVista("cuenta_datos",["modelo"=>$usr,"rol"=>$rol,"palabras"=>$palabras],$palabras[0]);
             }
 
             else
@@ -319,7 +321,7 @@
                 
                 $url = Sistema::app()->generaURL(array("compra","ImprimirBillete"));
 
-                $this->dibujaVista("proximosViajes",array("billetes"=>$var,"url"=>$url, "op"=>$_GET["op"], "palabras"=>$palabras),"Billetes");
+                $this->dibujaVista("proximosViajes",array("billetes"=>$var,"url"=>$url, "op"=>$_GET["op"], "palabras"=>$palabras),$palabras[4]);
 
             }
             else

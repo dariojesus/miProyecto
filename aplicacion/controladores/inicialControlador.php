@@ -12,11 +12,11 @@
 
             switch($_COOKIE["lang"]){
                     case("en"): 
-                        $palabras = ["en","Go ahead and buy one, there are a few remains","Find your next destination"]; 
+                        $palabras = ["en","Go ahead and buy one, there are a few remains","Find your destiny","Main page"]; 
                         break;
 
                     default: 
-                        $palabras = ["es","Corre que vuelan, quedan pocas plazas","Encuentra tu próximo destino"];
+                        $palabras = ["es","Corre que vuelan, quedan pocas plazas","Encuentra tu destino","Página principal"];
                         break;
                 }
             
@@ -27,7 +27,7 @@
                 return;
             }
 
-            $this->dibujaVista("index",array("palabras"=>$palabras),"Indice de la aplicación");
+            $this->dibujaVista("index",array("palabras"=>$palabras),$palabras[3]);
 		}
 
         //Acción para mostrar los planetas (destinos)
@@ -37,11 +37,11 @@
 
             switch($_COOKIE["lang"]){
 
-                case("en"): $palabras = ["en","Trip duration: "," hours"];
+                case("en"): $palabras = ["en","Trip duration: "," hours","Availables destinys"];
                             $nombre = "nombre_en";
                             break;
 
-                default: $palabras = ["es","Duración del viaje: "," horas"];
+                default: $palabras = ["es","Duración del viaje: "," horas","Destinos disponibles"];
                             $nombre = "nombre";
                             break;
               }
@@ -49,7 +49,7 @@
             $sentencia = "SELECT cod_destino, $nombre, duracion_viaje, foto FROM destinos";
             $var = $var->ejecutarSentencia($sentencia);
 
-            $this->dibujaVista("destinos",array("planetas"=>$var,"palabras"=>$palabras, "nombre"=>$nombre),"Destinos disponibles");
+            $this->dibujaVista("destinos",array("planetas"=>$var,"palabras"=>$palabras, "nombre"=>$nombre),$palabras[3]);
         }
 
         //Acción para ver los vuelos correspondientes al destino

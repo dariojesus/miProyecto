@@ -15,14 +15,16 @@
                 case("en"): 
                     $palabras = ["Yes","No","Login","My account","Home","Trips","Trips management","Users management","Logout",
                                  "ID","Email","Name","Subname","Birth date","Town","Address","Deleted","Action",
-                                 "Delete user","You are about to delete the user ","Are you sure you want to proceed with the operation?","Proceed","Cancel"]; 
+                                 "Delete user","You are about to delete the user ","Are you sure you want to proceed with the operation?","Proceed","Cancel",
+                                 "Users management"]; 
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
                 default: 
                     $palabras = ["Si","No","Iniciar sesión","Mi cuenta","Inicio","Viajes","Gestión de viajes","Gestión de usuarios","Logout",
                                  "NIF","Email","Nombre","Apellidos","Fecha de nacimiento","Población","Dirección","Borrado","Acción",
-                                 "Borrar usuario","Está a punto de borrar el usuario ","¿Seguro que quiere proceder con la operación?","Confirmar","Cancelar"];
+                                 "Borrar usuario","Está a punto de borrar el usuario ","¿Seguro que quiere proceder con la operación?","Confirmar","Cancelar",
+                                 "Gestión de usuarios"];
                     $errPalabras = ["No tiene permisos para acceder a esta acción"];
                     break;
             }
@@ -59,7 +61,7 @@
                     $palabras = ["Personal data","ID","Name","Subname","Birth date",
                                  "Contact data","Email","Town","Address",
                                  "Security","Password","Repeat password","Role",
-                                 "Add"]; 
+                                 "Add","Add user"]; 
                     $errPalabras = ["You don't have permissions to do this action"];
                     break;
 
@@ -67,7 +69,7 @@
                     $palabras = ["Datos personales","NIF","Nombre","Apellidos","Fecha de nacimiento",
                                 "Datos de contacto","Email","Población","Dirección",
                                 "Seguridad","Contraseña","Repetir contraseña","Rol",
-                                "Agregar"];
+                                "Agregar","Agregar usuario"];
                     $errPalabras = ["No tiene permisos para realizar esta acción"];
                     break;
             }
@@ -122,7 +124,7 @@
                 case("en"): 
                     $palabras = ["Personal data","ID","Name","Subname","Birth date",
                                  "Contact data","Email","Town","Address",
-                                 "Account data","Deleted"]; 
+                                 "Account data","Deleted","User information"]; 
                     $errPalabras = ["You don't have permissions to do this action",
                                     "Ups, the data about the user can't be retrieved"];
                     break;
@@ -130,7 +132,7 @@
                 default: 
                     $palabras = ["Datos personales","NIF","Nombre","Apellidos","Fecha de nacimiento",
                                 "Datos de contacto","Email","Población","Dirección",
-                                "Datos de la cuenta","Borrado"];
+                                "Datos de la cuenta","Borrado","Información del usuario"];
                     $errPalabras = ["No tiene permisos para realizar esta acción",
                                     "Ups, no se ha podido recuperar la información de dicho usuario"];
                     break;
@@ -172,7 +174,7 @@
                 case("en"): 
                     $palabras = ["Personal data","ID","Name","Subname","Birth date",
                                  "Contact data","Email","Town","Address",
-                                 "Account data","Deleted","Modify"]; 
+                                 "Account data","Deleted","Modify","Modify user"]; 
                     $errPalabras = ["You don't have permissions to do this action",
                                     "Ups, the data about the user can't be retrieved"];
                     break;
@@ -180,7 +182,7 @@
                 default: 
                     $palabras = ["Datos personales","NIF","Nombre","Apellidos","Fecha de nacimiento",
                                 "Datos de contacto","Email","Población","Dirección",
-                                "Datos de la cuenta","Borrado","Modificar"];
+                                "Datos de la cuenta","Borrado","Modificar","Modificar usuario"];
                     $errPalabras = ["No tiene permisos para realizar esta acción",
                                     "Ups, no se ha podido recuperar la información de dicho usuario"];
                     break;
