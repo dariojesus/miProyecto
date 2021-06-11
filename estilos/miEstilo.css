@@ -19,6 +19,26 @@
     padding: 12px;
 }
 
+.controlVoz{
+    width: 64px;
+    height: 64px;
+    position:fixed;
+    bottom: 6em;
+    right: 1.1em;
+    z-index: 100;
+
+    background-image: url('/imagenes/iconos/sound.png');
+    animation-name: pulsante;
+}
+
+@keyframes pulsante {
+    
+}
+
+.controlVoz:hover{
+    cursor: pointer;
+}
+
 p{
     font-size: 1em;
 }

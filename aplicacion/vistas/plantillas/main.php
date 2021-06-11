@@ -14,12 +14,17 @@
 	<!-- Bootstrap Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous" defer></script>
 
-	<!--Scrip de JQuery-->
+	<!--Script de JQuery-->
 	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" href="/estilos/miEstilo.css">
 	<link rel="stylesheet" href="/estilos/destinos.css">
 	<script src="/javascript/miJs.js" defer></script>
+
+	<!--Script de TensorFlow-->
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.0/dist/speech-commands.min.js"></script>
+	<script src="/javascript/IA.js"></script>
 
 	<?php
 	if (isset($this->textoHead))
