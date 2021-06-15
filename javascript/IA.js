@@ -19,7 +19,9 @@ async function crearModelo(URL) {
 async function init() {
 
     //Cargamos nuestro modelo entrenado de Google Teachable Machine
-    const reconocedor = await crearModelo("https://teachablemachine.withgoogle.com/models/q3w_q4Xpg/");
+    const reconocedor = await crearModelo("https://teachablemachine.withgoogle.com/models/41geNOYa2/");
+
+    $(".controlVoz").addClass("animar");
 
     //Se obtienen las palabras a reconocer del modelo
     const classLabels = reconocedor.wordLabels();
@@ -36,6 +38,7 @@ async function init() {
 
         if (indice!=2){
             reconocedor.stopListening();
+            $(".controlVoz").removeClass("animar");
             redireccionar(classLabels[indice]);
         }else{
             console.log("ciclo");
@@ -43,7 +46,7 @@ async function init() {
         
     }, {
         includeSpectrogram: false,
-        probabilityThreshold: 0.80,
+        probabilityThreshold: 0.70,
         overlapFactor: 0.50
     });
 
@@ -53,11 +56,11 @@ async function init() {
 //Función útil, para encontrar el indice del array con el valor mayor
 function indiceMayor(array){
 
-    let mayor = array[0];
+    let mayor = array[2];
     let indice = 0;
 
     for (let index = 0; index < array.length; index++) {
-        if (array[index]>mayor){
+        if (array[index]>0.90 && array[index]>mayor){
             mayor = array[index];
             indice = index;
         }
@@ -75,9 +78,8 @@ function redireccionar(palabra){
         case "Viajes": url = "http://www.miproyecto.es/inicial/Destinos"; break;
         case "Inicio": url = "http://www.miproyecto.es/inicial/Principal"; break;
         case "Cuenta" :url = "http://www.miproyecto.es/logueo/MiCuenta"; break;
-        case "Luna" :url = "http://www.miproyecto.es/inicial/infoDestino?planeta=Luna"; break;
-        case "Marte" :url = "http://www.miproyecto.es/inicial/infoDestino?planeta=Marte"; break;
     }
 
-    location.replace(url);
+    //location.replace(url);
+    alert(url);
 }

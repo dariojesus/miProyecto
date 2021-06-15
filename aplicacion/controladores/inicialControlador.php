@@ -104,6 +104,7 @@
                     $url = $_SERVER["SERVER_NAME"].Sistema::app()->generaURL(["api","VuelosDisponibles"]);
                     $opciones["destino"] = array_key_exists(6,$planeta)? $planeta[6]:$planeta[1];
                     $opciones["borrado"] = "0";
+                    $opciones["disponibles"] = "1";
                     
 
                     $pagina = isset($_GET["pag"])? CGeneral::addSlashes($_GET["pag"]) : 1;

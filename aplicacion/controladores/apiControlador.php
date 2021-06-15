@@ -66,6 +66,12 @@
                     }
                 }
 
+                if (isset($_GET["disponibles"])){
+                    $hoy = new DateTime();
+                    $hoy = $hoy->format("Y-m-d");
+                    $opciones["where"].= " and fecha_salida >= '$hoy'";
+                }
+
                 //Filtramos por fecha de llegada
                 if (isset($_GET["fecha_llegada"])){
                     $dato = CGeneral::addSlashes($_GET["fecha_llegada"]);

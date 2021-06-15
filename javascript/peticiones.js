@@ -19,7 +19,7 @@ function obtenerCookie(clave) {
 //Función para cargar billetes con pocas plazas haciendo una llamada a mi propia API
 function cargarUltimos() {
 
-    fetch("/api/VuelosDisponibles?limite=4&borrado=0&fullData", {
+    fetch("/api/VuelosDisponibles?limite=4&borrado=0&disponibles=1&fullData", {
         headers: { "Content-Type": "application/json" },
         method: "GET"
     })
