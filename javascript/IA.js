@@ -80,6 +80,5 @@ function redireccionar(palabra){
         case "Cuenta" :url = "http://www.miproyecto.es/logueo/MiCuenta"; break;
     }
 
-    //location.replace(url);
-    alert(url);
+    location.replace(url);
 }

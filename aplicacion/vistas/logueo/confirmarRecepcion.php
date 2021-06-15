@@ -22,17 +22,17 @@
     <script src="/javascript/registro.js" defer></script>
 </head>
 
-<body>
-
     <?php
+    echo CHTML::dibujaEtiqueta("body",["class"=>"fondo"],null,false).PHP_EOL;
+
     echo CHTML::iniciarForm() . PHP_EOL;
     echo CHTML::dibujaEtiqueta("main", ["class" => "login"], null, false) . PHP_EOL;
     echo CHTML::dibujaEtiqueta("div", ["class" => "logo"], null, false) . PHP_EOL;
     echo CHTML::link("<img src='../../../imagenes/logo/64.png'>", ["inicial"]);
-    echo CHTML::dibujaEtiqueta("h1", [], Sistema::app()->empresa);
+    echo CHTML::dibujaEtiqueta("h1", ["class" => "blanco"], Sistema::app()->empresa);
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
-    echo CHTML::dibujaEtiqueta("div", ["class" => "form-floating m-2"], null, false) . PHP_EOL;
+    echo CHTML::dibujaEtiqueta("div", ["class" => "form-floating m-2 blanco"], null, false) . PHP_EOL;
     echo CHTML::dibujaEtiqueta("p",[],$palabras[1]).PHP_EOL;
     echo CHTML::dibujaEtiquetaCierre("div") . PHP_EOL;
 
@@ -44,6 +44,7 @@
     echo CHTML::dibujaEtiquetaCierre("main") . PHP_EOL;
     echo CHTML::finalizarForm();
 
+    echo CHTML::dibujaEtiquetaCierre("body").PHP_EOL;
     ?>
 </body>
 
