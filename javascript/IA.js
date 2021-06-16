@@ -19,7 +19,7 @@ async function crearModelo(URL) {
 async function init() {
 
     //Cargamos nuestro modelo entrenado de Google Teachable Machine
-    const reconocedor = await crearModelo("https://teachablemachine.withgoogle.com/models/41geNOYa2/");
+    const reconocedor = await crearModelo("https://teachablemachine.withgoogle.com/models/AeMUqOYFn/");
 
     $(".controlVoz").addClass("animar");
 
@@ -60,7 +60,7 @@ function indiceMayor(array){
     let indice = 0;
 
     for (let index = 0; index < array.length; index++) {
-        if (array[index]>0.90 && array[index]>mayor){
+        if (array[index]>mayor){
             mayor = array[index];
             indice = index;
         }
